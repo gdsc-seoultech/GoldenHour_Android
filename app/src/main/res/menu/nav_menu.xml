@@ -3,17 +3,17 @@
     <item
         android:id="@+id/guide"
         android:icon="@drawable/ic_safety_guide"
-        android:title="안전가이드"/>
+        android:title="@string/guide_title"/>
     <item
         android:id="@+id/checklist"
         android:icon="@drawable/ic_checklist"
-        android:title="체크리스트"/>
+        android:title="@string/checklist_title"/>
     <item
         android:id="@+id/call"
         android:icon="@drawable/ic_call"
-        android:title="비상신고"/>
+        android:title="@string/call_title"/>
     <item
         android:id="@+id/map"
         android:icon="@drawable/ic_safety_map"
-        android:title="안전지도"/>
+        android:title="@string/map_title"/>
 </menu>

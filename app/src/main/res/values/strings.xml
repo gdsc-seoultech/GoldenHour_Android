@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GoldenHour</string>
+    <string name="guide_title">Safety Guide</string>
+    <string name="checklist_title">Checklist</string>
+    <string name="call_title">Emergency Call</string>
+    <string name="map_title">Safety Map</string>
 </resources>

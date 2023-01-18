@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GoldenHour</string>
+    <string name="guide_title">안전가이드</string>
+    <string name="checklist_title">체크리스트</string>
+    <string name="call_title">비상신고</string>
+    <string name="map_title">안전지도</string>
+</resources>
