@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.GuideFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/guide_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="안전가이드" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
