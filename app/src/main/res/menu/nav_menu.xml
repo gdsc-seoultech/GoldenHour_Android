@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/guide"
+        android:icon="@drawable/ic_safety_guide"
+        android:title="안전가이드"/>
+    <item
+        android:id="@+id/checklist"
+        android:icon="@drawable/ic_checklist"
+        android:title="체크리스트"/>
+    <item
+        android:id="@+id/call"
+        android:icon="@drawable/ic_call"
+        android:title="비상신고"/>
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/ic_safety_map"
+        android:title="안전지도"/>
+</menu>
