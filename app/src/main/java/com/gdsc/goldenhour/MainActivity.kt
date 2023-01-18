@@ -8,7 +8,6 @@ import com.gdsc.goldenhour.ui.CallFragment
 import com.gdsc.goldenhour.ui.ChecklistFragment
 import com.gdsc.goldenhour.ui.GuideFragment
 import com.gdsc.goldenhour.ui.MapFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         loadFragment(GuideFragment())
 
-        binding.bottomNav.setOnItemSelectedListener {
+        binding.bottomNavBar.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.guide -> {
                     loadFragment(GuideFragment())
