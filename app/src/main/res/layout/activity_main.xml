@@ -11,7 +11,8 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        android:backgroundTint="@android:color/transparent"
+        app:elevation="0.7dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
