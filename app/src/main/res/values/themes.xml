@@ -14,10 +14,4 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.GoldenHour.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="Theme.GoldenHour.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.GoldenHour.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
