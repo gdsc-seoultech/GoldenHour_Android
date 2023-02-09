@@ -8,7 +8,7 @@ import com.gdsc.goldenhour.databinding.ActivityMainBinding
 import com.gdsc.goldenhour.ui.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,17 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         loadFragment(GuideFragment())
         changeFragment()
-
-        // todo: 설정 버튼을 눌렀을 때 SettingsFragment로 이동
-        binding.toolBar.setOnMenuItemClickListener{
-            when(it.itemId){
-                R.id.settings -> {
-                    startActivity(Intent(this, SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
+        navigateSettingsScreen()
     }
 
     private fun loadFragment(fragment: Fragment){
@@ -53,6 +43,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.map -> {
                     loadFragment(MapFragment())
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
+    private fun navigateSettingsScreen() {
+        binding.toolBar.setOnMenuItemClickListener{
+            when(it.itemId){
+                R.id.settings -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
                     true
                 }
                 else -> false
