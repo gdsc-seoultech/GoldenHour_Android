@@ -22,11 +22,13 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/user_info_container"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="18dp">
         <ImageView
+            android:id="@+id/user_profile"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_background"/>
@@ -37,14 +39,15 @@
             android:layout_marginStart="18dp">
             <TextView
                 android:id="@+id/user_name"
-                android:text="이하은"
+                android:text="이름"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/user_email"
-                android:text="jxlhe@naver.com"
+                android:text="이메일 주소"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -56,6 +59,7 @@
         android:layout_height="wrap_content" />
 
     <LinearLayout
+        android:id="@+id/btn_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -65,7 +69,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_logout"/>
         <TextView
-            android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
