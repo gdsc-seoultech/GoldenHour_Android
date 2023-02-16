@@ -1,6 +1,6 @@
 package com.gdsc.goldenhour.network
 
-import com.gdsc.goldenhour.network.model.GuideImageList
+import com.gdsc.goldenhour.network.model.GuideWebtoonList
 import com.gdsc.goldenhour.network.model.GuideList
 import com.gdsc.goldenhour.network.model.SignInResponse
 import retrofit2.Call
@@ -20,5 +20,5 @@ interface INetworkService {
     fun getGuideList(): Call<GuideList>
 
     @GET("/guide/{id}")
-    fun getGuideImageList(@Path("id") id: Int): Call<GuideImageList>
+    fun getGuideWebtoonList(@Path("id") id: Int): Call<GuideWebtoonList>
 }

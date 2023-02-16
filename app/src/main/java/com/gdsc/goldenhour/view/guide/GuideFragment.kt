@@ -31,10 +31,10 @@ class GuideFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loadData()
+        loadGuideList()
     }
 
-    private fun loadData() {
+    private fun loadGuideList() {
         RetrofitObject.networkService.getGuideList()
             .enqueue(object : Callback<GuideList> {
                 override fun onResponse(call: Call<GuideList>, response: Response<GuideList>) {
@@ -61,7 +61,7 @@ class GuideFragment : Fragment() {
         guideAdapter.setMyItemClickListener(object : GuideAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 val item = guideList[position]
-                val intent = Intent(context, GuideItemActivity::class.java)
+                val intent = Intent(context, GuideWebtoonActivity::class.java)
                 intent.putExtra("id", item.id)
                 intent.putExtra("title", item.name)
                 startActivity(intent)

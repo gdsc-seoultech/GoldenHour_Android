@@ -18,11 +18,11 @@ data class Guide(
 //  val imgUrl: String
 )
 
-data class GuideImageList(
-    val data: List<GuideImage>
+data class GuideWebtoonList(
+    val data: List<GuideWebtoon>
 )
 
-data class GuideImage(
+data class GuideWebtoon(
     val id: Int,
     val imgUrl: String
 )
