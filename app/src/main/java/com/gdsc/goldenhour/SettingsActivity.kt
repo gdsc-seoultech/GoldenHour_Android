@@ -49,7 +49,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun logOut() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.server_client_id))
+            .requestIdToken(BuildConfig.GOOGLE_API_KEY)
             .requestEmail()
             .build()
 
