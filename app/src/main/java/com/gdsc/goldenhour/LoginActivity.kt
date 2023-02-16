@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<SignInResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d(RETROFIT_TAG, "success")
+                        Log.d(RETROFIT_TAG, "success upload user info")
                         Log.d(RETROFIT_TAG, response.body()!!.data)
                     } else {
                         Log.d(RETROFIT_TAG, response.message())

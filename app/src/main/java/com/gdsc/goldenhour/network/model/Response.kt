@@ -2,20 +2,28 @@ package com.gdsc.goldenhour.network.model
 
 data class SignInResponse(
     val success: Boolean,
-    val error: Error,
-    val data: String
-)
-
-data class Guide(
-    var id: Int,
-    var name: String,
-    var imgUrl: String
+    val data: String,
+    val error: Error
 )
 
 data class GuideList(
-    var data: List<Guide>
+    val success: Boolean,
+    val data: List<Guide>,
+    val error: Error
+)
+
+data class Guide(
+    val id: Int,
+    val name: String,
+//  val imgUrl: String
 )
 
 data class GuideImageList(
-    var data: List<String>
+    val data: List<GuideImage>
 )
+
+data class GuideImage(
+    val id: Int,
+    val imgUrl: String
+)
+
