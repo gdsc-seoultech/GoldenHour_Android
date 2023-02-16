@@ -7,7 +7,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.gdsc.goldenhour.databinding.ActivityLoginBinding
-import com.gdsc.goldenhour.network.RetrofitClass
+import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.SignInResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.btnLogin.setOnClickListener {
+        binding.signInButton.setOnClickListener {
             signIn()
         }
 
@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
     private fun uploadUserInfo(gsa: GoogleSignInAccount?) {
         if (gsa != null) {
             // 유저의 로그인 정보를 서버에 업로드 한다.
-            val call = RetrofitClass.networkService.createUser(gsa.idToken.toString())
+            val call = RetrofitObject.networkService.createUser(gsa.idToken.toString())
             call.enqueue(object : Callback<SignInResponse> {
                 override fun onResponse(
                     call: Call<SignInResponse>,
