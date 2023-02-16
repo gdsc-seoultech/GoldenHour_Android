@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.gdsc.goldenhour.databinding.ActivityMainBinding
-import com.gdsc.goldenhour.ui.*
+import com.gdsc.goldenhour.view.call.CallFragment
+import com.gdsc.goldenhour.view.checklist.ChecklistFragment
+import com.gdsc.goldenhour.view.map.MapFragment
+import com.gdsc.goldenhour.view.guide.GuideFragment
+import com.gdsc.goldenhour.view.settings.SettingsActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

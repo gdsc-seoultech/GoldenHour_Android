@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GuideItemActivity">
+    tools:context=".view.guide.GuideItemActivity">
 
     <TextView
         android:id="@+id/guide_title"

@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.adapter
+package com.gdsc.goldenhour.view.guide.adapter
 
 import android.content.Context
 import android.net.Uri

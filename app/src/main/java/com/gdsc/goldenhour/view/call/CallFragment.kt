@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.ui
+package com.gdsc.goldenhour.view.call
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

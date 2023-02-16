@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour
+package com.gdsc.goldenhour.view.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.gdsc.goldenhour.BuildConfig
+import com.gdsc.goldenhour.MainActivity
 import com.gdsc.goldenhour.databinding.ActivityLoginBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.SignInResponse

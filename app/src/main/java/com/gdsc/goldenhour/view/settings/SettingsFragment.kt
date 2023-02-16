@@ -1,9 +1,6 @@
-package com.gdsc.goldenhour.ui
+package com.gdsc.goldenhour.view.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.preference.PreferenceFragmentCompat
 import com.gdsc.goldenhour.R
 

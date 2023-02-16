@@ -1,18 +1,15 @@
-package com.gdsc.goldenhour
+package com.gdsc.goldenhour.view.guide
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.gdsc.goldenhour.databinding.ActivityGuideItemBinding
 import com.gdsc.goldenhour.network.model.GuideImageList
-import com.gdsc.goldenhour.network.INetworkService
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.GuideImage
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class GuideItemActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuideItemBinding
