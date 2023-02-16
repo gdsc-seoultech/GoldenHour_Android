@@ -32,7 +32,7 @@
             android:name=".view.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".view.guide.GuideItemActivity"
+            android:name=".view.guide.GuideWebtoonActivity"
             android:exported="false" />
     </application>
 
