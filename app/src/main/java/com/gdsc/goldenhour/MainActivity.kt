@@ -1,13 +1,19 @@
 package com.gdsc.goldenhour
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.gdsc.goldenhour.databinding.ActivityMainBinding
 import com.gdsc.goldenhour.ui.CallFragment
 import com.gdsc.goldenhour.ui.ChecklistFragment
 import com.gdsc.goldenhour.ui.GuideFragment
 import com.gdsc.goldenhour.ui.MapFragment
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,4 +52,7 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.container, fragment)
         transaction.commit()
     }
+
+
+
 }
