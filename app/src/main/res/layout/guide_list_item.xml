@@ -19,6 +19,7 @@
             android:id="@+id/item_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:padding="8dp"
             android:importantForAccessibility="no"
             android:scaleType="fitXY" />
 
@@ -26,8 +27,9 @@
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:layout_marginTop="4dp"
-            android:textAppearance="?attr/textAppearanceBody2" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
     </LinearLayout>
 
