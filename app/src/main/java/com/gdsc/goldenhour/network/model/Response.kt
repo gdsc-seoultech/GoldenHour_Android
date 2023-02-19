@@ -15,7 +15,7 @@ data class GuideList(
 data class Guide(
     val id: Int,
     val name: String,
-//  val imgUrl: String
+    val imgUrl: String
 )
 
 data class GuideWebtoonList(
