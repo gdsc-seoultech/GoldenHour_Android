@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def googlemap_api_key = properties.getProperty('googlemap_api_key')
 
 android {
     compileSdk 32
@@ -15,6 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        manifestPlaceholders = [GOOGLE_MAP_API_KEY: googlemap_api_key]
     }
 
     buildTypes {
