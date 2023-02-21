@@ -16,22 +16,26 @@
         android:theme="@style/Theme.GoldenHour"
         android:usesCleartextTraffic="true">
 
-
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="${GOOGLE_MAP_API_KEY}" />
 
-
         <meta-data
             android:name="com.google.android.gms.vision"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
         <activity
             android:name=".MapHosActivity"
-            android:exported="false"></activity>
+            android:exported="false"/>
+
         <activity
-            android:name=".SplashActivity"
+            android:name=".view.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,9 +43,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:name=".view.login.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.guide.GuideWebtoonActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

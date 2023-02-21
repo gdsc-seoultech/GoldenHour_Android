@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.data
+package com.gdsc.goldenhour.view.map.data
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem

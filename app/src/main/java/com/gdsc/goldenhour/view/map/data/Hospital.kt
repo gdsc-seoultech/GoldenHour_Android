@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.data
+package com.gdsc.goldenhour.view.map.data
 
 data class Hospital(
     var phone: String?,
@@ -7,7 +7,6 @@ data class Hospital(
     var name: String?,
     var x: Double?,
     var y: Double?
-
 ) {
     constructor() : this(
         null,

@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.ui
+package com.gdsc.goldenhour.view.map
 
 import android.content.Intent
 import android.os.Bundle

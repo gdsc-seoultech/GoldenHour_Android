@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreferenceCompat
+        android:key="notification"
+        android:title="알림"
+        android:icon="@drawable/ic_notification"/>
+    <ListPreference
+        android:key="language"
+        app:title="언어"
+        android:icon="@drawable/ic_language"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages"/>
+</PreferenceScreen>

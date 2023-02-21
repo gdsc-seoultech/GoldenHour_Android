@@ -8,8 +8,8 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.gdsc.goldenhour.data.Hospital
-import com.gdsc.goldenhour.data.hospitalItem
+import com.gdsc.goldenhour.view.map.data.Hospital
+import com.gdsc.goldenhour.view.map.data.hospitalItem
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,11 +41,11 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mgoogleMap = googleMap
-        var context: Context = this
-        var clusterManager: ClusterManager<hospitalItem> = ClusterManager(this, mgoogleMap)
+        val context: Context = this
+        val clusterManager: ClusterManager<hospitalItem> = ClusterManager(this, mgoogleMap)
 
         googleMap.setOnMapLoadedCallback {
-            var latLng = LatLng(37.566, 126.978)
+            val latLng = LatLng(37.566, 126.978)
             mgoogleMap?.moveCamera(CameraUpdateFactory.newLatLng(latLng))
             mgoogleMap?.animateCamera(CameraUpdateFactory.zoomTo(12f))
         }
@@ -56,9 +56,9 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
         //for(i in 0 until (hospital_list?.size ?: 300)) {
         for(i in 0 until 100) {
             Log.d("tag", i.toString()+" ::" + hospital_list.get(i).address.toString())
-            var location: Location = addrToPoint(context, hospital_list?.get(i)?.address)
+            val location: Location = addrToPoint(context, hospital_list?.get(i)?.address)
             //var latLng = LatLng(location.latitude, location.longitude)
-            var hospitalItems: hospitalItem = hospitalItem(location.latitude, location.longitude,
+            val hospitalItems: hospitalItem = hospitalItem(location.latitude, location.longitude,
                 hospital_list[i].name!!
             )
             clusterManager.addItem(hospitalItems)
@@ -68,13 +68,14 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
             markerOptions.position(latLng)
             googleMap!!.addMarker(markerOptions)*/
         }
+
         mgoogleMap!!.setOnInfoWindowClickListener {
             // 병원 정보 띄우기
         }
 
         clusterManager.setOnClusterClickListener {
-            var latLng = LatLng(it.position.latitude, it.position.longitude)
-            var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15f)
+            val latLng = LatLng(it.position.latitude, it.position.longitude)
+            val cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15f)
             mgoogleMap!!.moveCamera(cameraUpdate)
             return@setOnClusterClickListener false
         }
@@ -82,10 +83,10 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private fun xml_parse(): ArrayList<Hospital> {
-        var hospital_List = ArrayList<Hospital>()
-        var inputStream = resources.openRawResource(R.raw.hospital)
-        var inputStreamReader = InputStreamReader(inputStream)
-        var reader = BufferedReader(inputStreamReader)
+        val hospital_List = ArrayList<Hospital>()
+        val inputStream = resources.openRawResource(R.raw.hospital)
+        val inputStreamReader = InputStreamReader(inputStream)
+        val reader = BufferedReader(inputStreamReader)
 
         var factory: XmlPullParserFactory? = null
         var parser: XmlPullParser? = null
@@ -99,7 +100,7 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
         var hospital: Hospital? = null
 
         while(event != XmlPullParser.END_DOCUMENT) {
-            var tag_name = parser.name
+            val tag_name = parser.name
             when(event) {
                 XmlPullParser.START_TAG -> {
                     var startTag = parser.name
@@ -155,8 +156,8 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun addrToPoint(context: Context, addr: String?): Location {
-        var location: Location = Location("")
-        var geocoder: Geocoder = Geocoder(context)
+        val location = Location("")
+        val geocoder = Geocoder(context)
         var addresses: List<Address>? = null
 
         try {
@@ -167,7 +168,7 @@ class MapHosActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if(addresses != null) {
             for(i in addresses.indices) {
-                var lating: Address = addresses[i]
+                val lating: Address = addresses[i]
                 location.latitude = lating.latitude
                 location.longitude = lating.longitude
             }

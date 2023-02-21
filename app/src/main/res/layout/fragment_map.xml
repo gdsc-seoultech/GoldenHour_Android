@@ -1,127 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.MapFragment"
     android:layout_width="match_parent"
-     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.map.MapFragment">
+
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="실시간 재난 상황"
+            android:textColor="#222222"
+            android:textSize="20dp" />
+
+        <fragment
+            android:id="@+id/mapView"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="안전 편의시설"
+        android:textColor="#222222"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
-
-            <TextView
-                android:padding="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="실시간 재난 상황"
-                android:textColor="#222222"
-                android:textSize="20dp" />
-
-            <fragment
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/mapView"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:name="com.google.android.gms.maps.MapFragment" />
-
-        </LinearLayout>
-
-        <TextView
-            android:padding="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="안전 편의시설"
-            android:textColor="#222222"
-            android:textSize="20dp" />
-
-        <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/btnHos"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="15dp"
-                    android:text="병원 / 응급실" />
-                <Button
-                    android:id="@+id/btnPhar"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="30dp"
-                    android:text="약국" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/btnAED"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="15dp"
-                    android:text="자동심장충격기" />
-                <Button
-                    android:id="@+id/btnFire"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="30dp"
-                    android:text="비상소화장치" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal">
-                <Button
-                    android:id="@+id/btnShelter"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="15dp"
-                    android:text="대피소" />
-                <Button
-                    android:id="@+id/btnTmp"
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="30dp"
-                    android:text="임시주거시설" />
-            </LinearLayout>
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnRest"
+                android:id="@+id/btnHos"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
-                android:layout_marginLeft="40dp"
-                android:text="쉼터" />
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:text="병원 / 응급실" />
 
-
+            <Button
+                android:id="@+id/btnPhar"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="약국" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAED"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:text="자동심장충격기" />
+
+            <Button
+                android:id="@+id/btnFire"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="비상소화장치" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnShelter"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="15dp"
+                android:text="대피소" />
+
+            <Button
+                android:id="@+id/btnTmp"
+                android:layout_width="150dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="30dp"
+                android:text="임시주거시설" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRest"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:layout_marginLeft="40dp"
+            android:text="쉼터" />
+
+
     </LinearLayout>
+
 </LinearLayout>
