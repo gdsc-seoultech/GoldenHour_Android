@@ -3,4 +3,15 @@
         <item>한국어</item>
         <item>영어</item>
     </string-array>
+
+    <string-array name="ai_assist_array">
+        <item>심폐 소생술</item>
+        <item>심폐 소생술 (AED)</item>
+        <item>동물에게 물렸을 때</item>
+        <item>뱀에게 물렸을 때</item>
+        <item>출혈</item>
+        <item>상처</item>
+        <item>동상</item>
+        <item>골절</item>
+    </string-array>
 </resources>

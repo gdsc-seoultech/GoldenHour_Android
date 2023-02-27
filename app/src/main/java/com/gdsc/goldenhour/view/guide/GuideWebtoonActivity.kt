@@ -2,6 +2,7 @@ package com.gdsc.goldenhour.view.guide
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -30,8 +31,24 @@ class GuideWebtoonActivity : AppCompatActivity() {
         val title = intent.getStringExtra("title")
         binding.guideTitle.text = title
 
+        checkDisasterName(title)
+
         val id = intent.getIntExtra("id", 0)
         loadWebtoonImages(id)
+    }
+
+    private fun checkDisasterName(title: String?) {
+        val aiAssistArray = resources.getStringArray(R.array.ai_assist_array)
+        if(aiAssistArray.contains(title)){
+            // ai 보조 버튼 보이도록
+            binding.aiAssistBtn.visibility = View.VISIBLE
+            binding.aiAssistBtn.setOnClickListener {
+                Log.d("AI BUTTON", "버튼 클릭")
+
+                // TODO: 넘어간 화면에서 재난 이름을 1~4번 카테고리로 분류하여 그에 따른 AI 기능 제공
+                // TODO: 1. 압박점 2. 지혈 3. 동상 4. 골절
+            }
+        }
     }
 
     private fun loadWebtoonImages(id: Int) {
@@ -99,6 +116,7 @@ class GuideWebtoonActivity : AppCompatActivity() {
     private fun setCurrentIndicator(position: Int) {
         val indicatorContainer = binding.indicatorContainer
         val childCount = indicatorContainer.childCount
+
         for(i in 0 until childCount){
             val imageView = indicatorContainer.getChildAt(i) as ImageView
             if(i == position){
