@@ -3,34 +3,21 @@ package com.gdsc.goldenhour.view.guide
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.gdsc.goldenhour.view.guide.adapter.GuideAdapter
+import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentGuideBinding
+import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.Guide
 import com.gdsc.goldenhour.network.model.GuideList
-import com.gdsc.goldenhour.network.RetrofitObject
+import com.gdsc.goldenhour.view.guide.adapter.GuideAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class GuideFragment : Fragment() {
-    private var _binding: FragmentGuideBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentGuideBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
+class GuideFragment : BindingFragment<FragmentGuideBinding>(FragmentGuideBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadGuideList()
     }
 
@@ -72,10 +59,5 @@ class GuideFragment : Fragment() {
         val gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
         recyclerView.setHasFixedSize(true)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
