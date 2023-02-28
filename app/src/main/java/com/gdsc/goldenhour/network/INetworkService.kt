@@ -1,9 +1,6 @@
 package com.gdsc.goldenhour.network
 
-import com.gdsc.goldenhour.network.model.DisasterWebtoonList
-import com.gdsc.goldenhour.network.model.GuideWebtoonList
-import com.gdsc.goldenhour.network.model.GuideList
-import com.gdsc.goldenhour.network.model.SignInResponse
+import com.gdsc.goldenhour.network.model.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -14,7 +11,7 @@ interface INetworkService {
     @POST("/user")
     fun createUser(
         @Header("Authorization")
-        idToken: String,
+        idToken: String
     ): Call<SignInResponse>
 
     @GET("/guide")
@@ -25,4 +22,10 @@ interface INetworkService {
 
     @GET("/disaster/{name}")
     fun getDisasterWebtoonList(@Path("name") name: String): Call<DisasterWebtoonList>
+
+    @GET("/user/emergency_contact")
+    fun getContactList(
+        @Header("Authorization")
+        idToken: String
+    ): Call<ContactList>
 }

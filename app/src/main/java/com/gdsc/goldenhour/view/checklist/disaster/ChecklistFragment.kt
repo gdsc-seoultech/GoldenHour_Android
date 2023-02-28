@@ -11,15 +11,15 @@ import com.google.android.material.tabs.TabLayout
 class ChecklistFragment : BindingFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(OneFragment())
+        loadFragment(DisasterFragment())
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val tabNameArray = resources.getStringArray(R.array.checklist_tab_name)
                 when(tab?.text){
-                    tabNameArray[0] -> loadFragment(OneFragment())
-                    tabNameArray[1] -> loadFragment(TwoFragment())
-                    tabNameArray[2] -> loadFragment(ThreeFragment())
+                    tabNameArray[0] -> loadFragment(DisasterFragment())
+                    tabNameArray[1] -> loadFragment(GoodsFragment())
+                    tabNameArray[2] -> loadFragment(ContactFragment())
                 }
             }
 
