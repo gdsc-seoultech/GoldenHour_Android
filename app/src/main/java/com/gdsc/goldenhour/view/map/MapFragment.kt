@@ -6,16 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
-import com.gdsc.goldenhour.MainActivity
-import com.gdsc.goldenhour.MapHosActivity
-import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -35,6 +29,11 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 */
         binding.btnHos.setOnClickListener {
             val intent = Intent(activity, MapHosActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnPhar.setOnClickListener {
+            val intent = Intent(activity, MapPharActivity::class.java)
             startActivity(intent)
         }
         return binding.root

@@ -20,12 +20,7 @@
             android:textColor="#222222"
             android:textSize="20dp" />
 
-        <fragment
-            android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal" />
+
 
     </LinearLayout>
 
