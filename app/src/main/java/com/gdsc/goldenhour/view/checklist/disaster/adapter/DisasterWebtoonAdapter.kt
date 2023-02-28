@@ -27,8 +27,7 @@ class DisasterWebtoonAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterWebtoonViewHolder {
         val view = DisasterWebtoonItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
+            LayoutInflater.from(parent.context), parent, false)
         return DisasterWebtoonViewHolder(view)
     }
 

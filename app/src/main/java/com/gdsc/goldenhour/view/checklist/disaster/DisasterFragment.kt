@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
-import com.gdsc.goldenhour.databinding.FragmentOneBinding
+import com.gdsc.goldenhour.databinding.FragmentDisasterBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.DisasterWebtoon
 import com.gdsc.goldenhour.network.model.DisasterWebtoonList
@@ -19,12 +19,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OneFragment : BindingFragment<FragmentOneBinding>(FragmentOneBinding::inflate) {
+class DisasterFragment :
+    BindingFragment<FragmentDisasterBinding>(FragmentDisasterBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val disasterName = "화재"
-        loadWebtoonImages(disasterName)
+        //loadWebtoonImages(disasterName)
     }
 
     private fun loadWebtoonImages(disasterName: String) {
@@ -90,20 +91,21 @@ class OneFragment : BindingFragment<FragmentOneBinding>(FragmentOneBinding::infl
 
         setCurrentIndicator(0)
     }
+
     private fun setCurrentIndicator(position: Int) {
         val indicatorContainer = binding.indicatorContainer
         val childCount = indicatorContainer.childCount
 
-        for(i in 0 until childCount){
+        for (i in 0 until childCount) {
             val imageView = indicatorContainer.getChildAt(i) as ImageView
-            if(i == position){
+            if (i == position) {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
                         R.drawable.bd_indicator_active
                     )
                 )
-            }else{
+            } else {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         requireContext(),
