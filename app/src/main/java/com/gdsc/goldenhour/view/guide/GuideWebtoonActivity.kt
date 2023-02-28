@@ -73,10 +73,10 @@ class GuideWebtoonActivity : AppCompatActivity() {
             })
     }
 
-    private fun setViewPagerRecyclerView(guideWebtoonList: List<GuideWebtoon>) {
+    private fun setViewPagerRecyclerView(data: List<GuideWebtoon>) {
         val guideViewpager = binding.guideViewpager
         guideViewpager.offscreenPageLimit = 1
-        guideViewpager.adapter = GuideWebtoonAdapter(this, guideWebtoonList)
+        guideViewpager.adapter = GuideWebtoonAdapter(this, data)
 
         guideViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -85,7 +85,7 @@ class GuideWebtoonActivity : AppCompatActivity() {
             }
         })
 
-        setUpIndicators(guideWebtoonList.size)
+        setUpIndicators(data.size)
     }
 
     private fun setUpIndicators(size: Int) {
@@ -136,6 +136,4 @@ class GuideWebtoonActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

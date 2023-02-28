@@ -1,5 +1,6 @@
 package com.gdsc.goldenhour.network
 
+import com.gdsc.goldenhour.network.model.DisasterWebtoonList
 import com.gdsc.goldenhour.network.model.GuideWebtoonList
 import com.gdsc.goldenhour.network.model.GuideList
 import com.gdsc.goldenhour.network.model.SignInResponse
@@ -21,4 +22,7 @@ interface INetworkService {
 
     @GET("/guide/{id}")
     fun getGuideWebtoonList(@Path("id") id: Int): Call<GuideWebtoonList>
+
+    @GET("/disaster/{name}")
+    fun getDisasterWebtoonList(@Path("name") name: String): Call<DisasterWebtoonList>
 }

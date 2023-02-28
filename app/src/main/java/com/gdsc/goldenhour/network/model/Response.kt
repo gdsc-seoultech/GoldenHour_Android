@@ -27,3 +27,11 @@ data class GuideWebtoon(
     val imgUrl: String
 )
 
+data class DisasterWebtoonList(
+    val data: List<DisasterWebtoon>
+)
+
+data class DisasterWebtoon(
+    val name: String,
+    val imgUrl: String
+)
