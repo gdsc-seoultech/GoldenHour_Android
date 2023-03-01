@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(BuildConfig.GOOGLE_API_KEY)
+            .requestIdToken(BuildConfig.GOOGLE_LOGIN_KEY)
             .requestEmail()
             .build()
 
