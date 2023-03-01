@@ -11,20 +11,22 @@ import com.gdsc.goldenhour.network.model.GuideWebtoon
 class GuideWebtoonAdapter(
     private val context: Context,
     private val imageList: List<GuideWebtoon>
-): RecyclerView.Adapter<GuideWebtoonAdapter.GuideWebtoonViewHolder>() {
+) : RecyclerView.Adapter<GuideWebtoonAdapter.GuideWebtoonViewHolder>() {
 
     inner class GuideWebtoonViewHolder(
-        private val binding: GuideWebtoonItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
-            fun bind(imgUrl: String){
-                Glide.with(context)
-                    .load(imgUrl)
-                    .into(binding.webtoonImage)
-            }
+        private val binding: GuideWebtoonItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(imgUrl: String) {
+            Glide.with(context)
+                .load(imgUrl)
+                .into(binding.webtoonImage)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuideWebtoonViewHolder {
-        val view = GuideWebtoonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = GuideWebtoonItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return GuideWebtoonViewHolder(view)
     }
 

@@ -66,24 +66,25 @@ class LoginActivity : AppCompatActivity() {
     private fun uploadUserInfo(gsa: GoogleSignInAccount?) {
         if (gsa != null) {
             // 유저의 로그인 정보를 서버에 업로드 한다.
-            val call = RetrofitObject.networkService.createUser(gsa.idToken.toString())
-            call.enqueue(object : Callback<SignInResponse> {
-                override fun onResponse(
-                    call: Call<SignInResponse>,
-                    response: Response<SignInResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        Log.d(RETROFIT_TAG, "success upload user info")
-                        Log.d(RETROFIT_TAG, response.body()!!.data)
-                    } else {
-                        Log.d(RETROFIT_TAG, response.message())
+            RetrofitObject.networkService.createUser(gsa.idToken.toString())
+                .enqueue(object : Callback<SignInResponse> {
+                    override fun onResponse(
+                        call: Call<SignInResponse>,
+                        response: Response<SignInResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            Log.d(RETROFIT_TAG, "success upload user info")
+                            Log.d(RETROFIT_TAG, response.body()!!.data)
+                        } else {
+                            Log.d(RETROFIT_TAG, response.message())
+                        }
                     }
-                }
-                override fun onFailure(call: Call<SignInResponse>, t: Throwable) {
-                    Log.d(RETROFIT_TAG, "fail")
-                    Log.d(RETROFIT_TAG, t.message.toString())
-                }
-            })
+
+                    override fun onFailure(call: Call<SignInResponse>, t: Throwable) {
+                        Log.d("Retrofit", t.message.toString())
+                        call.cancel()
+                    }
+                })
         }
     }
 

@@ -27,3 +27,23 @@ data class GuideWebtoon(
     val imgUrl: String
 )
 
+data class DisasterWebtoonList(
+    val data: List<DisasterWebtoon>
+)
+
+data class DisasterWebtoon(
+    val name: String,
+    val imgUrl: String
+)
+
+data class ContactList(
+    val success: Boolean,
+    val data: List<Contact>,
+    val error: Error
+)
+
+data class Contact(
+    val id: Int,
+    val name: String,
+    val phoneNumber: String
+)

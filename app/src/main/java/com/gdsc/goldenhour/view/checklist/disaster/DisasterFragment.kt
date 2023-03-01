@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.view.guide
+package com.gdsc.goldenhour.view.checklist.disaster
 
 import android.os.Bundle
 import android.util.Log
@@ -6,57 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
-import com.gdsc.goldenhour.databinding.ActivityGuideWebtoonBinding
+import com.gdsc.goldenhour.binding.BindingFragment
+import com.gdsc.goldenhour.databinding.FragmentDisasterBinding
 import com.gdsc.goldenhour.network.RetrofitObject
-import com.gdsc.goldenhour.network.model.GuideWebtoon
-import com.gdsc.goldenhour.network.model.GuideWebtoonList
-import com.gdsc.goldenhour.view.guide.adapter.GuideWebtoonAdapter
+import com.gdsc.goldenhour.network.model.DisasterWebtoon
+import com.gdsc.goldenhour.network.model.DisasterWebtoonList
+import com.gdsc.goldenhour.view.checklist.disaster.adapter.DisasterWebtoonAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+class DisasterFragment :
+    BindingFragment<FragmentDisasterBinding>(FragmentDisasterBinding::inflate) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-class GuideWebtoonActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityGuideWebtoonBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityGuideWebtoonBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val title = intent.getStringExtra("title")
-        binding.guideTitle.text = title
-
-        checkDisasterName(title)
-
-        val id = intent.getIntExtra("id", 0)
-        loadWebtoonImages(id)
+        val disasterName = "화재"
+        //loadWebtoonImages(disasterName)
     }
 
-    private fun checkDisasterName(title: String?) {
-        val aiAssistArray = resources.getStringArray(R.array.ai_assist_array)
-        if(aiAssistArray.contains(title)){
-            // ai 보조 버튼 보이도록
-            binding.aiAssistBtn.visibility = View.VISIBLE
-            binding.aiAssistBtn.setOnClickListener {
-                Log.d("AI BUTTON", "버튼 클릭")
-
-                // TODO: 넘어간 화면에서 재난 이름을 1~4번 카테고리로 분류하여 그에 따른 AI 기능 제공
-                // TODO: 1. 압박점 2. 지혈 3. 동상 4. 골절
-            }
-        }
-    }
-
-    private fun loadWebtoonImages(id: Int) {
-        RetrofitObject.networkService.getGuideWebtoonList(id)
-            .enqueue(object : Callback<GuideWebtoonList> {
+    private fun loadWebtoonImages(disasterName: String) {
+        // TODO: 재난 이름에 따른 행동수칙을 받을 수 있도록 (id 말고)
+        // TODO: getDisasterWebtoonList 이 함수는 임의로 만들어둔 것!
+        RetrofitObject.networkService.getDisasterWebtoonList(disasterName)
+            .enqueue(object : Callback<DisasterWebtoonList> {
                 override fun onResponse(
-                    call: Call<GuideWebtoonList>,
-                    response: Response<GuideWebtoonList>
+                    call: Call<DisasterWebtoonList>,
+                    response: Response<DisasterWebtoonList>
                 ) {
                     if (response.isSuccessful) {
                         val body = response.body()
@@ -66,19 +45,19 @@ class GuideWebtoonActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<GuideWebtoonList>, t: Throwable) {
+                override fun onFailure(call: Call<DisasterWebtoonList>, t: Throwable) {
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }
             })
     }
 
-    private fun setViewPagerRecyclerView(data: List<GuideWebtoon>) {
-        val guideViewpager = binding.guideViewpager
-        guideViewpager.offscreenPageLimit = 1
-        guideViewpager.adapter = GuideWebtoonAdapter(this, data)
+    private fun setViewPagerRecyclerView(data: List<DisasterWebtoon>) {
+        val disasterViewpager = binding.checklistDisasterViewpager
+        disasterViewpager.offscreenPageLimit = 1
+        disasterViewpager.adapter = DisasterWebtoonAdapter(context, data)
 
-        guideViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        disasterViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 setCurrentIndicator(position)
@@ -99,10 +78,10 @@ class GuideWebtoonActivity : AppCompatActivity() {
 
         // LinearLayout에 동적으로 indicator 추가하기
         for (i in indicators.indices) {
-            indicators[i] = ImageView(this)
+            indicators[i] = ImageView(requireContext())
             indicators[i]?.setImageDrawable(
                 ContextCompat.getDrawable(
-                    this,
+                    requireContext(),
                     R.drawable.bd_indicator_inactive
                 )
             )
@@ -117,19 +96,19 @@ class GuideWebtoonActivity : AppCompatActivity() {
         val indicatorContainer = binding.indicatorContainer
         val childCount = indicatorContainer.childCount
 
-        for(i in 0 until childCount){
+        for (i in 0 until childCount) {
             val imageView = indicatorContainer.getChildAt(i) as ImageView
-            if(i == position){
+            if (i == position) {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
-                        this,
+                        requireContext(),
                         R.drawable.bd_indicator_active
                     )
                 )
-            }else{
+            } else {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
-                        this,
+                        requireContext(),
                         R.drawable.bd_indicator_inactive
                     )
                 )
