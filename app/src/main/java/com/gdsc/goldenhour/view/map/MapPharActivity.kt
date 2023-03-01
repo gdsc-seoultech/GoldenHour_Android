@@ -398,7 +398,7 @@ class MapPharActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnC
             .listener(this@MapPharActivity)
             .key(apiKey)
             .latlng(location.latitude,  location.longitude)
-            .radius(300)
+            .radius(500)
             .type(PlaceType.PHARMACY)
             .build()
             .execute()
