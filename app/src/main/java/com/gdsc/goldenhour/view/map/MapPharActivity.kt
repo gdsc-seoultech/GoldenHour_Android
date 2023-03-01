@@ -250,6 +250,8 @@ class MapPharActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnC
     }
 
     override fun onRequestPermissionsResult(permsRequestCode: Int, permissions: Array<String>, grandResults: IntArray) {
+        super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults)
+
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.size == REQUIRED_PERMISSIONS.size) {
 
             var check_result = true
@@ -393,7 +395,7 @@ class MapPharActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnC
 
     fun showPlaceInformation(location: LatLng) {
         previous_marker.clear()
-        val apiKey = BuildConfig.GOOGLE_MAP_API_KEY
+        val apiKey = BuildConfig.GOOGLE_MAP_KEY
         NRPlaces.Builder()
             .listener(this@MapPharActivity)
             .key(apiKey)

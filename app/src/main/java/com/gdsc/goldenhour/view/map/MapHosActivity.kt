@@ -1,7 +1,6 @@
 package com.gdsc.goldenhour.view.map
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -11,7 +10,6 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -23,21 +21,18 @@ import androidx.core.content.ContextCompat
 import com.gdsc.goldenhour.BuildConfig
 import com.gdsc.goldenhour.databinding.ActivityMapPharBinding
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
-import noman.googleplaces.PlacesListener
+import noman.googleplaces.*
 import java.io.IOException
 import java.util.*
-import noman.googleplaces.NRPlaces
-import noman.googleplaces.Place
-import noman.googleplaces.PlaceType
-import noman.googleplaces.PlacesException
-
 
 @Suppress("DEPRECATION")
 class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCameraIdleListener,
@@ -250,6 +245,8 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     }
 
     override fun onRequestPermissionsResult(permsRequestCode: Int, permissions: Array<String>, grandResults: IntArray) {
+        super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults)
+
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.size == REQUIRED_PERMISSIONS.size) {
 
             var check_result = true
@@ -393,7 +390,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
 
     fun showPlaceInformation(location: LatLng) {
         previous_marker.clear()
-        val apiKey = BuildConfig.GOOGLE_MAP_API_KEY
+        val apiKey = BuildConfig.GOOGLE_MAP_KEY
         NRPlaces.Builder()
             .listener(this@MapHosActivity)
             .key(apiKey)
