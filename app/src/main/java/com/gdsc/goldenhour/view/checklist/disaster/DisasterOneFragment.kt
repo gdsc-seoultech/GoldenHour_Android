@@ -10,17 +10,17 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
-import com.gdsc.goldenhour.databinding.FragmentDisasterBinding
+import com.gdsc.goldenhour.databinding.FragmentDisasterOneBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.DisasterWebtoon
 import com.gdsc.goldenhour.network.model.DisasterWebtoonList
-import com.gdsc.goldenhour.view.checklist.disaster.adapter.DisasterWebtoonAdapter
+import com.gdsc.goldenhour.view.checklist.disaster.adapter.RulesWebtoonAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DisasterFragment :
-    BindingFragment<FragmentDisasterBinding>(FragmentDisasterBinding::inflate) {
+class DisasterOneFragment :
+    BindingFragment<FragmentDisasterOneBinding>(FragmentDisasterOneBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,7 +55,7 @@ class DisasterFragment :
     private fun setViewPagerRecyclerView(data: List<DisasterWebtoon>) {
         val disasterViewpager = binding.checklistDisasterViewpager
         disasterViewpager.offscreenPageLimit = 1
-        disasterViewpager.adapter = DisasterWebtoonAdapter(context, data)
+        disasterViewpager.adapter = RulesWebtoonAdapter(context, data)
 
         disasterViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

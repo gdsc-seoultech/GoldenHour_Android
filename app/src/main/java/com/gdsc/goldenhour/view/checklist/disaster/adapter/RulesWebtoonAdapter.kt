@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.gdsc.goldenhour.databinding.DisasterWebtoonItemBinding
+import com.gdsc.goldenhour.databinding.RulesWebtoonItemBinding
 import com.gdsc.goldenhour.network.model.DisasterWebtoon
 
-class DisasterWebtoonAdapter(
+class RulesWebtoonAdapter(
     private val context: Context?,
     private val data: List<DisasterWebtoon>
-) : RecyclerView.Adapter<DisasterWebtoonAdapter.DisasterWebtoonViewHolder>() {
+) : RecyclerView.Adapter<RulesWebtoonAdapter.DisasterWebtoonViewHolder>() {
 
     inner class DisasterWebtoonViewHolder(
-        private val binding: DisasterWebtoonItemBinding
+        private val binding: RulesWebtoonItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(imgUrl: String) {
             if (context != null) {
@@ -26,7 +26,7 @@ class DisasterWebtoonAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterWebtoonViewHolder {
-        val view = DisasterWebtoonItemBinding.inflate(
+        val view = RulesWebtoonItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)
         return DisasterWebtoonViewHolder(view)
     }

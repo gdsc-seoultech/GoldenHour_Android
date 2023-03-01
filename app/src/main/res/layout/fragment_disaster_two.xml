@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.checklist.disaster.GoodsFragment">
+    tools:context=".view.checklist.disaster.DisasterTwoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/goods_recycler_view"

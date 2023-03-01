@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.view.checklist.disaster
+package com.gdsc.goldenhour.view.checklist.normal
 
 import android.os.Bundle
 import android.view.View
@@ -11,15 +11,17 @@ import com.google.android.material.tabs.TabLayout
 class ChecklistFragment : BindingFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(DisasterOneFragment())
+        loadFragment(NormalOneFragment())
+
+        binding.disasterSms.visibility = View.GONE
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val tabNameArray = resources.getStringArray(R.array.checklist_tab_name)
                 when(tab?.text){
-                    tabNameArray[0] -> loadFragment(DisasterOneFragment())
-                    tabNameArray[1] -> loadFragment(DisasterTwoFragment())
-                    tabNameArray[2] -> loadFragment(DisasterThreeFragment())
+                    tabNameArray[0] -> loadFragment(NormalOneFragment())
+                    tabNameArray[1] -> loadFragment(NormalTwoFragment())
+                    tabNameArray[2] -> loadFragment(NormalThreeFragment())
                 }
             }
 
