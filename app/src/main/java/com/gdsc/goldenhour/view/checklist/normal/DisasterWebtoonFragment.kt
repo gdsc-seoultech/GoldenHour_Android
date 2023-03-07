@@ -1,8 +1,11 @@
 package com.gdsc.goldenhour.view.checklist.normal
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentDisasterWebtoonBinding
 import com.gdsc.goldenhour.network.RetrofitObject
@@ -17,6 +20,18 @@ class DisasterWebtoonFragment(
     private val itemId: Int,
     private val itemName: String
 ) : BindingFragment<FragmentDisasterWebtoonBinding>(FragmentDisasterWebtoonBinding::inflate) {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val tran = requireActivity().supportFragmentManager.beginTransaction()
+                tran.replace(R.id.tab_content, NormalOneFragment())
+                tran.commit()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

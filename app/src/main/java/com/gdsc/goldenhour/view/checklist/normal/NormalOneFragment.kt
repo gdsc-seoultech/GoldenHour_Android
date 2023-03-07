@@ -30,12 +30,14 @@ class NormalOneFragment :
         }
 
         loadDisasterList()
+
+        // TODO: 재난 이름 검색할 수 있도록 (SearchView)
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val tran = activity?.supportFragmentManager?.beginTransaction()
-        tran?.replace(R.id.tab_content, fragment)
-        tran?.commit()
+        val tran = requireActivity().supportFragmentManager.beginTransaction()
+        tran.replace(R.id.tab_content, fragment)
+        tran.commit()
     }
 
     private fun loadDisasterList() {

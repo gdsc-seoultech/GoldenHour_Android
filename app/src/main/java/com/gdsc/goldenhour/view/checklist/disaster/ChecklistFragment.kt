@@ -32,8 +32,8 @@ class ChecklistFragment : BindingFragment<FragmentChecklistBinding>(FragmentChec
     }
 
     private fun loadFragment(fragment: Fragment) {
-        val tran = activity?.supportFragmentManager?.beginTransaction()
-        tran?.replace(R.id.tab_content, fragment)
-        tran?.commit()
+        val tran = requireActivity().supportFragmentManager.beginTransaction()
+        tran.replace(R.id.tab_content, fragment)
+        tran.commit()
     }
 }
