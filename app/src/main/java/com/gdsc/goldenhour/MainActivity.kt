@@ -1,10 +1,16 @@
 package com.gdsc.goldenhour
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.gdsc.goldenhour.databinding.ActivityMainBinding
+import com.gdsc.goldenhour.util.PermissionSupport
 import com.gdsc.goldenhour.view.call.CallFragment
 import com.gdsc.goldenhour.view.checklist.normal.ChecklistFragment
 import com.gdsc.goldenhour.view.map.MapFragment
