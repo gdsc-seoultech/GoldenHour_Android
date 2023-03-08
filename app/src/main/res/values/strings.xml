@@ -5,15 +5,6 @@
     <string name="call_title">Emergency Call</string>
     <string name="map_title">Safety Map</string>
 
-    <string name="guide_title_1">CPR</string>
-    <string name="guide_title_2">CPR</string>
-    <string name="guide_title_3">CPR</string>
-    <string name="guide_title_4">CPR</string>
-    <string name="guide_title_5">CPR</string>
-    <string name="guide_title_6">CPR</string>
-    <string name="guide_title_7">CPR</string>
-    <string name="guide_title_8">CPR</string>
-
     <string name="permission_guide" translatable="false">
         - 위치 권한: 비상신고, 안전지도 기능을 위해 필요합니다.\n
         - 전화, 메시지 권한: 비상연락망에 전화, 메시지를 보내기 위해 필요합니다.\n

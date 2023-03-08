@@ -5,13 +5,4 @@
     <string name="checklist_title">체크리스트</string>
     <string name="call_title">비상신고</string>
     <string name="map_title">안전지도</string>
-
-    <string name="guide_title_1">심폐소생술</string>
-    <string name="guide_title_2">심폐소생술</string>
-    <string name="guide_title_3">심폐소생술</string>
-    <string name="guide_title_4">심폐소생술</string>
-    <string name="guide_title_5">심폐소생술</string>
-    <string name="guide_title_6">심폐소생술</string>
-    <string name="guide_title_7">심폐소생술</string>
-    <string name="guide_title_8">심폐소생술</string>
 </resources>
