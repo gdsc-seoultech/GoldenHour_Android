@@ -90,4 +90,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'noman.placesapi:placesAPI:1.1.3'
     implementation files('libs/libDaumMapAndroid.jar')
+
 }

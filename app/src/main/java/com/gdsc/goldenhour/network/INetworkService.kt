@@ -41,4 +41,5 @@ interface INetworkService {
 
     @GET("/message/{id}/information")
     fun getInformationList(@Path("id") id: Int): Call<InformationList>
+
 }

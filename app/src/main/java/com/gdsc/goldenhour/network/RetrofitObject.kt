@@ -22,5 +22,6 @@ object RetrofitObject {
         .client(okHttpClient.build())
         .build()
 
+
     val networkService: INetworkService = retrofit.create(INetworkService::class.java)
 }

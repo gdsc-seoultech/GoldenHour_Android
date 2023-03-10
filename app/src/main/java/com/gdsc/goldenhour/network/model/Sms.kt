@@ -45,3 +45,4 @@ data class InformationList(
     val data: List<Information>,
     val error: Error
 )
+
