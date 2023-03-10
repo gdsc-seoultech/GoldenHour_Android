@@ -28,4 +28,17 @@ interface INetworkService {
         @Header("Authorization")
         idToken: String
     ): Call<ContactList>
+
+
+    @GET("/message/{type}")
+    fun getSituationList(@Path("type") type: String): Call<SituationList>
+
+    @GET("/message/{id}/type_situation")
+    fun getTypeSituationList(@Path("id") id: Int): Call<TypeSituationList>
+
+    @GET("/message/{id}/detail_situation")
+    fun getDetailSituationList(@Path("id") id: Int): Call<DetailSituationList>
+
+    @GET("/message/{id}/information")
+    fun getInformationList(@Path("id") id: Int): Call<InformationList>
 }
