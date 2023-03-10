@@ -34,16 +34,17 @@ android:layout_margin="15dp">
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btn112"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="긴급범죄 신고 112"
-
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/round_button"
         android:layout_marginBottom="10dp"/>
 
     <Button
+        android:id="@+id/btn119"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="화재 / 구조 / 구급 신고 119"
@@ -53,6 +54,7 @@ android:layout_margin="15dp">
         android:layout_marginBottom="10dp"/>
 
     <Button
+        android:id="@+id/btn110"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="그 외 모든 민원 상담 110"
@@ -70,12 +72,14 @@ android:layout_margin="15dp">
         android:textSize="20sp" />
 
     <Button
+        android:id="@+id/btnSms"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="긴급 문자 신고 (템플릿 제공)"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/round_button"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        tools:ignore="InvalidId" />
 
 </LinearLayout>
