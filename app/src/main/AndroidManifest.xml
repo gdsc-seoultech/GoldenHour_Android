@@ -76,7 +76,7 @@
 <!--            android:exported="false" />-->
 
         <activity
-            android:name=".view.call.smsButtonActivity"
+            android:name=".view.call.EmergencySmsActivity"
             android:exported="false"/>
     </application>
 

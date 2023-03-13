@@ -43,7 +43,7 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
         }
 
         binding.btnSms.setOnClickListener {
-            val intent = Intent(requireContext(), smsButtonActivity::class.java)
+            val intent = Intent(requireContext(), EmergencySmsActivity::class.java)
             startActivity(intent)
         }
 
