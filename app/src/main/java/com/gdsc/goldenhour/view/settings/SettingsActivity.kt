@@ -1,5 +1,6 @@
 package com.gdsc.goldenhour.view.settings
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.gdsc.goldenhour.BuildConfig
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivitySettingsBinding
+import com.gdsc.goldenhour.view.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
@@ -23,21 +25,16 @@ class SettingsActivity : AppCompatActivity() {
         loadFragment(SettingsFragment())
 
         val gsa = GoogleSignIn.getLastSignedInAccount(this)
-        if(gsa != null){
-            // 로그인 된 경우
-            Glide.with(this)
-                .load(gsa.photoUrl)
-                .override(100)
-                .into(binding.userProfile)
-            binding.userName.text = gsa.displayName
-            binding.userEmail.text = gsa.email
-            binding.btnLogout.setOnClickListener {
-                logOut()
-            }
-        }else{
-            // 로그아웃 한 경우
-            binding.userInfoContainer.visibility = View.GONE
-            binding.btnLogout.visibility = View.GONE
+        Glide.with(this)
+            .load(gsa?.photoUrl)
+            .override(100)
+            .into(binding.userProfile)
+
+        binding.userName.text = gsa?.displayName
+        binding.userEmail.text = gsa?.email
+
+        binding.btnLogout.setOnClickListener {
+            logOut()
         }
     }
 
@@ -56,8 +53,11 @@ class SettingsActivity : AppCompatActivity() {
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
         googleSignInClient.signOut().addOnCompleteListener(this) {
             Log.d("GOOGLE_LOGIN", "logout")
-            binding.userInfoContainer.visibility = View.GONE
-            binding.btnLogout.visibility = View.GONE
+
+            // Activity Task 비우면서 로그인 화면으로 이동하도록
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 }

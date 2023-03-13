@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.binding.BindingFragment
-import com.gdsc.goldenhour.databinding.FragmentContactBinding
+import com.gdsc.goldenhour.databinding.FragmentDisasterThreeBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.Contact
 import com.gdsc.goldenhour.network.model.ContactList
@@ -17,7 +17,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ContactFragment : BindingFragment<FragmentContactBinding>(FragmentContactBinding::inflate) {
+class DisasterThreeFragment :
+    BindingFragment<FragmentDisasterThreeBinding>(FragmentDisasterThreeBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

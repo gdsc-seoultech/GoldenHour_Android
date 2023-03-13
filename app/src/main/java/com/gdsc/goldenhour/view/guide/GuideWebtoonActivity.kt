@@ -12,9 +12,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivityGuideWebtoonBinding
 import com.gdsc.goldenhour.network.RetrofitObject
-import com.gdsc.goldenhour.network.model.GuideWebtoon
+import com.gdsc.goldenhour.network.model.WebtoonItem
 import com.gdsc.goldenhour.network.model.GuideWebtoonList
-import com.gdsc.goldenhour.view.guide.adapter.GuideWebtoonAdapter
+import com.gdsc.goldenhour.adapter.WebtoonAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,10 +73,10 @@ class GuideWebtoonActivity : AppCompatActivity() {
             })
     }
 
-    private fun setViewPagerRecyclerView(data: List<GuideWebtoon>) {
+    private fun setViewPagerRecyclerView(data: List<WebtoonItem>) {
         val guideViewpager = binding.guideViewpager
-        guideViewpager.offscreenPageLimit = 1
-        guideViewpager.adapter = GuideWebtoonAdapter(this, data)
+        guideViewpager.offscreenPageLimit = 1 // 얼만큼 떨어져 있는 페이지를 미리 생성할 것인지 (1이면 좌우 페이지 미리 생성)
+        guideViewpager.adapter = WebtoonAdapter(this, data)
 
         guideViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
