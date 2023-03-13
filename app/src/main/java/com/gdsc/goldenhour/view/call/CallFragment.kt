@@ -15,32 +15,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
 
-class CallFragment : Fragment() {
-
-    lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    lateinit var mLastLocation: Location
-    lateinit var mLocationRequest: LocationRequest
-    val REQUEST_PERMISSION_LOCATION = 10
-
-    lateinit var binding: FragmentCallBinding
-    var addr: String? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCallBinding.inflate(inflater, container, false)
-
-        return binding.root
-    }
+class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var mLastLocation: Location
+    private lateinit var mLocationRequest: LocationRequest
+    private val REQUEST_PERMISSION_LOCATION = 10
+    private var addr: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
+        binding.tvUserName.text = "${gsa?.displayName}님의 위치"
 
         mLocationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -49,7 +42,6 @@ class CallFragment : Fragment() {
         if(checkPermissionForLocation(requireContext())) {
             startLocationUpdates()
         }
-
     }
 
     fun startLocationUpdates() {
@@ -83,12 +75,11 @@ class CallFragment : Fragment() {
         )
         if (addresses == null || addresses.isEmpty()) {
             Toast.makeText(requireContext(), "주소 미발견", Toast.LENGTH_LONG).show()
-            binding.callAddress.text = "   : 주소를 찾을 수 없습니다."
+            binding.tvUserLocation.text = " :  주소를 찾을 수 없습니다."
         } else {
             val address = addresses[0]
-            binding.callAddress.text = "   : "+address.getAddressLine(0).toString()
+            binding.tvUserLocation.text = " :  ${address.getAddressLine(0)}"
         }
-
     }
 
     fun checkPermissionForLocation(context: Context): Boolean {
@@ -114,7 +105,7 @@ class CallFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 addr = "   : 주소를 확인할 수 없습니다."
-                binding.callAddress.text = addr
+                binding.tvUserLocation.text = addr
             }
         }
     }

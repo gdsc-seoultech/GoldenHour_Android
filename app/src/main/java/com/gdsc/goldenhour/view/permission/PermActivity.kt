@@ -36,7 +36,7 @@ class PermActivity : AppCompatActivity() {
     }
 
     private fun checkInitialPermissionStatus() {
-        // 최초 실행 시 퍼미션 여부 확인 (거부된 권한에 대해 요청)
+        // 최초 실행 시 퍼미션 여부 확인 (거부된 권한 요청)
         if (!permissionSupport.checkPermission()) {
             permissionSupport.requestPermission()
         }
