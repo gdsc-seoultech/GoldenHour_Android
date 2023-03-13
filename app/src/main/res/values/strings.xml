@@ -11,6 +11,4 @@
     <string name="perm3">비상연락망 전화 발신 기능 제공</string>
     <string name="perm4">재난문자 수신 및 비상연락망 일반문자 발신 기능 제공</string>
     <string name="perm5">안전가이드에서 AI 보조 기능 제공</string>
-    <string name="perm_detail">※ 선택 접근 권한은 해당 기능 사용 시 요청하며, 동의하지 않아도 서비스 이용은 가능합니다.\n\n
-        ※ 휴대폰 설정 > 어플리케이션 > GoldenHour > 앱 권한 메뉴에서 설정 변경 가능합니다.</string>
 </resources>
