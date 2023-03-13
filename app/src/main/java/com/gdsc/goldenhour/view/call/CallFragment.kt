@@ -2,23 +2,28 @@ package com.gdsc.goldenhour.view.call
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
+import kotlin.properties.Delegates
 
 class CallFragment : Fragment() {
 
@@ -26,16 +31,31 @@ class CallFragment : Fragment() {
     lateinit var mLastLocation: Location
     lateinit var mLocationRequest: LocationRequest
     val REQUEST_PERMISSION_LOCATION = 10
-
     lateinit var binding: FragmentCallBinding
     var addr: String? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCallBinding.inflate(inflater, container, false)
 
+        binding.btnSms.setOnClickListener {
+            val intent = Intent(requireContext(), smsButtonActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        binding.btn112.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$112")))
+        }
+
+        binding.btn119.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$119")))
+        }
+
+        binding.btn110.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$110")))
+        }
         return binding.root
     }
 
@@ -104,6 +124,8 @@ class CallFragment : Fragment() {
         }
     }
 
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -117,5 +139,6 @@ class CallFragment : Fragment() {
                 binding.callAddress.text = addr
             }
         }
+
     }
 }
