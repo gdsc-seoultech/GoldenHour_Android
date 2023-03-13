@@ -7,6 +7,7 @@ import android.os.Handler
 import com.gdsc.goldenhour.MainActivity
 import com.gdsc.goldenhour.databinding.ActivitySplashBinding
 import com.gdsc.goldenhour.view.login.LoginActivity
+import com.gdsc.goldenhour.view.permission.PermActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
 class SplashActivity : AppCompatActivity() {
@@ -23,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
             if (gsa != null) {
                 navigateScreen(MainActivity::class.java)
             }else {
-                navigateScreen(LoginActivity::class.java)
+                navigateScreen(PermActivity::class.java)
             }
         }, 2500)
     }
