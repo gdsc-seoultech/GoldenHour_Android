@@ -1,26 +1,22 @@
 package com.gdsc.goldenhour.view.call
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.gdsc.goldenhour.R
-import com.gdsc.goldenhour.databinding.ActivitySmsButtonBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.gdsc.goldenhour.databinding.ActivityEmergencySmsBinding
 import com.gdsc.goldenhour.network.RetrofitObject
-import com.gdsc.goldenhour.network.model.GuideList
 import com.gdsc.goldenhour.network.model.SituationList
 import com.gdsc.goldenhour.network.model.TypeSituationList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import java.net.URL
 
-class smsButtonActivity : AppCompatActivity() {
-    lateinit var binding: ActivitySmsButtonBinding
+class EmergencySmsActivity : AppCompatActivity() {
+    lateinit var binding: ActivityEmergencySmsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySmsButtonBinding.inflate(layoutInflater)
+        binding = ActivityEmergencySmsBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
         loadSituationList("119")

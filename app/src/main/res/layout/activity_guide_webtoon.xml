@@ -7,7 +7,7 @@
     tools:context=".view.guide.GuideWebtoonActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/cl_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -17,7 +17,7 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/guide_title"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -27,11 +27,11 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"/>
 
         <ImageView
-            android:id="@+id/ai_assist_btn"
+            android:id="@+id/iv_ai_assist"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_ai_assist"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -45,7 +45,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_title_bar" />
 
     <LinearLayout
         android:id="@+id/indicator_container"

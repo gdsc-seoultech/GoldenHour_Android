@@ -1,12 +1,17 @@
 package com.gdsc.goldenhour.view.guide
 
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
@@ -22,33 +27,92 @@ import retrofit2.Response
 
 class GuideWebtoonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuideWebtoonBinding
+    private lateinit var guideName: TextView
+    private lateinit var aiAssistName: Array<String>
+    private lateinit var aiAssistGuide: Array<String>
+    private val PERMISSION_REQUEST_CODE = 111
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGuideWebtoonBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        guideName = binding.tvTitle
+        guideName.text = intent.getStringExtra("name")
 
-        val title = intent.getStringExtra("title")
-        binding.guideTitle.text = title
+        aiAssistName = resources.getStringArray(R.array.ai_assist_name)
+        aiAssistGuide = resources.getStringArray(R.array.ai_assist_guide)
 
-        checkDisasterName(title)
-
+        // 항목 id에 따라 웹툰 이미지를 띄운다.
         val id = intent.getIntExtra("id", 0)
         loadWebtoonImages(id)
+
+        // 항목 이름에 따라 ai 보조 버튼을 추가한다.
+        checkDisasterName(guideName.text.toString())
+
+        // AI 보조 버튼이 보이는 경우에만 클릭 리스너가 작동한다.
+        binding.ivAiAssist.setOnClickListener {
+            checkCameraPermission()
+            showGuideDialog()
+        }
     }
 
-    private fun checkDisasterName(title: String?) {
-        val aiAssistArray = resources.getStringArray(R.array.ai_assist_array)
-        if(aiAssistArray.contains(title)){
-            // ai 보조 버튼 보이도록
-            binding.aiAssistBtn.visibility = View.VISIBLE
-            binding.aiAssistBtn.setOnClickListener {
-                Log.d("AI BUTTON", "버튼 클릭")
+    private fun checkDisasterName(name: String) {
+        if (aiAssistName.contains(name)) {
+            binding.ivAiAssist.visibility = View.VISIBLE
+        }
+    }
 
-                // TODO: 넘어간 화면에서 재난 이름을 1~4번 카테고리로 분류하여 그에 따른 AI 기능 제공
-                // TODO: 1. 압박점 2. 지혈 3. 동상 4. 골절
+    private fun checkCameraPermission() {
+        val status = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA")
+        if (status == PackageManager.PERMISSION_GRANTED) {
+            Log.d("PERMISSION", "CAMERA Permission Granted...")
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf("android.permission.CAMERA"),
+                PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.isNotEmpty()) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("PERMISSION", "CAMERA Permission Granted...")
+            } else {
+                Log.d("PERMISSION", "CAMERA Permission Denied...")
             }
         }
+    }
+
+    private fun showGuideDialog() {
+        val bloodItems = mutableListOf<String>()
+        for (i in 0..3) {
+            bloodItems.add(aiAssistName[i])
+        }
+        val pressureItems = listOf<String>(aiAssistName[4], aiAssistName[5])
+
+        val guideMessage = when (guideName.text) {
+            in bloodItems -> aiAssistGuide[0] // 지혈점
+            in pressureItems -> aiAssistGuide[1] // 압박점
+            else -> "동상, 골절 안내 가이드"
+        }
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("안내 가이드")
+            .setMessage(guideMessage)
+            .setPositiveButton("확인") { _, _ ->
+                // todo: 카메라 앱을 켠다.
+
+            }
+            .setNegativeButton("취소", null)
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun loadWebtoonImages(id: Int) {
@@ -117,16 +181,16 @@ class GuideWebtoonActivity : AppCompatActivity() {
         val indicatorContainer = binding.indicatorContainer
         val childCount = indicatorContainer.childCount
 
-        for(i in 0 until childCount){
+        for (i in 0 until childCount) {
             val imageView = indicatorContainer.getChildAt(i) as ImageView
-            if(i == position){
+            if (i == position) {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         this,
                         R.drawable.bd_indicator_active
                     )
                 )
-            }else{
+            } else {
                 imageView.setImageDrawable(
                     ContextCompat.getDrawable(
                         this,

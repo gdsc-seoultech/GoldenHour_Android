@@ -6,7 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="false"
@@ -17,7 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenHour"
         android:usesCleartextTraffic="true">
-
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -36,12 +39,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.map.MapHosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.map.MapPharActivity"
-            android:exported="false" />
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:exported="true">
@@ -51,22 +49,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.permission.PermActivity"
+            android:exported="false" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".view.settings.SettingsActivity"
             android:exported="false" />
+
         <activity
             android:name=".view.guide.GuideWebtoonActivity"
             android:exported="false" />
+
         <activity
-            android:name=".view.map.MapAedActivity"
+            android:name=".view.map.MapHosActivity"
             android:exported="false" />
         <activity
-            android:name=".view.call.smsButtonActivity"
-            android:exported="false">
-        </activity>
+            android:name=".view.map.MapPharActivity"
+            android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".view.map.MapAedActivity"-->
+<!--            android:exported="false" />-->
+
+        <activity
+            android:name=".view.call.EmergencySmsActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

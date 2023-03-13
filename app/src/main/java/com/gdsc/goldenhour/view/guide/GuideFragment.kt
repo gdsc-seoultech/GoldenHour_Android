@@ -50,14 +50,13 @@ class GuideFragment : BindingFragment<FragmentGuideBinding>(FragmentGuideBinding
                 val item = guideList[position]
                 val intent = Intent(context, GuideWebtoonActivity::class.java)
                 intent.putExtra("id", item.id)
-                intent.putExtra("title", item.name)
+                intent.putExtra("name", item.name)
                 startActivity(intent)
             }
         })
 
         recyclerView.adapter = guideAdapter
-        val gridLayoutManager = GridLayoutManager(context, 2)
-        recyclerView.layoutManager = gridLayoutManager
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.setHasFixedSize(true)
     }
 }

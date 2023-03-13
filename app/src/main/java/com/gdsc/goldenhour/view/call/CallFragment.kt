@@ -11,39 +11,41 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
-import kotlin.properties.Delegates
 
-class CallFragment : Fragment() {
+class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var mLastLocation: Location
+    private lateinit var mLocationRequest: LocationRequest
+    private val REQUEST_PERMISSION_LOCATION = 10
+    private var addr: String? = null
 
-    lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    lateinit var mLastLocation: Location
-    lateinit var mLocationRequest: LocationRequest
-    val REQUEST_PERMISSION_LOCATION = 10
-    lateinit var binding: FragmentCallBinding
-    var addr: String? = null
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentCallBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSms.setOnClickListener {
-            val intent = Intent(requireContext(), smsButtonActivity::class.java)
-            startActivity(intent)
+        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
+        binding.tvUserName.text = "${gsa?.displayName}님의 위치"
+
+        mLocationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
+        if(checkPermissionForLocation(requireContext())) {
+            startLocationUpdates()
+        }
+
+        binding.btnSms.setOnClickListener {
+            val intent = Intent(requireContext(), EmergencySmsActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btn112.setOnClickListener {
             startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$112")))
@@ -56,20 +58,6 @@ class CallFragment : Fragment() {
         binding.btn110.setOnClickListener {
             startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$110")))
         }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mLocationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-        if(checkPermissionForLocation(requireContext())) {
-            startLocationUpdates()
-        }
-
     }
 
     fun startLocationUpdates() {
@@ -103,12 +91,11 @@ class CallFragment : Fragment() {
         )
         if (addresses == null || addresses.isEmpty()) {
             Toast.makeText(requireContext(), "주소 미발견", Toast.LENGTH_LONG).show()
-            binding.callAddress.text = "   : 주소를 찾을 수 없습니다."
+            binding.tvUserLocation.text = " :  주소를 찾을 수 없습니다."
         } else {
             val address = addresses[0]
-            binding.callAddress.text = "   : "+address.getAddressLine(0).toString()
+            binding.tvUserLocation.text = " :  ${address.getAddressLine(0)}"
         }
-
     }
 
     fun checkPermissionForLocation(context: Context): Boolean {
@@ -124,8 +111,6 @@ class CallFragment : Fragment() {
         }
     }
 
-
-
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -136,9 +121,8 @@ class CallFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 addr = "   : 주소를 확인할 수 없습니다."
-                binding.callAddress.text = addr
+                binding.tvUserLocation.text = addr
             }
         }
-
     }
 }

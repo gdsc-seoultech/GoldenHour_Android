@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.gdsc.goldenhour.databinding.WebtoonListItemBinding
 import com.gdsc.goldenhour.network.model.WebtoonItem
 
-// TODO: GuideWebtoonAdapter, DisasterWebtoonFragment -> 리스트의 데이터 타입만 다르다. 하나로 합치고 싶다!!!
 class WebtoonAdapter(
     private val context: Context?,
     private val imageList: List<WebtoonItem>

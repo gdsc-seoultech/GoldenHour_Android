@@ -4,14 +4,17 @@
         <item>영어</item>
     </string-array>
 
-    <string-array name="ai_assist_array">
-        <item>심폐 소생술</item>
-        <item>심폐 소생술 (AED)</item>
+    <string-array name="ai_assist_name">
         <item>동물에게 물렸을 때</item>
         <item>뱀에게 물렸을 때</item>
         <item>출혈</item>
         <item>상처</item>
+
+        <item>심폐 소생술</item>
+        <item>심폐 소생술 (AED)</item>
+
         <item>동상</item>
+
         <item>골절</item>
     </string-array>
 
@@ -19,5 +22,12 @@
         <item>행동수칙</item>
         <item>구호물자</item>
         <item>비상연락망</item>
+    </string-array>
+
+    <string-array name="ai_assist_guide">
+        <item>출혈 및 상처 부위가 잘 보이도록 카메라로 촬영해주세요.</item>
+        <item>심폐소생술이 필요한 환자의 상반신이 잘 보이도록 카메라로 촬영해주세요.</item>
+        <item>화상이나 동상의 상태가 잘 보이도록 카메라로 촬영해주세요.</item>
+        <item>골절 부위가 잘 보이도록 카메라로 촬영해주세요.</item>
     </string-array>
 </resources>

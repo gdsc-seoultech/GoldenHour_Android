@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="15dp"
-    tools:context=".view.call.smsButtonActivity">
+    tools:context=".view.call.EmergencySmsActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
