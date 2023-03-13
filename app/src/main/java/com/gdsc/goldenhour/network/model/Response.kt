@@ -19,21 +19,27 @@ data class Guide(
 )
 
 data class GuideWebtoonList(
-    val data: List<GuideWebtoon>
+    val data: List<WebtoonItem>
 )
 
-data class GuideWebtoon(
+data class WebtoonItem(
     val id: Int,
     val imgUrl: String
 )
 
-data class DisasterWebtoonList(
-    val data: List<DisasterWebtoon>
+data class DisasterList(
+    val success: Boolean,
+    val data: List<Disaster>,
+    val error: Error
 )
 
-data class DisasterWebtoon(
-    val name: String,
-    val imgUrl: String
+data class Disaster(
+    val id: Int,
+    val name: String
+)
+
+data class DisasterWebtoonList(
+    val data: List<WebtoonItem>
 )
 
 data class ContactList(

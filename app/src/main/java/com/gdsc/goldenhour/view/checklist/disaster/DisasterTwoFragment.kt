@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.gdsc.goldenhour.binding.BindingFragment
-import com.gdsc.goldenhour.databinding.FragmentGoodsBinding
+import com.gdsc.goldenhour.databinding.FragmentDisasterTwoBinding
 import com.gdsc.goldenhour.view.checklist.disaster.adapter.GoodsCheckAdapter
 import com.gdsc.goldenhour.view.checklist.disaster.adapter.model.GoodsCheck
 
-class GoodsFragment : BindingFragment<FragmentGoodsBinding>(FragmentGoodsBinding::inflate) {
+class DisasterTwoFragment :
+    BindingFragment<FragmentDisasterTwoBinding>(FragmentDisasterTwoBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -50,7 +50,9 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.result
                 uploadUserInfo(account)
 
+                // 로그인 액티비티는 완전히 종료되고, 메인 액티비티가 루트가 될 수 있도록
                 val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             } else {
                 Log.d(GOOGLE_LOGIN_TAG, "fail")

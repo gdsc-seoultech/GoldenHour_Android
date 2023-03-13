@@ -24,10 +24,10 @@
     </com.google.android.material.tabs.TabLayout>
 
     <TextView
+        android:id="@+id/disaster_sms"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="재난문자"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:background="@drawable/round_border"
         android:padding="14dp"
         android:layout_margin="16dp"
@@ -36,6 +36,6 @@
     <FrameLayout
         android:id="@+id/tab_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
