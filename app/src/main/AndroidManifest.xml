@@ -21,9 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenHour"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".view.permission.PermActivity"
-            android:exported="false" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -33,18 +30,16 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="${google_map_key}" />
         <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="${kakao_map_key}" />
+        <meta-data
             android:name="com.google.android.gms.vision"
             android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.map.MapHosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.map.MapPharActivity"
-            android:exported="false" />
+
         <activity
             android:name=".view.splash.SplashActivity"
             android:exported="true">
@@ -54,15 +49,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".view.permission.PermActivity"
+            android:exported="false" />
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".view.settings.SettingsActivity"
             android:exported="false" />
+
         <activity
             android:name=".view.guide.GuideWebtoonActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".view.map.MapHosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.map.MapPharActivity"
+            android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".view.map.MapAedActivity"-->
+<!--            android:exported="false" />-->
+
+        <activity
+            android:name=".view.call.smsButtonActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

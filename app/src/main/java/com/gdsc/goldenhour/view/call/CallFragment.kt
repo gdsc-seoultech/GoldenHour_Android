@@ -2,17 +2,16 @@ package com.gdsc.goldenhour.view.call
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.gdsc.goldenhour.binding.BindingFragment
@@ -41,6 +40,23 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
 
         if(checkPermissionForLocation(requireContext())) {
             startLocationUpdates()
+        }
+
+        binding.btnSms.setOnClickListener {
+            val intent = Intent(requireContext(), smsButtonActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btn112.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$112")))
+        }
+
+        binding.btn119.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$119")))
+        }
+
+        binding.btn110.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$110")))
         }
     }
 
