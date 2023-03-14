@@ -1,6 +1,8 @@
 package com.gdsc.goldenhour.view.checklist.normal
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -16,22 +18,36 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NormalOneFragment :
-    BindingFragment<FragmentNormalOneBinding>(FragmentNormalOneBinding::inflate) {
-    lateinit var listView: ListView
+class NormalOneFragment : BindingFragment<FragmentNormalOneBinding>(FragmentNormalOneBinding::inflate) {
+    private lateinit var listView: ListView
+    private lateinit var adapter: ArrayAdapter<String>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView = binding.disasterListView
+        loadDisasterList()
 
+        listView = binding.disasterListView
         listView.setOnItemClickListener { _, _, pos, _ ->
             val name = listView.getItemAtPosition(pos).toString()
             loadFragment(DisasterWebtoonFragment(pos + 1, name))
         }
 
-        loadDisasterList()
+        binding.etSearch.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(edit: Editable?) {
+                val filterText = edit.toString()
+                if(filterText.isNotEmpty()){
+                    listView.setFilterText(filterText)
+                }else{
+                    listView.clearTextFilter()
+                }
+            }
 
-        // TODO: 재난 이름 검색할 수 있도록 (SearchView)
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -69,7 +85,9 @@ class NormalOneFragment :
             nameList.add(element.name)
         }
 
-        val adapter = ArrayAdapter(
+        Log.e("LISTVIEW", "size: ${nameList.size}, last item: ${nameList[nameList.lastIndex]}")
+
+        adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
             nameList
