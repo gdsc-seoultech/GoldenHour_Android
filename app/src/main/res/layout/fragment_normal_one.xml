@@ -18,7 +18,12 @@
             android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="38dp"
+            android:maxLines="1"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:background="@drawable/et_search_border" />
     </LinearLayout>
 
     <ListView
