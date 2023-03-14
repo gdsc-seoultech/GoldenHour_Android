@@ -44,6 +44,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".view.splash.SplashActivity"
@@ -71,9 +72,12 @@
             android:exported="false" />
         <activity
             android:name=".view.map.MapPharActivity"
-            android:exported="false" /> <!-- <activity -->
+            android:exported="false" />
+
+        <!-- <activity -->
         <!-- android:name=".view.map.MapAedActivity" -->
         <!-- android:exported="false" /> -->
+
         <activity
             android:name=".view.call.EmergencySmsActivity"
             android:exported="false" />
