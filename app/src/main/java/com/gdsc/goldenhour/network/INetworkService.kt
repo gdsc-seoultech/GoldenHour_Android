@@ -1,11 +1,10 @@
 package com.gdsc.goldenhour.network
 
 import com.gdsc.goldenhour.network.model.*
+import com.gdsc.goldenhour.view.map.data.AedItemList
+import com.gdsc.goldenhour.view.map.data.AedResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface INetworkService {
     @POST("/user")
@@ -31,7 +30,9 @@ interface INetworkService {
 
     @GET("/disaster/{id}")
     fun getDisasterWebtoonList(@Path("id") id: Int): Call<DisasterWebtoonList>
-    
+
+    // 비상신고
+
     @GET("/message/{type}")
     fun getSituationList(@Path("type") type: String): Call<SituationList>
 
@@ -43,4 +44,14 @@ interface INetworkService {
 
     @GET("/message/{id}/information")
     fun getInformationList(@Path("id") id: Int): Call<InformationList>
+
+    // map
+    @GET("/B552657/AEDInfoInqireService/getAedLcinfoInqire")
+    fun getAedList(
+        @Query("WGS84_LON") longitude: Double,
+        @Query("WGS84_LAT") latitude: Double,
+        @Query("pageNo") pageNo: Int,
+        @Query("numOfRows") numOfRows: Int,
+        @Query("Servicekey", encoded = true) serviceKey: String
+    ): Call<AedItemList>
 }

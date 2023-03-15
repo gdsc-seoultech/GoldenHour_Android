@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -40,6 +42,10 @@
             android:name=".view.map.MapHosActivity"
             android:exported="false" />
         <activity
+            android:name=".view.map.MapFireActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".view.map.MapPharActivity"
             android:exported="false" />
         <activity
@@ -65,8 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".view.call.smsButtonActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>
