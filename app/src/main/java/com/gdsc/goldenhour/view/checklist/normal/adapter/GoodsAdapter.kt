@@ -14,9 +14,18 @@ class GoodsAdapter(
         fun onItemClick(pos: Int)
     }
 
-    private var mListener: OnItemClickListener? = null
+    interface OnItemLongClickListener{
+        fun onItemLongClick(pos: Int)
+    }
+
+    private var clickListener: OnItemClickListener? = null
     fun setMyItemClickListener(listener: OnItemClickListener){
-        mListener = listener
+        clickListener = listener
+    }
+
+    private var longClickListener: OnItemLongClickListener? = null
+    fun setMyItemLongClickListener(listener: OnItemLongClickListener){
+        longClickListener = listener
     }
 
     inner class GoodsViewHolder(
@@ -27,8 +36,15 @@ class GoodsAdapter(
             itemView.setOnClickListener {
                 val pos = adapterPosition
                 if(pos != RecyclerView.NO_POSITION){
-                    mListener?.onItemClick(pos)
+                    clickListener?.onItemClick(pos)
                 }
+            }
+            itemView.setOnLongClickListener {
+                val pos = adapterPosition
+                if(pos != RecyclerView.NO_POSITION){
+                    longClickListener?.onItemLongClick(pos)
+                }
+                return@setOnLongClickListener true
             }
         }
 
