@@ -9,9 +9,29 @@ import com.gdsc.goldenhour.network.model.Goods
 class GoodsAdapter(
     private val goods: List<Goods>
 ): RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
-    class GoodsViewHolder(
+
+    interface OnItemClickListener{
+        fun onItemClick(pos: Int)
+    }
+
+    private var mListener: OnItemClickListener? = null
+    fun setMyItemClickListener(listener: OnItemClickListener){
+        mListener = listener
+    }
+
+    inner class GoodsViewHolder(
         private val binding: NormalGoodsItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
+        init {
+            val itemView = binding.root
+            itemView.setOnClickListener {
+                val pos = adapterPosition
+                if(pos != RecyclerView.NO_POSITION){
+                    mListener?.onItemClick(pos)
+                }
+            }
+        }
+
         fun bind(item: Goods){
             binding.tvGoodsId.text = item.id.toString()
             binding.tvGoodsName.text = item.name
