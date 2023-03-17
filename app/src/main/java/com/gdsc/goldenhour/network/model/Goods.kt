@@ -1,6 +1,9 @@
 package com.gdsc.goldenhour.network.model
 
-// todo: CREATE, UPDATE 요청을 보낼 때 필요한 래퍼 클래스
+// todo: 조회 -> 요청: x         응답: id, name
+// todo: 추가 -> 요청: name      응답: id, name
+// todo: 수정 -> 요청: id, name  응답: name
+// todo: 삭제 -> 요청: id        응답: message
 data class GoodsRequest(
     val name: String
 )
@@ -16,14 +19,12 @@ data class GoodsReadResponse(
     val error: Error
 )
 
-// todo: 항목을 새로 등록할 때는 id와 name을 모두 리턴받는다.
 data class GoodsCreateResponse(
     val success: Boolean,
     val data: Goods,
     val error: Error
 )
 
-// todo: 항목을 수정할 때는, 응답값으로 name만 받는다.
 data class GoodsUpdateResponse(
     val success: Boolean,
     val data: NameWrapper,
