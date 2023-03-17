@@ -3,7 +3,7 @@ package com.gdsc.goldenhour.view.checklist.disaster.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.gdsc.goldenhour.databinding.GoodsListItemBinding
+import com.gdsc.goldenhour.databinding.DisasterGoodsListItemBinding
 import com.gdsc.goldenhour.view.checklist.disaster.adapter.model.GoodsCheck
 
 class GoodsCheckAdapter(
@@ -11,7 +11,7 @@ class GoodsCheckAdapter(
 ): RecyclerView.Adapter<GoodsCheckAdapter.GoodsCheckViewHolder>() {
 
     class GoodsCheckViewHolder(
-        private val binding: GoodsListItemBinding
+        private val binding: DisasterGoodsListItemBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(item: GoodsCheck) {
             binding.goodsName.text = item.name
@@ -20,7 +20,7 @@ class GoodsCheckAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoodsCheckViewHolder {
-        val view = GoodsListItemBinding.inflate(
+        val view = DisasterGoodsListItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)
         return GoodsCheckViewHolder(view)
     }

@@ -41,15 +41,3 @@ data class Disaster(
 data class DisasterWebtoonList(
     val data: List<WebtoonItem>
 )
-
-data class ContactList(
-    val success: Boolean,
-    val data: List<Contact>,
-    val error: Error
-)
-
-data class Contact(
-    val id: Int,
-    val name: String,
-    val phoneNumber: String
-)

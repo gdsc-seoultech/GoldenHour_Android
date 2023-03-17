@@ -2,10 +2,7 @@ package com.gdsc.goldenhour.network
 
 import com.gdsc.goldenhour.network.model.*
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface INetworkService {
     @POST("/user")
@@ -14,17 +11,45 @@ interface INetworkService {
         idToken: String
     ): Call<SignInResponse>
 
-    @GET("/guide")
-    fun getGuideList(): Call<GuideList>
+    @POST("/user/relief_goods")
+    fun createReliefGoods(
+        @Header("Authorization")
+        idToken: String,
+        @Body name: GoodsRequest
+    ): Call<GoodsPostResponse>
 
-    @GET("/guide/{id}")
-    fun getGuideWebtoonList(@Path("id") id: Int): Call<GuideWebtoonList>
+    @GET("/user/relief_goods")
+    fun readReliefGoods(
+        @Header("Authorization")
+        idToken: String
+    ): Call<GoodsGetResponse>
+
+    @PUT("/user/relief_goods/{id}")
+    fun updateReliefGoods(
+        @Header("Authorization")
+        idToken: String,
+        @Path("id") id: Int,
+        @Body name: GoodsRequest
+    ): Call<GoodsPutResponse>
+
+    @DELETE("/user/relief_goods/{id}")
+    fun deleteReliefGoods(
+        @Header("Authorization")
+        idToken: String,
+        @Path("id") id: Int
+    ): Call<GoodsDeleteResponse>
 
     @GET("/user/emergency_contact")
     fun getContactList(
         @Header("Authorization")
         idToken: String
     ): Call<ContactList>
+
+    @GET("/guide")
+    fun getGuideList(): Call<GuideList>
+
+    @GET("/guide/{id}")
+    fun getGuideWebtoonList(@Path("id") id: Int): Call<GuideWebtoonList>
 
     @GET("/disaster")
     fun getDisasterList(): Call<DisasterList>
