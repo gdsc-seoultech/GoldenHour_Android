@@ -22,7 +22,7 @@
             android:maxLines="1"
             android:layout_margin="4dp"
             android:padding="8dp"
-            android:textCursorDrawable="@drawable/color_cursor"
+            android:textCursorDrawable="@drawable/et_cursor_color"
             android:background="@drawable/et_search_border" />
     </LinearLayout>
 

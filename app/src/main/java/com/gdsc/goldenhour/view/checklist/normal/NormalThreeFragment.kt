@@ -13,13 +13,15 @@ class NormalThreeFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = DataSource().loadEmergencyContacts()
+        val contacts = DataSource().loadEmergencyContacts()
         binding.lvEmergencyContact.adapter = SimpleAdapter(
             requireContext(),
-            data,
+            contacts,
             android.R.layout.simple_list_item_2,
             arrayOf("name", "phoneNumber"),
             intArrayOf(android.R.id.text1, android.R.id.text2)
         )
+
+
     }
 }
