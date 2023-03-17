@@ -16,13 +16,13 @@ interface INetworkService {
         @Header("Authorization")
         idToken: String,
         @Body name: GoodsRequest
-    ): Call<GoodsPostResponse>
+    ): Call<GoodsCreateResponse>
 
     @GET("/user/relief_goods")
     fun readReliefGoods(
         @Header("Authorization")
         idToken: String
-    ): Call<GoodsGetResponse>
+    ): Call<GoodsReadResponse>
 
     @PUT("/user/relief_goods/{id}")
     fun updateReliefGoods(
@@ -30,7 +30,7 @@ interface INetworkService {
         idToken: String,
         @Path("id") id: Int,
         @Body name: GoodsRequest
-    ): Call<GoodsPutResponse>
+    ): Call<GoodsUpdateResponse>
 
     @DELETE("/user/relief_goods/{id}")
     fun deleteReliefGoods(
