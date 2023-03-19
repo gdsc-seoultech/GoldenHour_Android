@@ -38,7 +38,7 @@ class DisasterChecklistFragment(
 
     private fun updateDisasterModeView() {
         binding.tvDisasterSms.visibility = View.VISIBLE
-        binding.tvDisasterSms.text = disasterSMS
+        binding.tvDisasterSms.text = "재난문자\n${disasterSMS}"
 
         binding.tabLayout.setTabTextColors(
             resources.getColor(R.color.dark_gray),

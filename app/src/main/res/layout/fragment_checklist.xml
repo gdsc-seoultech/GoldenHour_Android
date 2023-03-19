@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/tv_disaster_sms"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:text="재난문자"
         android:background="@drawable/round_border"
         android:padding="14dp"
