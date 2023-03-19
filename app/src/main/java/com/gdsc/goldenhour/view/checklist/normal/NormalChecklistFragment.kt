@@ -37,7 +37,6 @@ class NormalChecklistFragment :
     private fun updateNormalModeView() {
         binding.tvDisasterSms.visibility = View.GONE
 
-        // todo: 탭 레이아웃 색상 변경
         binding.tabLayout.setTabTextColors(
             resources.getColor(R.color.dark_gray),
             resources.getColor(R.color.green)

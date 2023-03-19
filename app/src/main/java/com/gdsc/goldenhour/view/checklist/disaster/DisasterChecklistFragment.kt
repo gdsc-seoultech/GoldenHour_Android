@@ -9,7 +9,7 @@ import com.gdsc.goldenhour.databinding.FragmentChecklistBinding
 import com.google.android.material.tabs.TabLayout
 
 class DisasterChecklistFragment(
-    private val disasterSMSContent: String
+    private val disasterSMS: String
 ) : BindingFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,9 +38,8 @@ class DisasterChecklistFragment(
 
     private fun updateDisasterModeView() {
         binding.tvDisasterSms.visibility = View.VISIBLE
-        binding.tvDisasterSms.text = disasterSMSContent
+        binding.tvDisasterSms.text = disasterSMS
 
-        // todo: 탭 레이아웃 색상 변경
         binding.tabLayout.setTabTextColors(
             resources.getColor(R.color.dark_gray),
             resources.getColor(R.color.red)
