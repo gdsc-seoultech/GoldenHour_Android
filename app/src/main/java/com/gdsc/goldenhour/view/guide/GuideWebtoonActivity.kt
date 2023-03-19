@@ -1,126 +1,69 @@
 package com.gdsc.goldenhour.view.guide
 
-import android.app.AlertDialog
-import android.content.pm.PackageManager
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivityGuideWebtoonBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.WebtoonItem
-import com.gdsc.goldenhour.network.model.GuideWebtoonList
+import com.gdsc.goldenhour.network.model.WebtoonList
 import com.gdsc.goldenhour.adapter.WebtoonAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class GuideWebtoonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuideWebtoonBinding
-    private lateinit var guideName: TextView
-    private lateinit var aiAssistName: Array<String>
-    private lateinit var aiAssistGuide: Array<String>
-    private val PERMISSION_REQUEST_CODE = 111
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGuideWebtoonBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        guideName = binding.tvTitle
-        guideName.text = intent.getStringExtra("name")
 
-        aiAssistName = resources.getStringArray(R.array.ai_assist_name)
-        aiAssistGuide = resources.getStringArray(R.array.ai_assist_guide)
+        // 항목 이름을 설정한다.
+        val guideName = intent.getStringExtra("name").toString()
+        binding.tvTitle.text = guideName
 
         // 항목 id에 따라 웹툰 이미지를 띄운다.
         val id = intent.getIntExtra("id", 0)
         loadWebtoonImages(id)
 
         // 항목 이름에 따라 ai 보조 버튼을 추가한다.
-        checkDisasterName(guideName.text.toString())
+        checkDisasterName(guideName)
 
-        // AI 보조 버튼이 보이는 경우에만 클릭 리스너가 작동한다.
+        // AI 보조 버튼을 클릭하면 카메라 화면으로 전환한다.
         binding.ivAiAssist.setOnClickListener {
-            checkCameraPermission()
-            showGuideDialog()
+            navigateCameraScreen(guideName)
         }
     }
 
+    private fun navigateCameraScreen(guideName: String) {
+        val intent = Intent(this, AiAssistActivity::class.java)
+        intent.putExtra("name", guideName)
+        startActivity(intent)
+    }
+
     private fun checkDisasterName(name: String) {
-        if (aiAssistName.contains(name)) {
+        val aiAssistNames = resources.getStringArray(R.array.ai_assist_name)
+        if (aiAssistNames.contains(name)) {
             binding.ivAiAssist.visibility = View.VISIBLE
         }
     }
 
-    private fun checkCameraPermission() {
-        val status = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA")
-        if (status == PackageManager.PERMISSION_GRANTED) {
-            Log.d("PERMISSION", "CAMERA Permission Granted...")
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf("android.permission.CAMERA"),
-                PERMISSION_REQUEST_CODE
-            )
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_CODE && grantResults.isNotEmpty()) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("PERMISSION", "CAMERA Permission Granted...")
-            } else {
-                Log.d("PERMISSION", "CAMERA Permission Denied...")
-            }
-        }
-    }
-
-    private fun showGuideDialog() {
-        val bloodItems = mutableListOf<String>()
-        for (i in 0..3) {
-            bloodItems.add(aiAssistName[i])
-        }
-        val pressureItems = listOf<String>(aiAssistName[4], aiAssistName[5])
-
-        val guideMessage = when (guideName.text) {
-            in bloodItems -> aiAssistGuide[0] // 지혈점
-            in pressureItems -> aiAssistGuide[1] // 압박점
-            else -> "동상, 골절 안내 가이드"
-        }
-
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("안내 가이드")
-            .setMessage(guideMessage)
-            .setPositiveButton("확인") { _, _ ->
-                // todo: 카메라 앱을 켠다.
-
-            }
-            .setNegativeButton("취소", null)
-        val dialog = builder.create()
-        dialog.show()
-    }
-
     private fun loadWebtoonImages(id: Int) {
         RetrofitObject.networkService.getGuideWebtoonList(id)
-            .enqueue(object : Callback<GuideWebtoonList> {
+            .enqueue(object : Callback<WebtoonList> {
                 override fun onResponse(
-                    call: Call<GuideWebtoonList>,
-                    response: Response<GuideWebtoonList>
+                    call: Call<WebtoonList>,
+                    response: Response<WebtoonList>
                 ) {
                     if (response.isSuccessful) {
                         val body = response.body()
@@ -130,7 +73,7 @@ class GuideWebtoonActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<GuideWebtoonList>, t: Throwable) {
+                override fun onFailure(call: Call<WebtoonList>, t: Throwable) {
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }

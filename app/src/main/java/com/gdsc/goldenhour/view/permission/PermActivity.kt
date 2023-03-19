@@ -27,14 +27,6 @@ class PermActivity : AppCompatActivity() {
         }
     }
 
-    // 화면이 처음 or 다시 뜰 때 필수 권한이 허용되어 있어야만 로그인 화면 진입
-    override fun onResume() {
-        super.onResume()
-        if (checkOverlayPermission()) {
-            navigateLoginScreen()
-        }
-    }
-
     private fun checkInitialPermissionStatus() {
         // 최초 실행 시 퍼미션 여부 확인 (거부된 권한 요청)
         if (!permissionSupport.checkPermission()) {
@@ -63,13 +55,20 @@ class PermActivity : AppCompatActivity() {
 
     private fun requestOverlayPermission() {
         // 시스템 권한 창에서 유저가 직접 권한을 허용할 수 있도록
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-            && !Settings.canDrawOverlays(this)) {
+        if(!checkOverlayPermission()){
             val intent = Intent(
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:$packageName")
             )
             startActivity(intent)
+        }
+    }
+
+    // 필수 권한이 허용되어 있으면 로그인 화면으로 진입
+    override fun onResume() {
+        super.onResume()
+        if (checkOverlayPermission()) {
+            navigateLoginScreen()
         }
     }
 

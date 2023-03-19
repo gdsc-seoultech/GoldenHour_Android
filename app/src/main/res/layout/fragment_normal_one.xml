@@ -4,16 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"/>
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="38dp"
+            android:maxLines="1"
+            android:layout_margin="4dp"
+            android:padding="8dp"
+            android:textCursorDrawable="@drawable/et_cursor_color"
+            android:background="@drawable/et_search_border" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/disaster_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true"
         android:divider="@color/gray"
+        android:textFilterEnabled="true"
         android:dividerHeight="1dp"/>
 
 </LinearLayout>

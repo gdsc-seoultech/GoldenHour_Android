@@ -216,6 +216,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
         android:text="확인"
+        android:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

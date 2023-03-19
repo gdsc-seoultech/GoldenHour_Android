@@ -4,6 +4,12 @@
         <item>영어</item>
     </string-array>
 
+    <string-array name="checklist_tab_name">
+        <item>행동수칙</item>
+        <item>구호물자</item>
+        <item>비상연락망</item>
+    </string-array>
+
     <string-array name="ai_assist_name">
         <item>동물에게 물렸을 때</item>
         <item>뱀에게 물렸을 때</item>
@@ -16,12 +22,6 @@
         <item>동상</item>
 
         <item>골절</item>
-    </string-array>
-
-    <string-array name="checklist_tab_name">
-        <item>행동수칙</item>
-        <item>구호물자</item>
-        <item>비상연락망</item>
     </string-array>
 
     <string-array name="ai_assist_guide">
