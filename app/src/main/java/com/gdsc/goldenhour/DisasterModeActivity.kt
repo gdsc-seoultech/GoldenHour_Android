@@ -16,6 +16,7 @@ import com.gdsc.goldenhour.view.settings.SettingsActivity
 class DisasterModeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDisasterModeBinding
     private lateinit var disasterSMS: String
+    private lateinit var disasterName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,8 @@ class DisasterModeActivity : AppCompatActivity() {
     // 브로드캐스트 리시버로부터 문자 데이터 전달 받기
     private fun showDisasterSMS(intent: Intent?) {
         disasterSMS = intent?.getStringExtra("content").toString()
-        loadFragment(DisasterChecklistFragment(disasterSMS))
+        disasterName = intent?.getStringExtra("name").toString()
+        loadFragment(DisasterChecklistFragment(disasterSMS, disasterName))
     }
 
     private fun loadFragment(fragment: Fragment){
@@ -55,7 +57,7 @@ class DisasterModeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.checklist -> {
-                    loadFragment(DisasterChecklistFragment(disasterSMS))
+                    loadFragment(DisasterChecklistFragment(disasterSMS, disasterName))
                     true
                 }
                 R.id.call -> {

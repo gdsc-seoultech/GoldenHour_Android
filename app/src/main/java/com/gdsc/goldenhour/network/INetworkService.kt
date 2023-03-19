@@ -49,13 +49,16 @@ interface INetworkService {
     fun getGuideList(): Call<GuideList>
 
     @GET("/guide/{id}")
-    fun getGuideWebtoonList(@Path("id") id: Int): Call<GuideWebtoonList>
+    fun getGuideWebtoonList(@Path("id") id: Int): Call<WebtoonList>
 
     @GET("/disaster")
     fun getDisasterList(): Call<DisasterList>
 
     @GET("/disaster/{id}")
-    fun getDisasterWebtoonList(@Path("id") id: Int): Call<DisasterWebtoonList>
+    fun getDisasterWebtoonListById(@Path("id") id: Int): Call<WebtoonList>
+
+    @GET("/disaster/")
+    fun getDisasterWebtoonListByName(@Query("name") name: String): Call<WebtoonList>
     
     @GET("/message/{type}")
     fun getSituationList(@Path("type") type: String): Call<SituationList>

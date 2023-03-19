@@ -9,9 +9,9 @@ import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentDisasterWebtoonBinding
 import com.gdsc.goldenhour.network.RetrofitObject
-import com.gdsc.goldenhour.network.model.DisasterWebtoonList
 import com.gdsc.goldenhour.network.model.WebtoonItem
 import com.gdsc.goldenhour.adapter.WebtoonAdapter
+import com.gdsc.goldenhour.network.model.WebtoonList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,11 +40,11 @@ class DisasterWebtoonFragment(
     }
 
     private fun loadWebtoonImages(id: Int) {
-        RetrofitObject.networkService.getDisasterWebtoonList(id)
-            .enqueue(object : Callback<DisasterWebtoonList> {
+        RetrofitObject.networkService.getDisasterWebtoonListById(id)
+            .enqueue(object : Callback<WebtoonList> {
                 override fun onResponse(
-                    call: Call<DisasterWebtoonList>,
-                    response: Response<DisasterWebtoonList>
+                    call: Call<WebtoonList>,
+                    response: Response<WebtoonList>
                 ) {
                     if (response.isSuccessful) {
                         Log.d("Retrofit", "success disaster webtoon fragment")
@@ -55,7 +55,7 @@ class DisasterWebtoonFragment(
                     }
                 }
 
-                override fun onFailure(call: Call<DisasterWebtoonList>, t: Throwable) {
+                override fun onFailure(call: Call<WebtoonList>, t: Throwable) {
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }

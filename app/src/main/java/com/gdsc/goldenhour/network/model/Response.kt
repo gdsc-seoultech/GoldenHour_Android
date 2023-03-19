@@ -18,7 +18,7 @@ data class Guide(
     val imgUrl: String
 )
 
-data class GuideWebtoonList(
+data class WebtoonList(
     val data: List<WebtoonItem>
 )
 
@@ -36,8 +36,4 @@ data class DisasterList(
 data class Disaster(
     val id: Int,
     val name: String
-)
-
-data class DisasterWebtoonList(
-    val data: List<WebtoonItem>
 )

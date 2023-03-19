@@ -14,7 +14,7 @@ import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivityGuideWebtoonBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.WebtoonItem
-import com.gdsc.goldenhour.network.model.GuideWebtoonList
+import com.gdsc.goldenhour.network.model.WebtoonList
 import com.gdsc.goldenhour.adapter.WebtoonAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,10 +60,10 @@ class GuideWebtoonActivity : AppCompatActivity() {
 
     private fun loadWebtoonImages(id: Int) {
         RetrofitObject.networkService.getGuideWebtoonList(id)
-            .enqueue(object : Callback<GuideWebtoonList> {
+            .enqueue(object : Callback<WebtoonList> {
                 override fun onResponse(
-                    call: Call<GuideWebtoonList>,
-                    response: Response<GuideWebtoonList>
+                    call: Call<WebtoonList>,
+                    response: Response<WebtoonList>
                 ) {
                     if (response.isSuccessful) {
                         val body = response.body()
@@ -73,7 +73,7 @@ class GuideWebtoonActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<GuideWebtoonList>, t: Throwable) {
+                override fun onFailure(call: Call<WebtoonList>, t: Throwable) {
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }

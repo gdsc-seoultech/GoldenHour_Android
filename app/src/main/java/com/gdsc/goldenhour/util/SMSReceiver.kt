@@ -60,12 +60,12 @@ class SMSReceiver : BroadcastReceiver() {
         for (item in data) {
             if (smsContent.contains(item.name)) {
                 Log.d(TAG, "success send disaster sms....")
-                sendSmsContentToActivity(context, smsContent)
+                sendSmsContentToActivity(context, smsContent, item.name)
             }
         }
     }
 
-    private fun sendSmsContentToActivity(context: Context, content: String) {
+    private fun sendSmsContentToActivity(context: Context, content: String, disasterName: String) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
             && Settings.canDrawOverlays(context)
         ) {
@@ -75,6 +75,7 @@ class SMSReceiver : BroadcastReceiver() {
                         or Intent.FLAG_ACTIVITY_CLEAR_TASK
             )
             intent.putExtra("content", content)
+            intent.putExtra("name", disasterName)
             context.startActivity(intent)
         }
     }
