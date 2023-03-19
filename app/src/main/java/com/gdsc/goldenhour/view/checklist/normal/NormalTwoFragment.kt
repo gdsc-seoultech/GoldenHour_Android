@@ -23,7 +23,6 @@ class NormalTwoFragment :
     // todo: 추가 -> 요청: token, name      응답: id, name
     // todo: 수정 -> 요청: token, id, name  응답: name
     // todo: 삭제 -> 요청: token, id        응답: message
-
     private lateinit var userIdToken: String
     private lateinit var goodsList: MutableList<Goods>
     private lateinit var adapter: GoodsAdapter
@@ -54,7 +53,7 @@ class NormalTwoFragment :
                     if (response.isSuccessful) {
                         Log.d("Retrofit", "success GET goods list...")
                         val responseBody = response.body()
-                        if(responseBody != null){
+                        if(responseBody != null && responseBody.data.isNotEmpty()){
                             setRecyclerView(responseBody.data)
                         }
                     }else{

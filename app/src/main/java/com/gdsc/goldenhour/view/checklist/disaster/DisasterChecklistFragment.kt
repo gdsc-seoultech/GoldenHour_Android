@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.view.checklist.normal
+package com.gdsc.goldenhour.view.checklist.disaster
 
 import android.os.Bundle
 import android.view.View
@@ -8,20 +8,23 @@ import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentChecklistBinding
 import com.google.android.material.tabs.TabLayout
 
-class ChecklistFragment : BindingFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
+class DisasterChecklistFragment(
+    private val disasterSMSContent: String
+) : BindingFragment<FragmentChecklistBinding>(FragmentChecklistBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(NormalOneFragment())
 
-        binding.disasterSms.visibility = View.GONE
+        updateDisasterModeView()
+
+        loadFragment(DisasterOneFragment())
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val tabNameArray = resources.getStringArray(R.array.checklist_tab_name)
                 when(tab?.text){
-                    tabNameArray[0] -> loadFragment(NormalOneFragment())
-                    tabNameArray[1] -> loadFragment(NormalTwoFragment())
-                    tabNameArray[2] -> loadFragment(NormalThreeFragment())
+                    tabNameArray[0] -> loadFragment(DisasterOneFragment())
+                    tabNameArray[1] -> loadFragment(DisasterTwoFragment())
+                    tabNameArray[2] -> loadFragment(DisasterThreeFragment())
                 }
             }
 
@@ -31,6 +34,18 @@ class ChecklistFragment : BindingFragment<FragmentChecklistBinding>(FragmentChec
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
         })
+    }
+
+    private fun updateDisasterModeView() {
+        binding.tvDisasterSms.visibility = View.VISIBLE
+        binding.tvDisasterSms.text = disasterSMSContent
+
+        // todo: 탭 레이아웃 색상 변경
+        binding.tabLayout.setTabTextColors(
+            resources.getColor(R.color.dark_gray),
+            resources.getColor(R.color.red)
+        )
+        binding.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.red))
     }
 
     private fun loadFragment(fragment: Fragment) {

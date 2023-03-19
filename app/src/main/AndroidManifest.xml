@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_CELL_BROADCASTS" />
 
     <uses-feature android:name="android.hardware.camera.any" />
 
@@ -24,6 +25,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenHour"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".DisasterModeActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".util.SMSReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.provider.Telephony.SMS_EMERGENCY_CB_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".view.guide.AiAssistActivity"
             android:exported="false" />
@@ -44,8 +59,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.splash.SplashActivity"
             android:exported="true">
@@ -72,12 +87,9 @@
             android:exported="false" />
         <activity
             android:name=".view.map.MapPharActivity"
-            android:exported="false" />
-
-        <!-- <activity -->
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".view.map.MapAedActivity" -->
         <!-- android:exported="false" /> -->
-
         <activity
             android:name=".view.call.EmergencySmsActivity"
             android:exported="false" />
