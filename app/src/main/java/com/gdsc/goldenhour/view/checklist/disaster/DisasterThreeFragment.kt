@@ -1,8 +1,16 @@
 package com.gdsc.goldenhour.view.checklist.disaster
 
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentDisasterThreeBinding
@@ -17,6 +25,8 @@ import retrofit2.Response
 
 class DisasterThreeFragment :
     BindingFragment<FragmentDisasterThreeBinding>(FragmentDisasterThreeBinding::inflate) {
+    private var clickedPhoneNumber: String? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -52,13 +62,19 @@ class DisasterThreeFragment :
             })
     }
 
-    private fun setRecyclerView(data: List<Contact>) {
+    private fun setRecyclerView(contactList: List<Contact>) {
         val recyclerView = binding.rvContacts
-        val adapter = DisasterContactAdapter(data)
+        val adapter = DisasterContactAdapter(contactList)
 
-        adapter.setMyItemClickListener(object: DisasterContactAdapter.OnItemClickListener{
+        adapter.setMyItemClickListener(object : DisasterContactAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
-                Log.d("CLICK", "$position clicked...")
+                // 암시적 인텐트로 전화 앱 열기 (퍼미션 필요 없음)
+                val clickedPhoneNumber = contactList[position].phoneNumber
+                val intent = Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:${clickedPhoneNumber}")
+                )
+                startActivity(intent)
             }
         })
 
