@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.DialogInputFormBinding
@@ -17,15 +16,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ *  조회 -> 요청: token            응답: id, name
+ *  추가 -> 요청: token, name      응답: id, name
+ *  수정 -> 요청: token, id, name  응답: name
+ *  삭제 -> 요청: token, id        응답: message
+ */
+
 class NormalTwoFragment :
     BindingFragment<FragmentNormalTwoBinding>(FragmentNormalTwoBinding::inflate) {
-    // todo: 조회 -> 요청: token            응답: id, name
-    // todo: 추가 -> 요청: token, name      응답: id, name
-    // todo: 수정 -> 요청: token, id, name  응답: name
-    // todo: 삭제 -> 요청: token, id        응답: message
     private lateinit var userIdToken: String
     private lateinit var goodsList: MutableList<Goods>
-    private lateinit var adapter: GoodsAdapter
+    private lateinit var goodsAdapter: GoodsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,12 +53,13 @@ class NormalTwoFragment :
                     response: Response<GoodsReadResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("Retrofit", "success GET goods list...")
                         val responseBody = response.body()
-                        if(responseBody != null && responseBody.data.isNotEmpty()){
+                        if (responseBody != null) {
                             setRecyclerView(responseBody.data)
                         }
-                    }else{
+
+                        Log.d("Retrofit", "success GET goods list...")
+                    } else {
                         Log.e("Retrofit", response.code().toString())
                     }
                 }
@@ -72,24 +75,24 @@ class NormalTwoFragment :
         // 다른 곳에서 항목을 수정, 삭제할 수 있도록 Mutable로 변경
         goodsList = data.toMutableList()
 
-        val recyclerView = binding.rvEmergencyGoods
-        adapter = GoodsAdapter(data)
+        goodsAdapter = GoodsAdapter(data)
 
         // 아이템을 클릭하면 내용을 수정할 수 있도록
-        adapter.setMyItemClickListener(object: GoodsAdapter.OnItemClickListener{
+        goodsAdapter.setMyItemClickListener(object : GoodsAdapter.OnItemClickListener {
             override fun onItemClick(pos: Int) {
                 showModifyDialog(pos)
             }
         })
 
         // 아이템을 길게 누르면 삭제할 수 있도록
-        adapter.setMyItemLongClickListener(object: GoodsAdapter.OnItemLongClickListener{
+        goodsAdapter.setMyItemLongClickListener(object : GoodsAdapter.OnItemLongClickListener {
             override fun onItemLongClick(pos: Int) {
                 showDeleteDialog(pos)
             }
         })
 
-        recyclerView.adapter = adapter
+        val recyclerView = binding.rvEmergencyGoods
+        recyclerView.adapter = goodsAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
     }
@@ -101,11 +104,17 @@ class NormalTwoFragment :
             .setView(binding.root)
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
+
                 if (inputText.isNotEmpty()) {
-                    // todo: id, name을 응답값으로 받아서 새 항목을 등록한다.
-                    val requestBody = GoodsRequest(inputText)
-                    createUserGoods(requestBody)
+                    // todo: 뷰에서는 제일 마지막에 항목을 추가한다.
+                    val insertedPosition = goodsList.size
+                    goodsList.add(insertedPosition, Goods(0, inputText))
+                    goodsAdapter.notifyItemInserted(insertedPosition)
+
                     binding.etGoods.text.clear()
+
+                    // todo: 서버에 새 항목을 등록한다.
+                    createUserGoods(GoodsRequest(inputText))
                 }
             }
             .setNegativeButton("취소", null)
@@ -122,13 +131,13 @@ class NormalTwoFragment :
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        if(responseBody != null){
-                            val goodsItem = responseBody.data
-                            goodsList.add(Goods(goodsItem.id, goodsItem.name))
-                            adapter.notifyItemInserted(goodsList.size - 1)
+                        if (responseBody != null) {
+                            val insertedItem = responseBody.data
+                            goodsList.last().id = insertedItem.id
+                            Log.d("Retrofit", "${insertedItem.id} success POST goods item!!!")
                         }
-                    }else{
-                         Log.e("Retrofit", response.code().toString())
+                    } else {
+                        Log.e("Retrofit", response.code().toString())
                     }
                 }
 
@@ -147,7 +156,12 @@ class NormalTwoFragment :
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
                 if (inputText.isNotEmpty()) {
+                    val item = goodsList[pos]
+                    item.name = inputText
+                    goodsAdapter.notifyItemChanged(pos)
 
+                    // 서버에서는 항목의 id를 기준으로 내용 변경
+                    updateUserGoods(item.id, GoodsRequest(item.name))
                 }
             }
             .setNegativeButton("취소", null)
@@ -155,8 +169,8 @@ class NormalTwoFragment :
         dialog.show()
     }
 
-    private fun updateUserGoods(pos: Int, requestBody: GoodsRequest) {
-        RetrofitObject.networkService.updateReliefGoods(userIdToken, pos, requestBody)
+    private fun updateUserGoods(itemId: Int, requestBody: GoodsRequest) {
+        RetrofitObject.networkService.updateReliefGoods(userIdToken, itemId, requestBody)
             .enqueue(object : Callback<GoodsUpdateResponse> {
                 override fun onResponse(
                     call: Call<GoodsUpdateResponse>,
@@ -164,10 +178,10 @@ class NormalTwoFragment :
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        if(responseBody != null){
+                        if (responseBody != null) {
                             Log.d("Retrofit", responseBody.data.name)
                         }
-                    }else{
+                    } else {
                         Log.e("Retrofit", response.code().toString())
                     }
                 }
@@ -183,17 +197,23 @@ class NormalTwoFragment :
         AlertDialog.Builder(requireContext())
             .setTitle("구호물자를 삭제하시겠습니까?")
             .setPositiveButton("확인") { dialog, which ->
+                val id = goodsList[pos].id
 
+                // 뷰에서는 클릭한 위치에 따라 삭제한다.
+                goodsList.removeAt(pos)
+                goodsAdapter.notifyItemRemoved(pos)
+
+                // 서버에서는 항목의 id를 기준으로 삭제한다.
+                deleteUserGoods(id)
             }
             .setNegativeButton("취소", null)
             .create()
             .show()
-
         return true
     }
 
-    private fun deleteUserGoods(pos: Int) {
-        RetrofitObject.networkService.deleteReliefGoods(userIdToken, pos)
+    private fun deleteUserGoods(itemId: Int) {
+        RetrofitObject.networkService.deleteReliefGoods(userIdToken, itemId)
             .enqueue(object : Callback<GoodsDeleteResponse> {
                 override fun onResponse(
                     call: Call<GoodsDeleteResponse>,
@@ -201,10 +221,10 @@ class NormalTwoFragment :
                 ) {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
-                        if(responseBody != null){
+                        if (responseBody != null) {
                             Log.d("Retrofit", responseBody.data)
                         }
-                    }else{
+                    } else {
                         Log.e("Retrofit", response.code().toString())
                     }
                 }

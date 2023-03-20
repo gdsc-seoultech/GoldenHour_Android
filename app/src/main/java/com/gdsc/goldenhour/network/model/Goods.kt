@@ -1,16 +1,12 @@
 package com.gdsc.goldenhour.network.model
 
-// todo: 조회 -> 요청: x         응답: id, name
-// todo: 추가 -> 요청: name      응답: id, name
-// todo: 수정 -> 요청: id, name  응답: name
-// todo: 삭제 -> 요청: id        응답: message
 data class GoodsRequest(
     val name: String
 )
 
 data class Goods(
-    val id: Int,
-    val name: String
+    var id: Int,
+    var name: String
 )
 
 data class GoodsReadResponse(
