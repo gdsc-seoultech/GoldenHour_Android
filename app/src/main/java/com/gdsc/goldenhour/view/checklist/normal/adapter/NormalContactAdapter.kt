@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.databinding.NormalContactItemBinding
 import com.gdsc.goldenhour.network.model.Contact
 
-class ContactAdapter(
+class NormalContactAdapter(
     private val contacts: List<Contact>
-): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+): RecyclerView.Adapter<NormalContactAdapter.ContactViewHolder>() {
     class ContactViewHolder(
         private val binding: NormalContactItemBinding
     ): RecyclerView.ViewHolder(binding.root) {

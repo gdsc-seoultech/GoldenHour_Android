@@ -3,15 +3,13 @@ package com.gdsc.goldenhour.view.checklist.disaster
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentDisasterThreeBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.Contact
 import com.gdsc.goldenhour.network.model.ContactReadResponse
-import com.gdsc.goldenhour.view.checklist.normal.adapter.ContactAdapter
+import com.gdsc.goldenhour.view.checklist.disaster.adapter.DisasterContactAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +54,15 @@ class DisasterThreeFragment :
 
     private fun setRecyclerView(data: List<Contact>) {
         val recyclerView = binding.rvContacts
-        recyclerView.adapter = ContactAdapter(data)
+        val adapter = DisasterContactAdapter(data)
+
+        adapter.setMyItemClickListener(object: DisasterContactAdapter.OnItemClickListener{
+            override fun onItemClick(position: Int) {
+                Log.d("CLICK", "$position clicked...")
+            }
+        })
+
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
     }

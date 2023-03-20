@@ -13,7 +13,7 @@ import com.gdsc.goldenhour.network.model.Contact
 import com.gdsc.goldenhour.network.model.ContactCreateResponse
 import com.gdsc.goldenhour.network.model.ContactReadResponse
 import com.gdsc.goldenhour.network.model.ContactRequest
-import com.gdsc.goldenhour.view.checklist.normal.adapter.ContactAdapter
+import com.gdsc.goldenhour.view.checklist.normal.adapter.NormalContactAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,7 +23,7 @@ class NormalThreeFragment :
     BindingFragment<FragmentNormalThreeBinding>(FragmentNormalThreeBinding::inflate) {
     private lateinit var userIdToken: String
     private lateinit var contactList: MutableList<Contact>
-    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var contactAdapter: NormalContactAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +71,7 @@ class NormalThreeFragment :
 
     private fun setRecyclerView(data: List<Contact>) {
         contactList = data.toMutableList()
-        contactAdapter = ContactAdapter(data)
+        contactAdapter = NormalContactAdapter(data)
 
         val recyclerView = binding.rvEmergencyContact
         recyclerView.adapter = contactAdapter

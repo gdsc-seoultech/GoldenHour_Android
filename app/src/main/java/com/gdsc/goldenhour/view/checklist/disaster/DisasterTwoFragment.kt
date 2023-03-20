@@ -1,10 +1,14 @@
 package com.gdsc.goldenhour.view.checklist.disaster
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdsc.goldenhour.binding.BindingFragment
+import com.gdsc.goldenhour.databinding.DisasterGoodsItemBinding
 import com.gdsc.goldenhour.databinding.FragmentDisasterTwoBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.Goods
@@ -20,7 +24,6 @@ class DisasterTwoFragment :
     BindingFragment<FragmentDisasterTwoBinding>(FragmentDisasterTwoBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         loadUserGoodsData()
     }
 
@@ -28,18 +31,18 @@ class DisasterTwoFragment :
         val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
         val userIdToken = gsa?.idToken.toString()
         RetrofitObject.networkService.readReliefGoods(userIdToken)
-            .enqueue(object: Callback<GoodsReadResponse>{
+            .enqueue(object : Callback<GoodsReadResponse> {
                 override fun onResponse(
                     call: Call<GoodsReadResponse>,
                     response: Response<GoodsReadResponse>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             setRecyclerView(responseBody.data)
                         }
                         Log.d("Retrofit", "success GET goods list...")
-                    }else{
+                    } else {
                         Log.e("Retrofit", response.code().toString())
                     }
                 }
@@ -53,13 +56,13 @@ class DisasterTwoFragment :
 
     private fun setRecyclerView(goodsList: List<Goods>) {
         val goodsCheckList = mutableListOf<GoodsCheck>()
-        for(goods in goodsList){
+        for (goods in goodsList) {
             val item = GoodsCheck(goods.name, false)
             goodsCheckList.add(item)
         }
 
         val recyclerView = binding.rvGoodsCheck
-        recyclerView.adapter = GoodsCheckAdapter(goodsCheckList)
+        recyclerView.adapter = GoodsCheckAdapter(requireContext(), goodsCheckList)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
     }
