@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.view.checklist.disaster.adapter
+package com.gdsc.goldenhour.view.checklist.normal.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

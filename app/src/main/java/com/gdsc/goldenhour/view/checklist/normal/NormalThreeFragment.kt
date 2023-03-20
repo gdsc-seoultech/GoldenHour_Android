@@ -13,7 +13,7 @@ import com.gdsc.goldenhour.network.model.Contact
 import com.gdsc.goldenhour.network.model.ContactCreateResponse
 import com.gdsc.goldenhour.network.model.ContactReadResponse
 import com.gdsc.goldenhour.network.model.ContactRequest
-import com.gdsc.goldenhour.view.checklist.disaster.adapter.ContactAdapter
+import com.gdsc.goldenhour.view.checklist.normal.adapter.ContactAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import retrofit2.Call
 import retrofit2.Callback
