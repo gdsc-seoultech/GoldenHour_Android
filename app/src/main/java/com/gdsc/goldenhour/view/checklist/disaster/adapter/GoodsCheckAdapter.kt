@@ -14,8 +14,8 @@ class GoodsCheckAdapter(
         private val binding: DisasterGoodsItemBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(item: GoodsCheck) {
-            binding.goodsName.text = item.name
-            binding.checkbox.isChecked = item.checked
+            binding.tvGoodsName.text = item.name
+            binding.cbGoods.isChecked = item.checked
         }
     }
 
