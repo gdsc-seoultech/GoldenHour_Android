@@ -50,11 +50,7 @@ class GoodsAdapter(
         }
 
         fun bind(item: Goods){
-            binding.tvGoodsId.text = item.id.toString()
             binding.tvGoodsName.text = item.name
-
-            // View에는 id가 안 보이도록
-            binding.tvGoodsId.visibility = View.GONE
         }
     }
 
