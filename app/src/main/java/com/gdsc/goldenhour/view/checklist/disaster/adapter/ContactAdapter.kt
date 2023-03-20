@@ -7,14 +7,14 @@ import com.gdsc.goldenhour.databinding.ContactListItemBinding
 import com.gdsc.goldenhour.network.model.Contact
 
 class ContactAdapter(
-    private val data: List<Contact>
+    private val contacts: List<Contact>
 ): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
     class ContactViewHolder(
         private val binding: ContactListItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Contact){
-            binding.name.text = item.name
-            binding.phoneNumber.text = item.phoneNumber
+            binding.tvName.text = item.name
+            binding.tvPhoneNumber.text = item.phoneNumber
         }
     }
 
@@ -25,8 +25,8 @@ class ContactAdapter(
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(contacts[position])
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = contacts.size
 }

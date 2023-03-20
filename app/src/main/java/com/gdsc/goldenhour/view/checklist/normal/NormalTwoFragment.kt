@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gdsc.goldenhour.binding.BindingFragment
-import com.gdsc.goldenhour.databinding.DialogInputFormBinding
 import com.gdsc.goldenhour.databinding.FragmentNormalTwoBinding
+import com.gdsc.goldenhour.databinding.GoodsInputFormBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.*
 import com.gdsc.goldenhour.view.checklist.normal.adapter.GoodsAdapter
@@ -97,8 +97,9 @@ class NormalTwoFragment :
         recyclerView.setHasFixedSize(true)
     }
 
+    // todo: 항목을 추가하면 뷰가 바로 갱신되도록
     private fun showInputDialog() {
-        val binding = DialogInputFormBinding.inflate(layoutInflater)
+        val binding = GoodsInputFormBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("재난 상황 발생 시 필요한 구호물자를 등록해주세요.")
             .setView(binding.root)
@@ -106,15 +107,9 @@ class NormalTwoFragment :
                 val inputText = binding.etGoods.text.toString()
 
                 if (inputText.isNotEmpty()) {
-                    // todo: 뷰에서는 제일 마지막에 항목을 추가한다.
-                    val insertedPosition = goodsList.size
-                    goodsList.add(insertedPosition, Goods(0, inputText))
-                    goodsAdapter.notifyItemInserted(insertedPosition)
-
-                    binding.etGoods.text.clear()
-
-                    // todo: 서버에 새 항목을 등록한다.
+                    // 서버에 새 항목을 등록한다.
                     createUserGoods(GoodsRequest(inputText))
+                    binding.etGoods.text.clear()
                 }
             }
             .setNegativeButton("취소", null)
@@ -122,8 +117,8 @@ class NormalTwoFragment :
         dialog.show()
     }
 
-    private fun createUserGoods(requestBody: GoodsRequest) {
-        RetrofitObject.networkService.createReliefGoods(userIdToken, requestBody)
+    private fun createUserGoods(goodsRequest: GoodsRequest) {
+        RetrofitObject.networkService.createReliefGoods(userIdToken, goodsRequest)
             .enqueue(object : Callback<GoodsCreateResponse> {
                 override fun onResponse(
                     call: Call<GoodsCreateResponse>,
@@ -132,9 +127,11 @@ class NormalTwoFragment :
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            val insertedItem = responseBody.data
-                            goodsList.last().id = insertedItem.id
-                            Log.d("Retrofit", "${insertedItem.id} success POST goods item!!!")
+                            val item = responseBody.data
+                            val position = goodsList.size
+                            goodsList.add(position, Goods(item.id, item.name))
+                            goodsAdapter.notifyItemInserted(position)
+                            Log.d("Retrofit", "${item.id} success POST goods item!!!")
                         }
                     } else {
                         Log.e("Retrofit", response.code().toString())
@@ -149,7 +146,7 @@ class NormalTwoFragment :
     }
 
     private fun showModifyDialog(pos: Int) {
-        val binding = DialogInputFormBinding.inflate(layoutInflater)
+        val binding = GoodsInputFormBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("구호물자 수정")
             .setView(binding.root)
@@ -169,8 +166,8 @@ class NormalTwoFragment :
         dialog.show()
     }
 
-    private fun updateUserGoods(itemId: Int, requestBody: GoodsRequest) {
-        RetrofitObject.networkService.updateReliefGoods(userIdToken, itemId, requestBody)
+    private fun updateUserGoods(itemId: Int, goodsRequest: GoodsRequest) {
+        RetrofitObject.networkService.updateReliefGoods(userIdToken, itemId, goodsRequest)
             .enqueue(object : Callback<GoodsUpdateResponse> {
                 override fun onResponse(
                     call: Call<GoodsUpdateResponse>,
@@ -193,6 +190,7 @@ class NormalTwoFragment :
             })
     }
 
+    // todo: 항목을 삭제하면 뷰가 바로 갱신되도록
     private fun showDeleteDialog(pos: Int): Boolean {
         AlertDialog.Builder(requireContext())
             .setTitle("구호물자를 삭제하시겠습니까?")
