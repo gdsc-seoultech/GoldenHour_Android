@@ -1,6 +1,7 @@
 package com.gdsc.goldenhour.view.checklist.normal.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.databinding.NormalGoodsItemBinding
@@ -51,6 +52,9 @@ class GoodsAdapter(
         fun bind(item: Goods){
             binding.tvGoodsId.text = item.id.toString()
             binding.tvGoodsName.text = item.name
+
+            // View에는 id가 안 보이도록
+            binding.tvGoodsId.visibility = View.GONE
         }
     }
 
