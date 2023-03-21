@@ -7,8 +7,12 @@ import com.gdsc.goldenhour.databinding.NormalContactItemBinding
 import com.gdsc.goldenhour.network.model.Contact
 
 class NormalContactAdapter(
-    private val contacts: List<Contact>
+    private val contacts: MutableList<Contact>
 ): RecyclerView.Adapter<NormalContactAdapter.ContactViewHolder>() {
+    fun addItem(item: Contact){
+        contacts.add(item)
+    }
+
     class ContactViewHolder(
         private val binding: NormalContactItemBinding
     ): RecyclerView.ViewHolder(binding.root) {

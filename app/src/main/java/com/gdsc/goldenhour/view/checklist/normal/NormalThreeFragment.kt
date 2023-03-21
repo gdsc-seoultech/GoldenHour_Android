@@ -22,7 +22,6 @@ import retrofit2.Response
 class NormalThreeFragment :
     BindingFragment<FragmentNormalThreeBinding>(FragmentNormalThreeBinding::inflate) {
     private lateinit var userIdToken: String
-    private lateinit var contactList: MutableList<Contact>
     private lateinit var contactAdapter: NormalContactAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class NormalThreeFragment :
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            setRecyclerView(responseBody.data)
+                            setRecyclerView(responseBody.data.toMutableList())
                         }
 
                         Log.d("Retrofit", "success GET contact list...")
@@ -69,10 +68,8 @@ class NormalThreeFragment :
             })
     }
 
-    private fun setRecyclerView(data: List<Contact>) {
-        contactList = data.toMutableList()
+    private fun setRecyclerView(data: MutableList<Contact>) {
         contactAdapter = NormalContactAdapter(data)
-
         val recyclerView = binding.rvEmergencyContact
         recyclerView.adapter = contactAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -85,6 +82,7 @@ class NormalThreeFragment :
         builder.setTitle("재난상황 발생 시 필요한 비상연락망을 등록해주세요.")
             .setView(binding.root)
             .setPositiveButton("저장") { dialogInterface, i ->
+                // 서버에 새 항목 등록하고 UI 갱신
                 val name = binding.etName.text.toString()
                 val phoneNumber = binding.etPhoneNumber.text.toString()
                 createUserContact(ContactRequest(name, phoneNumber))
@@ -105,9 +103,7 @@ class NormalThreeFragment :
                         val responseBody = response.body()
                         if (responseBody != null) {
                             val item = responseBody.data
-                            val position = contactList.size
-                            contactList.add(position, Contact(item.id, item.name, item.phoneNumber))
-                            contactAdapter.notifyItemInserted(position)
+                            addItemInAdapter(item)
                             Log.d("Retrofit", "${item.id} success POST contact item!!!")
                         }
                     } else {
@@ -119,9 +115,13 @@ class NormalThreeFragment :
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }
-
             })
     }
 
-
+    private fun addItemInAdapter(item: Contact) {
+        contactAdapter.apply {
+            addItem(item)
+            notifyItemInserted(itemCount)
+        }
+    }
 }

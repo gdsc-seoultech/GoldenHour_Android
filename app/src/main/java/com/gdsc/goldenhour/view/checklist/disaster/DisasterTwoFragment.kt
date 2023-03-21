@@ -54,6 +54,7 @@ class DisasterTwoFragment :
             })
     }
 
+    // todo: 각 항목의 체크 상태를 업데이트 해줘야 한다.
     private fun setRecyclerView(goodsList: List<Goods>) {
         val goodsCheckList = mutableListOf<GoodsCheck>()
         for (goods in goodsList) {

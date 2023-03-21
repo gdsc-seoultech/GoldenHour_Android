@@ -28,22 +28,6 @@ class GoodsAdapter(
         longClickListener = listener
     }
 
-    fun addItem(item: Goods){
-        goods.add(item)
-    }
-
-    fun updateItem(pos: Int, name: String){
-        goods[pos].name = name
-    }
-
-    fun deleteItem(pos: Int){
-        goods.removeAt(pos)
-    }
-
-    fun getItem(pos: Int): Goods {
-        return goods[pos]
-    }
-
     inner class GoodsViewHolder(
         private val binding: NormalGoodsItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
@@ -81,4 +65,20 @@ class GoodsAdapter(
     }
 
     override fun getItemCount(): Int = goods.size
+
+    fun addItem(item: Goods){
+        goods.add(item)
+    }
+
+    fun updateItem(pos: Int, name: String){
+        goods[pos].name = name
+    }
+
+    fun deleteItem(pos: Int){
+        goods.removeAt(pos)
+    }
+
+    fun getItem(pos: Int): Goods {
+        return goods[pos]
+    }
 }
