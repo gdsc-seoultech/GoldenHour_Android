@@ -95,7 +95,6 @@ class NormalTwoFragment :
         recyclerView.setHasFixedSize(true)
     }
 
-    // todo: 항목을 추가하면 뷰가 바로 갱신되도록
     private fun showInputDialog() {
         val binding = GoodsInputFormBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireContext())
@@ -103,9 +102,8 @@ class NormalTwoFragment :
             .setView(binding.root)
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
-
                 if (inputText.isNotEmpty()) {
-                    // 서버에 새 항목을 등록한다.
+                    // 서버에 새 항목을 등록하고 뷰를 갱신한다.
                     createUserGoods(GoodsRequest(inputText))
                     binding.etGoods.text.clear()
                 }
@@ -126,13 +124,7 @@ class NormalTwoFragment :
                         val responseBody = response.body()
                         if (responseBody != null) {
                             val item = responseBody.data
-
-                            // todo: 프래그먼트 내에 정의된 리스트가 아니라, 어댑터에 정의된 리스트를 갱신해야 한다!
-                            goodsAdapter.apply {
-                                addItem(item)
-                                notifyItemInserted(itemCount)
-                            }
-
+                            addGoodsItem(item)
                             Log.d("Retrofit", "${item.id} success POST goods item!!!")
                         }
                     } else {
@@ -147,6 +139,62 @@ class NormalTwoFragment :
             })
     }
 
+    // 프래그먼트 내의 리스트가 아니라, 어댑터에 정의된 리스트를 갱신해야 한다!
+    private fun addGoodsItem(item: Goods) {
+        goodsAdapter.apply {
+            addItem(item)
+            notifyItemInserted(itemCount)
+        }
+    }
+
+    private fun showDeleteDialog(pos: Int): Boolean {
+        AlertDialog.Builder(requireContext())
+            .setTitle("구호물자를 삭제하시겠습니까?")
+            .setPositiveButton("확인") { dialog, which ->
+                // 서버에서는 항목의 id를 기준으로 삭제
+                val id = goodsAdapter.getItem(pos).id
+                deleteUserGoods(id)
+
+                // 뷰에서는 클릭한 위치를 기준으로 삭제
+                deleteGoodsItem(pos)
+            }
+            .setNegativeButton("취소", null)
+            .create()
+            .show()
+        return true
+    }
+
+    private fun deleteGoodsItem(pos: Int) {
+        goodsAdapter.apply {
+            deleteItem(pos)
+            notifyItemRemoved(pos)
+        }
+    }
+
+    private fun deleteUserGoods(itemId: Int) {
+        RetrofitObject.networkService.deleteReliefGoods(userIdToken, itemId)
+            .enqueue(object : Callback<GoodsDeleteResponse> {
+                override fun onResponse(
+                    call: Call<GoodsDeleteResponse>,
+                    response: Response<GoodsDeleteResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()
+                        if (responseBody != null) {
+                            Log.d("Retrofit", responseBody.data)
+                        }
+                    } else {
+                        Log.e("Retrofit", response.code().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<GoodsDeleteResponse>, t: Throwable) {
+                    Log.d("Retrofit", t.message.toString())
+                    call.cancel()
+                }
+            })
+    }
+
     private fun showModifyDialog(pos: Int) {
         val binding = GoodsInputFormBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireContext())
@@ -155,8 +203,6 @@ class NormalTwoFragment :
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
                 if (inputText.isNotEmpty()) {
-
-
                     val item = goodsList[pos]
                     item.name = inputText
                     goodsAdapter.notifyItemChanged(pos)
@@ -188,50 +234,6 @@ class NormalTwoFragment :
                 }
 
                 override fun onFailure(call: Call<GoodsUpdateResponse>, t: Throwable) {
-                    Log.d("Retrofit", t.message.toString())
-                    call.cancel()
-                }
-            })
-    }
-
-    // todo: 항목을 삭제하면 뷰가 바로 갱신되도록
-    private fun showDeleteDialog(pos: Int): Boolean {
-        AlertDialog.Builder(requireContext())
-            .setTitle("구호물자를 삭제하시겠습니까?")
-            .setPositiveButton("확인") { dialog, which ->
-                val id = goodsList[pos].id
-
-                // 뷰에서는 클릭한 위치에 따라 삭제한다.
-                goodsList.removeAt(pos)
-                goodsAdapter.notifyItemRemoved(pos)
-
-                // 서버에서는 항목의 id를 기준으로 삭제한다.
-                deleteUserGoods(id)
-            }
-            .setNegativeButton("취소", null)
-            .create()
-            .show()
-        return true
-    }
-
-    private fun deleteUserGoods(itemId: Int) {
-        RetrofitObject.networkService.deleteReliefGoods(userIdToken, itemId)
-            .enqueue(object : Callback<GoodsDeleteResponse> {
-                override fun onResponse(
-                    call: Call<GoodsDeleteResponse>,
-                    response: Response<GoodsDeleteResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        if (responseBody != null) {
-                            Log.d("Retrofit", responseBody.data)
-                        }
-                    } else {
-                        Log.e("Retrofit", response.code().toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<GoodsDeleteResponse>, t: Throwable) {
                     Log.d("Retrofit", t.message.toString())
                     call.cancel()
                 }

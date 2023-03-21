@@ -33,8 +33,12 @@ class GoodsAdapter(
         goods.add(item)
     }
 
-    fun updateItem(pos: Int, name: String){
+    fun deleteItem(pos: Int){
+        goods.removeAt(pos)
+    }
 
+    fun getItem(pos: Int): Goods {
+        return goods[pos]
     }
 
     inner class GoodsViewHolder(
