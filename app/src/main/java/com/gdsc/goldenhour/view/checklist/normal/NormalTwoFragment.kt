@@ -26,7 +26,6 @@ import retrofit2.Response
 class NormalTwoFragment :
     BindingFragment<FragmentNormalTwoBinding>(FragmentNormalTwoBinding::inflate) {
     private lateinit var userIdToken: String
-    private lateinit var goodsList: MutableList<Goods>
     private lateinit var goodsAdapter: GoodsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +54,7 @@ class NormalTwoFragment :
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            // todo: 항목 추가, 수정, 삭제가 가능하도록 Mutable로 변경
+                            // 항목 추가, 수정, 삭제가 가능하도록 Mutable로 변경
                             setRecyclerView(responseBody.data.toMutableList())
                         }
 
@@ -124,7 +123,7 @@ class NormalTwoFragment :
                         val responseBody = response.body()
                         if (responseBody != null) {
                             val item = responseBody.data
-                            addGoodsItem(item)
+                            addItemInAdapter(item)
                             Log.d("Retrofit", "${item.id} success POST goods item!!!")
                         }
                     } else {
@@ -140,7 +139,7 @@ class NormalTwoFragment :
     }
 
     // 프래그먼트 내의 리스트가 아니라, 어댑터에 정의된 리스트를 갱신해야 한다!
-    private fun addGoodsItem(item: Goods) {
+    private fun addItemInAdapter(item: Goods) {
         goodsAdapter.apply {
             addItem(item)
             notifyItemInserted(itemCount)
@@ -156,7 +155,7 @@ class NormalTwoFragment :
                 deleteUserGoods(id)
 
                 // 뷰에서는 클릭한 위치를 기준으로 삭제
-                deleteGoodsItem(pos)
+                deleteItemInAdapter(pos)
             }
             .setNegativeButton("취소", null)
             .create()
@@ -164,7 +163,7 @@ class NormalTwoFragment :
         return true
     }
 
-    private fun deleteGoodsItem(pos: Int) {
+    private fun deleteItemInAdapter(pos: Int) {
         goodsAdapter.apply {
             deleteItem(pos)
             notifyItemRemoved(pos)
@@ -203,17 +202,24 @@ class NormalTwoFragment :
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
                 if (inputText.isNotEmpty()) {
-                    val item = goodsList[pos]
-                    item.name = inputText
-                    goodsAdapter.notifyItemChanged(pos)
-
-                    // 서버에서는 항목의 id를 기준으로 내용 변경
+                    // 서버에서는 항목의 id를 기준으로 수정
+                    val item = goodsAdapter.getItem(pos)
                     updateUserGoods(item.id, GoodsRequest(item.name))
+
+                    // 뷰에서는 클릭한 위치에 따라 수정
+                    updateItemInAdapter(pos, inputText)
                 }
             }
             .setNegativeButton("취소", null)
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun updateItemInAdapter(pos: Int, name: String) {
+        goodsAdapter.apply {
+            updateItem(pos, name)
+            notifyItemChanged(pos)
+        }
     }
 
     private fun updateUserGoods(itemId: Int, goodsRequest: GoodsRequest) {

@@ -1,7 +1,6 @@
 package com.gdsc.goldenhour.view.checklist.normal.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.databinding.NormalGoodsItemBinding
@@ -31,6 +30,10 @@ class GoodsAdapter(
 
     fun addItem(item: Goods){
         goods.add(item)
+    }
+
+    fun updateItem(pos: Int, name: String){
+        goods[pos].name = name
     }
 
     fun deleteItem(pos: Int){
