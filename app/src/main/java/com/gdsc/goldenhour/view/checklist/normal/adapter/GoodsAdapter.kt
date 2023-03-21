@@ -7,7 +7,7 @@ import com.gdsc.goldenhour.databinding.NormalGoodsItemBinding
 import com.gdsc.goldenhour.network.model.Goods
 
 class GoodsAdapter(
-    private val goods: List<Goods>
+    private val goods: MutableList<Goods>
 ): RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
 
     interface OnItemClickListener{
@@ -49,7 +49,6 @@ class GoodsAdapter(
         }
 
         fun bind(item: Goods){
-            binding.tvGoodsId.text = item.id.toString()
             binding.tvGoodsName.text = item.name
         }
     }
@@ -66,4 +65,20 @@ class GoodsAdapter(
     }
 
     override fun getItemCount(): Int = goods.size
+
+    fun addItem(item: Goods){
+        goods.add(item)
+    }
+
+    fun updateItem(pos: Int, name: String){
+        goods[pos].name = name
+    }
+
+    fun deleteItem(pos: Int){
+        goods.removeAt(pos)
+    }
+
+    fun getItem(pos: Int): Goods {
+        return goods[pos]
+    }
 }

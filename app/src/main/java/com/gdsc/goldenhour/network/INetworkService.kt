@@ -29,7 +29,7 @@ interface INetworkService {
         @Header("Authorization")
         idToken: String,
         @Path("id") id: Int,
-        @Body name: GoodsRequest
+        @Body goodsRequest: GoodsRequest
     ): Call<GoodsUpdateResponse>
 
     @DELETE("/user/relief_goods/{id}")
@@ -40,10 +40,17 @@ interface INetworkService {
     ): Call<GoodsDeleteResponse>
 
     @GET("/user/emergency_contact")
-    fun getContactList(
+    fun readEmergencyContacts(
         @Header("Authorization")
         idToken: String
-    ): Call<ContactList>
+    ): Call<ContactReadResponse>
+
+    @POST("/user/emergency_contact")
+    fun createEmergencyContact(
+        @Header("Authorization")
+        idToken: String,
+        @Body contactRequest: ContactRequest
+    ): Call<ContactCreateResponse>
 
     @GET("/guide")
     fun getGuideList(): Call<GuideList>

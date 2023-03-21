@@ -1,21 +1,27 @@
 package com.gdsc.goldenhour.view.checklist.disaster.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gdsc.goldenhour.databinding.DisasterGoodsItemBinding
 import com.gdsc.goldenhour.view.checklist.disaster.adapter.model.GoodsCheck
 
+
 class GoodsCheckAdapter(
+    private val context: Context,
     private val data: List<GoodsCheck>
 ): RecyclerView.Adapter<GoodsCheckAdapter.GoodsCheckViewHolder>() {
 
-    class GoodsCheckViewHolder(
+    inner class GoodsCheckViewHolder(
         private val binding: DisasterGoodsItemBinding
     ): RecyclerView.ViewHolder(binding.root){
         fun bind(item: GoodsCheck) {
-            binding.goodsName.text = item.name
-            binding.checkbox.isChecked = item.checked
+            binding.tvGoodsName.text = item.name
+            binding.cbGoods.isChecked = item.checked
         }
     }
 

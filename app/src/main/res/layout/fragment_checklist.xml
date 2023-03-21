@@ -29,9 +29,11 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:text="재난문자"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:background="@drawable/round_border"
-        android:padding="14dp"
-        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:elevation="4dp"/>
 
     <FrameLayout

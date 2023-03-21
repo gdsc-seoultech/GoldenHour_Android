@@ -7,9 +7,10 @@
     tools:context=".view.checklist.disaster.DisasterTwoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/goods_recycler_view"
+        android:id="@+id/rv_goods_check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingVertical="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

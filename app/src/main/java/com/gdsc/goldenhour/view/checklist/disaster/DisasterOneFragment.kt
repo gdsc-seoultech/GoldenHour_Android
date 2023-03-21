@@ -24,7 +24,6 @@ class DisasterOneFragment(
     }
 
     private fun loadWebtoonImages(disasterName: String) {
-        // TODO: 재난 이름에 따른 행동수칙을 받을 수 있도록 (id 말고)
         Log.e("Retrofit", disasterName)
         RetrofitObject.networkService.getDisasterWebtoonListByName(disasterName)
             .enqueue(object: Callback<WebtoonList> {

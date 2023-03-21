@@ -3,6 +3,7 @@
     <SwitchPreferenceCompat
         android:key="notification"
         android:title="알림"
+        android:defaultValue="true"
         android:icon="@drawable/ic_notification"/>
     <ListPreference
         android:key="language"
