@@ -8,7 +8,7 @@ import com.gdsc.goldenhour.databinding.NormalGoodsItemBinding
 import com.gdsc.goldenhour.network.model.Goods
 
 class GoodsAdapter(
-    private val goods: List<Goods>
+    private val goods: MutableList<Goods>
 ): RecyclerView.Adapter<GoodsAdapter.GoodsViewHolder>() {
 
     interface OnItemClickListener{
@@ -27,6 +27,14 @@ class GoodsAdapter(
     private var longClickListener: OnItemLongClickListener? = null
     fun setMyItemLongClickListener(listener: OnItemLongClickListener){
         longClickListener = listener
+    }
+
+    fun addItem(item: Goods){
+        goods.add(item)
+    }
+
+    fun updateItem(pos: Int, name: String){
+
     }
 
     inner class GoodsViewHolder(

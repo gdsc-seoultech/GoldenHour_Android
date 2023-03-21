@@ -55,7 +55,8 @@ class NormalTwoFragment :
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            setRecyclerView(responseBody.data)
+                            // todo: 항목 추가, 수정, 삭제가 가능하도록 Mutable로 변경
+                            setRecyclerView(responseBody.data.toMutableList())
                         }
 
                         Log.d("Retrofit", "success GET goods list...")
@@ -71,10 +72,7 @@ class NormalTwoFragment :
             })
     }
 
-    private fun setRecyclerView(data: List<Goods>) {
-        // 다른 곳에서 항목을 수정, 삭제할 수 있도록 Mutable로 변경
-        goodsList = data.toMutableList()
-
+    private fun setRecyclerView(data: MutableList<Goods>) {
         goodsAdapter = GoodsAdapter(data)
 
         // 아이템을 클릭하면 내용을 수정할 수 있도록
@@ -128,9 +126,13 @@ class NormalTwoFragment :
                         val responseBody = response.body()
                         if (responseBody != null) {
                             val item = responseBody.data
-                            val position = goodsList.size
-                            goodsList.add(position, Goods(item.id, item.name))
-                            goodsAdapter.notifyItemInserted(position)
+
+                            // todo: 프래그먼트 내에 정의된 리스트가 아니라, 어댑터에 정의된 리스트를 갱신해야 한다!
+                            goodsAdapter.apply {
+                                addItem(item)
+                                notifyItemInserted(itemCount)
+                            }
+
                             Log.d("Retrofit", "${item.id} success POST goods item!!!")
                         }
                     } else {
@@ -153,6 +155,8 @@ class NormalTwoFragment :
             .setPositiveButton("저장") { dialogInterface, i ->
                 val inputText = binding.etGoods.text.toString()
                 if (inputText.isNotEmpty()) {
+
+
                     val item = goodsList[pos]
                     item.name = inputText
                     goodsAdapter.notifyItemChanged(pos)
