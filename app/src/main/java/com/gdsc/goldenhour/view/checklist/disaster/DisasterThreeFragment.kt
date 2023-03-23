@@ -1,5 +1,6 @@
 package com.gdsc.goldenhour.view.checklist.disaster
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,8 +20,6 @@ import retrofit2.Response
 
 class DisasterThreeFragment :
     BindingFragment<FragmentDisasterThreeBinding>(FragmentDisasterThreeBinding::inflate) {
-    private var clickedPhoneNumber: String? = null
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -28,8 +27,8 @@ class DisasterThreeFragment :
     }
 
     private fun loadUserContactData() {
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
-        val userIdToken = gsa?.idToken.toString()
+        val sharedPref = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val userIdToken = sharedPref.getString("idToken", "none").toString()
 
         RetrofitObject.networkService.readEmergencyContacts(userIdToken)
             .enqueue(object : Callback<ContactReadResponse> {

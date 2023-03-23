@@ -1,5 +1,6 @@
 package com.gdsc.goldenhour.view.checklist.disaster
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -28,10 +29,8 @@ class DisasterTwoFragment :
     }
 
     private fun loadUserGoodsData() {
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
-        val userIdToken = gsa?.idToken.toString()
-
-
+        val sharedPref = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val userIdToken = sharedPref.getString("idToken", "none").toString()
 
         RetrofitObject.networkService.readReliefGoods(userIdToken)
             .enqueue(object : Callback<GoodsReadResponse> {
