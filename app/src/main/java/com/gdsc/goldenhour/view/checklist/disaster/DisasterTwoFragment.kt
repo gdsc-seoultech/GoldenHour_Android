@@ -30,6 +30,9 @@ class DisasterTwoFragment :
     private fun loadUserGoodsData() {
         val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
         val userIdToken = gsa?.idToken.toString()
+
+
+
         RetrofitObject.networkService.readReliefGoods(userIdToken)
             .enqueue(object : Callback<GoodsReadResponse> {
                 override fun onResponse(
