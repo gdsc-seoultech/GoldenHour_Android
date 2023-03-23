@@ -38,12 +38,12 @@ class LoginActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) {
             if (it.resultCode == RESULT_OK) {
-                // todo: 로그인에 성공하면 idToken 값을 my_prefs 에 저장한다.
+                // 로그인에 성공하면 idToken 값을 my_prefs 에 저장한다.
                 val googleSignInAccountTask = mGoogleSignInClient.silentSignIn()
                 val idToken = googleSignInAccountTask.result.idToken.toString()
                 saveUserIdTokenInPrefs(idToken)
 
-                // todo: 서버에 로그인 정보를 업로드한다.
+                // 서버에 로그인 정보를 업로드한다.
                 uploadUserInfoToServer(idToken)
 
                 // 로그인 액티비티는 완전히 종료되고, 메인 액티비티가 루트가 될 수 있도록
