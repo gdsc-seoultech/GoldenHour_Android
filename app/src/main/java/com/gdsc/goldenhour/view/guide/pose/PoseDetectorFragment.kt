@@ -66,7 +66,7 @@ class PoseDetectorFragment :
 
         // todo: 후방 카메라로 방향 바꾸기 (그에 따라 scaleFactor 조절)
         val cameraSelector =
-            CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_FRONT).build()
+            CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
 
         preview = Preview.Builder()
             .build()
