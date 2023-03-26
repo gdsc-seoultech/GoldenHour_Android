@@ -1,19 +1,17 @@
 package com.gdsc.goldenhour.view.settings
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.gdsc.goldenhour.BuildConfig
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivitySettingsBinding
 import com.gdsc.goldenhour.util.GoogleSignInClientObj
 import com.gdsc.goldenhour.view.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -24,27 +22,25 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mGoogleSignInClient = GoogleSignInClientObj.getInstance(this)
         loadFragment(SettingsFragment())
 
-        mGoogleSignInClient = GoogleSignInClientObj.getInstance(this)
-        val googleSignInAccountTask = mGoogleSignInClient.silentSignIn()
-        if (googleSignInAccountTask.isSuccessful) {
-            val taskResult = googleSignInAccountTask.result
-
-            Glide.with(this)
-                .load(taskResult.photoUrl)
-                .override(100)
-                .into(binding.userProfile)
-
-            binding.userName.text = taskResult.displayName
-            binding.userEmail.text = taskResult.email
-        } else {
-            Log.e(GOOGLE_LOGIN_TAG, "GoogleSignInClient 객체를 다시 얻어야 합니다.")
-        }
+        updateUserInfo()
 
         binding.btnLogout.setOnClickListener {
             logOut()
         }
+    }
+
+    private fun updateUserInfo() {
+        val gsa = GoogleSignIn.getLastSignedInAccount(this)
+        Glide.with(this)
+            .load(gsa?.photoUrl)
+            .override(100)
+            .into(binding.userProfile)
+
+        binding.userName.text = gsa?.displayName
+        binding.userEmail.text = gsa?.email
     }
 
     private fun logOut() {
