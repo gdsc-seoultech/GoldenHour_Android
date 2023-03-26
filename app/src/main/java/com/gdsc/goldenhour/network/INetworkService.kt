@@ -1,9 +1,9 @@
 package com.gdsc.goldenhour.network
 
 import com.gdsc.goldenhour.network.model.*
-import com.gdsc.goldenhour.view.map.data.AedItemList
-import com.gdsc.goldenhour.view.map.data.AedResponse
+import com.gdsc.goldenhour.network.model.AedResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface INetworkService {
@@ -45,13 +45,12 @@ interface INetworkService {
     @GET("/message/{id}/information")
     fun getInformationList(@Path("id") id: Int): Call<InformationList>
 
-    // map
-    @GET("/B552657/AEDInfoInqireService/getAedLcinfoInqire")
-    fun getAedList(
-        @Query("WGS84_LON") longitude: Double,
-        @Query("WGS84_LAT") latitude: Double,
-        @Query("pageNo") pageNo: Int,
-        @Query("numOfRows") numOfRows: Int,
-        @Query("Servicekey", encoded = true) serviceKey: String
-    ): Call<AedItemList>
+    // 대피소
+    @GET("/1741000/TsunamiShelter3/getTsunamiShelter1List")
+    fun getShelterList(
+        @Query("ServiceKey") serviceKey: String,
+        @Query("type") type: String = "json",
+        @Query("pageNo") pageNo: Int = 1,
+        @Query("numOfRows") numOfRows: Int = 10
+    ): Call<ShelterBody>
 }

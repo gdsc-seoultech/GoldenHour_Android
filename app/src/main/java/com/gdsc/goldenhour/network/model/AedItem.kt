@@ -1,65 +1,49 @@
 package com.gdsc.goldenhour.network.model
 
+import com.tickaroo.tikxml.annotation.Element
 import com.tickaroo.tikxml.annotation.PropertyElement
 import com.tickaroo.tikxml.annotation.Xml
-import org.simpleframework.xml.Element
-
 
 @Xml(name = "response")
 data class AedResponse(
-    @Element(name = "header")
-    val header: AedHeader,
+    @Element
+    var body: AedBody
+)
 
-    @Element(name = "body")
-    val body: AedBody
-) {
-    constructor(): this(AedHeader(), AedBody())
-}
 
 @Xml(name = "header")
 data class AedHeader(
     @PropertyElement(name="resultCode")
-    val resultCode: Int,
+    var resultCode: String,
 
     @PropertyElement(name="resultMsg")
-    val resultMsg: String
+    var resultMsg: String
 ) {
-    constructor() : this(0, "")
 }
 
 @Xml(name = "body")
 data class AedBody(
-    @field:Element(name = "items")
-    val itemList: AedItemList?,
-
-    @field:PropertyElement(name = "numOfRows")
-    var numOfRows: Int,
-
-    @field:PropertyElement(name = "pageNo")
-    var pageNo: Int,
-
-    @field:PropertyElement(name = "totalCount")
-    var totalCount: Int
-) {
-    constructor(): this(null, 0, 0, 0)
-}
+    @Element(name = "items")
+    val itemList: AedItemList? = null,
+)
 
 
-@Xml(name = "items")
+@Xml
 data class AedItemList(
     @Element(name="item")
-    val item: List<AedItem>?
-) {
-    constructor() : this(null)
-}
+    val item: List<AedItem>? = null
+)
 
-@Xml(name = "item")
+@Xml
 data class AedItem(
     @PropertyElement(name = "buildAddress")
     var buildAddress: String?,
 
     @PropertyElement(name = "buildPlace")
     var buildPlace: String?,
+
+    @PropertyElement(name = "org")
+    var org: String?,
 
     @PropertyElement(name = "clerkTel")
     var clerkTel: String?,
@@ -70,5 +54,69 @@ data class AedItem(
     @PropertyElement(name = "wgs84Lon")
     var wgs84Lon: Double,
 ){
-    constructor(): this("", "", "", 0.0, 0.0)
+
 }
+
+
+
+/*
+@Root(name = "response", strict = false)
+data class AedResponse(
+    @Element(name = "header")
+    val header: AedHeader,
+
+    @Element(name = "body")
+    val body: AedBody
+)
+
+@Root(name = "header", strict=false)
+data class AedHeader(
+    @Element(name="resultCode")
+    val resultCode: Int,
+
+    @Element(name="resultMsg")
+    val resultMsg: String
+)
+
+@Root(name = "body", strict = false)
+data class AedBody(
+    @ElementList(entry = "items")
+    val itemList: List<AedItem>?,
+
+    @Element(name = "numOfRows")
+    var numOfRows: Int,
+
+    @Element(name = "pageNo")
+    var pageNo: Int,
+
+    @Element(name = "totalCount")
+    var totalCount: Int
+)
+
+/*
+@Root(name = "items", strict=false)
+data class AedItemList(
+    @Element(name="item")
+    val item: List<AedItem>?
+)
+
+ */
+
+@Root(name = "item", strict = false)
+data class AedItem(
+    @Element(name = "buildAddress")
+    var buildAddress: String?,
+
+    @Element(name = "buildPlace")
+    var buildPlace: String?,
+
+    @Element(name = "clerkTel")
+    var clerkTel: String?,
+
+    @Element(name = "wgs84Lat")
+    var wgs84Lat: Double,
+
+    @Element(name = "wgs84Lon")
+    var wgs84Lon: Double,
+)
+*/
