@@ -27,15 +27,20 @@ class SettingsActivity : AppCompatActivity() {
         loadFragment(SettingsFragment())
 
         mGoogleSignInClient = GoogleSignInClientObj.getInstance(this)
-        val taskResult = mGoogleSignInClient.silentSignIn().result
+        val googleSignInAccountTask = mGoogleSignInClient.silentSignIn()
+        if (googleSignInAccountTask.isSuccessful) {
+            val taskResult = googleSignInAccountTask.result
 
-        Glide.with(this)
-            .load(taskResult.photoUrl)
-            .override(100)
-            .into(binding.userProfile)
+            Glide.with(this)
+                .load(taskResult.photoUrl)
+                .override(100)
+                .into(binding.userProfile)
 
-        binding.userName.text = taskResult.displayName
-        binding.userEmail.text = taskResult.email
+            binding.userName.text = taskResult.displayName
+            binding.userEmail.text = taskResult.email
+        } else {
+            Log.e(GOOGLE_LOGIN_TAG, "GoogleSignInClient 객체를 다시 얻어야 합니다.")
+        }
 
         binding.btnLogout.setOnClickListener {
             logOut()
@@ -44,7 +49,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun logOut() {
         mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-            Log.d("GOOGLE_LOGIN", "logout")
+            Log.d(GOOGLE_LOGIN_TAG, "logout")
 
             // Activity Task 비우면서 로그인 화면으로 이동하도록
             val intent = Intent(this, LoginActivity::class.java)
@@ -53,9 +58,13 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment){
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, fragment)
         transaction.commit()
+    }
+
+    companion object {
+        private const val GOOGLE_LOGIN_TAG = "GOOGLE_LOGIN"
     }
 }
