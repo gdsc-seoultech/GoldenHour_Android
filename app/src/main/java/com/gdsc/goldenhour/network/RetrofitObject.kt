@@ -47,20 +47,5 @@ object RetrofitObject {
 
     val dataService: INetworkService = retrofitAPI.create(INetworkService::class.java)
 }
-    // 카카오맵
-/*
-    private const val KAKAO_URL = "https://dapi.kakao.com"
-
-    private val retrofitKaKao = Retrofit.Builder()
-        .baseUrl(KAKAO_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(okHttpClient.build())
-        .build()
-
-    val kakaoService: KakaoAPI = retrofitKaKao.create(KakaoAPI::class.java)
-
-    }
-
- */
 
 

@@ -25,7 +25,7 @@ data class TypeSituationList(
 
 data class DetailSituation(
     val id: Int,
-    val content: String
+    val name: String
 )
 
 data class DetailSituationList(
