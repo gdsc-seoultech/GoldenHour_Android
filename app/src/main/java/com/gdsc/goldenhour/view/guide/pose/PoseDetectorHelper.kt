@@ -161,7 +161,7 @@ class PoseDetectorHelper(
                     PoseLandmark.LEFT_SHOULDER,
                     PoseLandmark.LEFT_ELBOW,
                     PoseLandmark.LEFT_WRIST,
-                    TARGET_ARM_ANGLE
+                    MIN_ARM_ANGLE
                 )
             )
         )
@@ -171,7 +171,7 @@ class PoseDetectorHelper(
                     PoseLandmark.RIGHT_SHOULDER,
                     PoseLandmark.RIGHT_ELBOW,
                     PoseLandmark.RIGHT_WRIST,
-                    TARGET_ARM_ANGLE
+                    MIN_ARM_ANGLE
                 )
             )
         )
@@ -197,6 +197,6 @@ class PoseDetectorHelper(
 
     companion object {
         private const val TAG = "PoseDetection"
-        private const val TARGET_ARM_ANGLE = 160.0
+        private const val MIN_ARM_ANGLE = 140.0
     }
 }

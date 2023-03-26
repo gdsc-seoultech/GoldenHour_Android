@@ -22,8 +22,8 @@ class PoseMatcher {
             val angle = calculateAngle(firstLandmark!!, middleLandmark!!, lastLandmark!!)
             Log.e("PoseDetection", "세 점의 각도: ${angle}")
 
-            val targetAngle = target.angle
-            if (abs(angle - targetAngle) > offset) {
+            // 팔의 각도가 140도 보다 작으면 경고음 울리기
+            if (angle < target.minAngle) {
                 return false
             }
         }

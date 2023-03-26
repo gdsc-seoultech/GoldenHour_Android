@@ -4,7 +4,7 @@ data class TargetShape(
     val firstLandmarkType: Int,
     val middleLandmarkType: Int,
     val lastLandmarkType: Int,
-    val angle: Double
+    val minAngle: Double
 )
 
 data class TargetPose(
