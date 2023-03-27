@@ -19,7 +19,6 @@ object RetrofitObject {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(SERVER_URL)
-        .addConverterFactory(ScalarsConverterFactory.create()) // 이걸 먼저 실행하도록
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient.build())
         .build()

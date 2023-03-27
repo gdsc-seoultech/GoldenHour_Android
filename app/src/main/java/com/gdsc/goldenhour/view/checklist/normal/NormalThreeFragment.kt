@@ -1,6 +1,7 @@
 package com.gdsc.goldenhour.view.checklist.normal
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,8 +38,8 @@ class NormalThreeFragment :
     }
 
     private fun initUserIdToken() {
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
-        userIdToken = gsa?.idToken.toString()
+        val sharedPref = requireActivity().getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        userIdToken = sharedPref.getString("idToken", "none").toString()
     }
 
     private fun getEmergencyContacts() {

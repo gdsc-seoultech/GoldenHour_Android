@@ -5,13 +5,13 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.ActivityAiAssistBinding
+import com.gdsc.goldenhour.view.guide.blood.BloodDetectorFragment
+import com.gdsc.goldenhour.view.guide.pose.PoseDetectorFragment
 
 class AiAssistActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAiAssistBinding
@@ -70,48 +70,32 @@ class AiAssistActivity : AppCompatActivity() {
             else -> "동상, 골절 안내 가이드"
         }
 
+        val aiModelNumber = when (guideName) {
+            in bloodItems -> 1
+            in pressureItems -> 2
+            else -> 0
+        }
+
         val builder = AlertDialog.Builder(this)
         builder.setTitle("안내 가이드")
             .setMessage(guideMessage)
             .setPositiveButton("확인") { _, _ ->
-                // 다이얼로그에서 확인 버튼을 누르면 카메라 띄우기
-                startCamera()
+                when(aiModelNumber){
+                    1 -> loadFragment(BloodDetectorFragment())
+                    2 -> loadFragment(PoseDetectorFragment())
+                }
             }
             .setNegativeButton("취소", null)
         val dialog = builder.create()
         dialog.show()
     }
 
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            // Preview
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
-
-            // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            try {
-                // Unbind use cases before rebinding
-                cameraProvider.unbindAll()
-
-                // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview)
-
-            } catch (exc: Exception) {
-                Log.e("CameraX", "Use case binding failed", exc)
-            }
-        }, ContextCompat.getMainExecutor(this))
+    private fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
+
 
     companion object {
         private const val PERMISSION_REQUEST_CODE = 10
