@@ -1,18 +1,9 @@
 package com.gdsc.goldenhour.network
 
-import com.gdsc.goldenhour.network.model.DataApi
-import com.gdsc.goldenhour.network.model.DataRetrofit.parser
-import com.google.gson.GsonBuilder
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 
 // 싱글톤 패턴으로 객체가 한번만 생성되도록

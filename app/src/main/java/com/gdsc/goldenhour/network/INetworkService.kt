@@ -45,12 +45,4 @@ interface INetworkService {
     @GET("/message/{id}/information")
     fun getInformationList(@Path("id") id: Int): Call<InformationList>
 
-    // 대피소
-    @GET("/1741000/TsunamiShelter3/getTsunamiShelter1List")
-    fun getShelterList(
-        @Query("ServiceKey") serviceKey: String,
-        @Query("type") type: String = "json",
-        @Query("pageNo") pageNo: Int = 1,
-        @Query("numOfRows") numOfRows: Int = 10
-    ): Call<ShelterBody>
 }
