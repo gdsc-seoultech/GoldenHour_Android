@@ -18,7 +18,6 @@
         android:theme="@style/Theme.GoldenHour"
         android:usesCleartextTraffic="true">
 
-
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -26,7 +25,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="${google_map_key}" />
-
         <meta-data
             android:name="com.google.android.gms.vision"
             android:value="@integer/google_play_services_version" />
@@ -38,15 +36,8 @@
             android:name=".view.map.MapHosActivity"
             android:exported="false" />
         <activity
-            android:name=".view.map.MapFireActivity"
-            android:exported="false"></activity>
-        <activity
             android:name=".view.map.MapPharActivity"
             android:exported="false" />
-        <activity
-            android:name=".view.map.MapShelterActivity"
-            android:exported="false"/>
-
         <activity
             android:name=".view.splash.SplashActivity"
             android:exported="true">

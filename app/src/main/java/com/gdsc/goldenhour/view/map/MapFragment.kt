@@ -36,6 +36,12 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
             val intent = Intent(activity, MapPharActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnAED.setOnClickListener {
+            val intent = Intent(activity, MapAedActivity::class.java)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
