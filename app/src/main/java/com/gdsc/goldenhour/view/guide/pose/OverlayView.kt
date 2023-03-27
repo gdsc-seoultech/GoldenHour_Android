@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.View
 import com.google.mlkit.vision.pose.PoseLandmark
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.round
 
 class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
@@ -59,12 +61,12 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         }
 
         // 왼쪽 팔
-        canvas.drawConnectLine(armCoords,0, 1)
-        canvas.drawConnectLine(armCoords,1, 2)
+        canvas.drawConnectLine(armCoords, 0, 1)
+        canvas.drawConnectLine(armCoords, 1, 2)
 
         // 오른쪽 팔
-        canvas.drawConnectLine(armCoords,3, 4)
-        canvas.drawConnectLine(armCoords,4, 5)
+        canvas.drawConnectLine(armCoords, 3, 4)
+        canvas.drawConnectLine(armCoords, 4, 5)
     }
 
     private fun drawUpperBodyFrame(canvas: Canvas) {
@@ -79,10 +81,10 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             pressurePaint
         )
 
-        canvas.drawConnectLine(upperBodyCoords,0, 1)
-        canvas.drawConnectLine(upperBodyCoords,0, 2)
-        canvas.drawConnectLine(upperBodyCoords,1, 3)
-        canvas.drawConnectLine(upperBodyCoords,2, 3)
+        canvas.drawConnectLine(upperBodyCoords, 0, 1)
+        canvas.drawConnectLine(upperBodyCoords, 0, 2)
+        canvas.drawConnectLine(upperBodyCoords, 1, 3)
+        canvas.drawConnectLine(upperBodyCoords, 2, 3)
     }
 
     private fun Canvas.drawConnectLine(coords: MutableList<Pair<Float, Float>>, a: Int, b: Int) {
@@ -103,21 +105,18 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         Log.d("PoseDetection", "[input image size] ${imageWidth} ${imageHeight}")
         Log.d("PoseDetection", "[view size] ${width} ${height}")
 
-        val scaleFactor = (round(width * 1f / imageWidth) + round(height * 1f / imageHeight)) / 2
-        Log.d("PoseDetection", scaleFactor.toString())
-
         upperBodyLandmarks = landmarks as List<PoseLandmark>
 
         for (i in upperBodyLandmarks.indices) {
-            val posX = upperBodyLandmarks[i].position.x * scaleFactor
-            val posY = upperBodyLandmarks[i].position.y * scaleFactor
+            val posX = upperBodyLandmarks[i].position.x * SCALE_FACTOR
+            val posY = upperBodyLandmarks[i].position.y * SCALE_FACTOR
             upperBodyCoords[i] = Pair(posX, posY)
         }
 
         val middleX =
-            ((upperBodyLandmarks[0].position.x + upperBodyLandmarks[1].position.x) / 2) * scaleFactor
+            ((upperBodyLandmarks[0].position.x + upperBodyLandmarks[1].position.x) / 2) * SCALE_FACTOR
         val middleY =
-            ((upperBodyLandmarks[0].position.y * 2 + upperBodyLandmarks[2].position.y) / 3) * scaleFactor // 1:2 내분점
+            ((upperBodyLandmarks[0].position.y * 2 + upperBodyLandmarks[2].position.y) / 3) * SCALE_FACTOR // 1:2 내분점
         pressureCoord = Pair(middleX, middleY)
     }
 
@@ -126,14 +125,14 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         closedUpperBodyDetector = true
         invalidate()
 
-        val scaleFactor = (round(width * 1f / imageWidth) + round(height * 1f / imageHeight)) / 2
-        Log.d("PoseDetection", scaleFactor.toString())
+//        var scaleFactor = (round(width * 1f / imageWidth) + round(height * 1f / imageHeight)) / 2
+//        Log.d("PoseDetection", scaleFactor.toString())
 
         armLandmarks = landmarks as List<PoseLandmark>
 
         for (i in armLandmarks.indices) {
-            val posX = armLandmarks[i].position.x * scaleFactor
-            val posY = armLandmarks[i].position.y * scaleFactor
+            val posX = armLandmarks[i].position.x * SCALE_FACTOR
+            val posY = armLandmarks[i].position.y * SCALE_FACTOR
             armCoords[i] = Pair(posX, posY)
         }
     }
@@ -143,5 +142,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         private const val STROKE_WIDTH = 10.0f
         private const val UPPER_BODY_LANDMARKS = 4
         private const val ARM_LANDMARKS = 6
+        private const val SCALE_FACTOR = 3.3F
     }
 }

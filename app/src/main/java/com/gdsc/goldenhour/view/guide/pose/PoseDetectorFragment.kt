@@ -2,6 +2,7 @@ package com.gdsc.goldenhour.view.guide.pose
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.View
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -73,6 +74,7 @@ class PoseDetectorFragment :
 
         imageAnalyzer =
             ImageAnalysis.Builder()
+//                .setTargetResolution(Size(1080, 1080))
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {

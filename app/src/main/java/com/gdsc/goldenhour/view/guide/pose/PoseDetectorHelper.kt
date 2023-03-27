@@ -181,7 +181,7 @@ class PoseDetectorHelper(
         val isRightArmStraighted = poseMatcher.match(pose, rightArmTargetPose)
         Log.e(TAG, "left: ${isLeftArmStraighted}, right:  ${isRightArmStraighted}")
 
-        // 양쪽 팔 중에 하나라도 140도 보다 작아지면 경고음 울리기
+        // 양쪽 팔 중에 하나라도 120도 보다 작아지면 경고음 울리기
         if(!isLeftArmStraighted || !isRightArmStraighted){
             val toneGenerator = ToneGenerator(AudioManager.STREAM_ALARM, 70)
             toneGenerator.startTone(ToneGenerator.TONE_CDMA_ABBR_INTERCEPT, 200)
@@ -197,6 +197,6 @@ class PoseDetectorHelper(
 
     companion object {
         private const val TAG = "PoseDetection"
-        private const val MIN_ARM_ANGLE = 140.0
+        private const val MIN_ARM_ANGLE = 120.0
     }
 }
