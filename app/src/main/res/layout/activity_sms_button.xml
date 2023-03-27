@@ -1,224 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.call.smsButtonActivity">
+    android:orientation="vertical"
+    tools:context=".view.call.smsButtonActivity"
+    android:layout_margin="15dp">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="15dp">
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="신고처"
+            android:textColor="#222222"
+            android:textSize="20sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="15dp">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn112"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="신고처"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textSize="17dp"
+                android:layout_margin="5dp"
+                android:text="112" />
+            <Button
+                android:id="@+id/btn119"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn112"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="17dp"
-                    android:layout_margin="5dp"
-                    android:text="112" />
-                <Button
-                    android:id="@+id/btn119"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:textSize="17dp"
-                    android:text="119" />
-                <Button
-                    android:id="@+id/btn110"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp"
-                    android:textSize="17dp"
-                    android:text="110" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:textSize="17dp"
+                android:text="119" />
+            <Button
+                android:id="@+id/btn110"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="상황"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/typeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/typeSituation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사고 유형"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/typeSituationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/detailSituation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="피해 상황"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/detailSituationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/information"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사고 정보"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/informationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/safetyInformation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="신고자 안전 정보"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/safetyInformationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="인원 수"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/numLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/peopleInformation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="인원 정보"
-                android:textColor="#222222"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:id="@+id/peopleInformationLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:textSize="17dp"
+                android:text="110" />
         </LinearLayout>
 
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</ScrollView>
+    </FrameLayout>
+
+
+</LinearLayout>

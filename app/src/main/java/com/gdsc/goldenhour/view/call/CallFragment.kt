@@ -19,6 +19,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
@@ -33,6 +34,8 @@ class CallFragment : Fragment() {
     val REQUEST_PERMISSION_LOCATION = 10
     lateinit var binding: FragmentCallBinding
     var addr: String? = null
+    var addresses: List<Address>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,8 @@ class CallFragment : Fragment() {
 
         binding.btnSms.setOnClickListener {
             val intent = Intent(requireContext(), smsButtonActivity::class.java)
+            val address = addresses?.get(0)?.getAddressLine(0).toString()
+            intent.putExtra("addr", address)
             startActivity(intent)
         }
 
@@ -94,18 +99,19 @@ class CallFragment : Fragment() {
         val currentLatLng = LatLng(mLastLocation.latitude, mLastLocation.longitude)
 
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        val addresses: List<Address>?
+
 
         addresses = geocoder.getFromLocation(
             currentLatLng.latitude,
             currentLatLng.longitude,
             1
         )
-        if (addresses == null || addresses.isEmpty()) {
+
+        if (addresses == null || addresses!!.isEmpty()) {
             Toast.makeText(requireContext(), "주소 미발견", Toast.LENGTH_LONG).show()
             binding.callAddress.text = "   : 주소를 찾을 수 없습니다."
         } else {
-            val address = addresses[0]
+            val address = addresses!![0]
             binding.callAddress.text = "   : "+address.getAddressLine(0).toString()
         }
 
