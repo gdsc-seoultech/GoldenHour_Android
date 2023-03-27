@@ -36,7 +36,6 @@ class SituationFragment : Fragment() {
         val type: String? = arguments?.getString("type")
         loadSituation(type?: "112")
 
-
         return binding.root
     }
 
@@ -58,19 +57,61 @@ class SituationFragment : Fragment() {
                             button.text = response.body()!!.data[i].name
                             button.setOnClickListener {
                                 Toast.makeText(context, "${response.body()!!.data[i].name}", Toast.LENGTH_SHORT).show()
+                                if(response.body()!!.data[i].id >=23) {
+                                    if(response.body()!!.data[i].id == 24) {
 
-                                val typeSituationFragment = TypeSituationFragment()
-                                val bundle = Bundle()
-                                bundle.putInt("situationId", response.body()!!.data[i].id)
+                                        val btn110Fragment = btn110Fragment()
+                                        val bundle2 = Bundle()
+                                        val tmp: String = arguments?.getString("key") + "\n" + "상황 : " + response.body()!!.data[i].name
+                                        bundle2.putString("key", tmp)
+                                        bundle2.putString("type", arguments!!.getString("type"))
+                                        btn110Fragment.arguments = bundle2
+                                        fragmentManager.beginTransaction().replace(R.id.container, btn110Fragment)
+                                            .commit()
 
-                                val tmp: String = arguments?.getString("key") + "\n" + "상황 : " + response.body()!!.data[i].name
-                                bundle.putString("key", tmp)
-                                bundle.putString("type", arguments!!.getString("type"))
-                                typeSituationFragment.arguments = bundle
-                                Log.d("tag", "situ " + tmp)
-                                Log.d("tag", "situ " + response.body()!!.data[i].id)
-                                fragmentManager.beginTransaction().replace(R.id.container, typeSituationFragment)
-                                    .commit()
+                                    } else if(response.body()!!.data[i].id == 26) {
+
+                                        val informationFragment = InformationFragment()
+                                        val bundle3 = Bundle()
+                                        bundle3.putInt("situationId3", response.body()!!.data[i].id)
+
+                                        val tmp: String = arguments?.getString("key") + "\n" + "상황 : " + response.body()!!.data[i].name
+                                        bundle3.putString("key", tmp)
+                                        bundle3.putString("type", arguments!!.getString("type"))
+                                        informationFragment.arguments = bundle3
+
+                                        fragmentManager.beginTransaction().replace(R.id.container, informationFragment)
+                                            .commit()
+
+                                    } else {
+
+                                        val detailFragment = DetailFragment()
+                                        val bundle2 = Bundle()
+                                        bundle2.putInt("situationId2", response.body()!!.data[i].id)
+
+                                        val tmp: String = arguments?.getString("key") + "\n" + "상황 : " + response.body()!!.data[i].name
+                                        bundle2.putString("key", tmp)
+                                        bundle2.putString("type", arguments!!.getString("type"))
+                                        detailFragment.arguments = bundle2
+
+                                        fragmentManager.beginTransaction().replace(R.id.container, detailFragment)
+                                            .commit()
+
+                                    }
+
+                                } else {
+                                    val typeSituationFragment = TypeSituationFragment()
+                                    val bundle = Bundle()
+                                    bundle.putInt("situationId", response.body()!!.data[i].id)
+
+                                    val tmp: String = arguments?.getString("key") + "\n" + "상황 : " + response.body()!!.data[i].name
+                                    bundle.putString("key", tmp)
+                                    bundle.putString("type", arguments!!.getString("type"))
+                                    typeSituationFragment.arguments = bundle
+                                    fragmentManager.beginTransaction().replace(R.id.container, typeSituationFragment)
+                                        .commit()
+                                }
+
                             }
 
                             gridLayout.addView(button)

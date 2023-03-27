@@ -9,9 +9,6 @@ class smsButtonActivity : AppCompatActivity() {
     lateinit var binding: ActivitySmsButtonBinding
     var message: String = ""
 
-
-    val situationFragment = SituationFragment()
-
     val fragmentManager = supportFragmentManager
     val transaction = fragmentManager.beginTransaction()
 
@@ -54,6 +51,15 @@ class smsButtonActivity : AppCompatActivity() {
         binding.btn110.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("type", "110")
+            bundle.putString("key", "위치 : " +intent.extras?.getString("addr"))
+            val btn110Fragment = btn110Fragment()
+            btn110Fragment.arguments = bundle
+            transaction.replace(R.id.container, btn110Fragment)
+                .commit()
+
+            binding.btn112.isEnabled = false
+            binding.btn110.isEnabled = false
+            binding.btn119.isEnabled = false
 
         }
 

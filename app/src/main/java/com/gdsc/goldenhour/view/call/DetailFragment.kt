@@ -1,6 +1,5 @@
 package com.gdsc.goldenhour.view.call
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,10 +11,8 @@ import android.widget.GridLayout
 import android.widget.Toast
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.databinding.FragmentDetailBinding
-import com.gdsc.goldenhour.databinding.FragmentSafetyInformationBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.DetailSituationList
-import com.gdsc.goldenhour.network.model.Information
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +36,6 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-
     private fun loadDetailSituation(id: Int) {
 
         val fragmentManager = requireActivity().supportFragmentManager
@@ -60,21 +56,30 @@ class DetailFragment : Fragment() {
                             button.text = response.body()!!.data[i].name
                             button.setOnClickListener {
                                 Toast.makeText(context, "${response.body()!!.data[i].name}", Toast.LENGTH_SHORT).show()
+                                if(arguments?.getInt("situationId2")!! ==23) {
 
-                                val informationFragment = InformationFragment()
-                                val bundle3 = Bundle()
-                                bundle3.putInt("situationId3", arguments?.getInt("situationId2")!!)
+                                    val btn110Fragment = btn110Fragment()
+                                    val bundle2 = Bundle()
+                                    val tmp: String = arguments?.getString("key") + "\n" + "피해 상황 : " + response.body()!!.data[i].name
+                                    bundle2.putString("key", tmp)
+                                    bundle2.putString("type", arguments!!.getString("type"))
+                                    btn110Fragment.arguments = bundle2
+                                    fragmentManager.beginTransaction().replace(R.id.container, btn110Fragment)
+                                        .commit()
 
+                                } else{
 
-                                val tmp: String = arguments?.getString("key") + "\n" + "피해상황 : " + response.body()!!.data[i].name
-                                bundle3.putString("key", tmp)
-                                bundle3.putString("type", arguments!!.getString("type"))
-                                informationFragment.arguments = bundle3
-                                Log.d("tag", "detail " + tmp)
-                                Log.d("tag", "detail " + response.body()!!.data[i].id)
-                                transaction.replace(R.id.container, informationFragment).commit()
+                                    val informationFragment = InformationFragment()
+                                    val bundle3 = Bundle()
+                                    bundle3.putInt("situationId3", arguments?.getInt("situationId2")!!)
+
+                                    val tmp: String = arguments?.getString("key") + "\n" + "피해상황 : " + response.body()!!.data[i].name
+                                    bundle3.putString("key", tmp)
+                                    bundle3.putString("type", arguments!!.getString("type"))
+                                    informationFragment.arguments = bundle3
+                                    transaction.replace(R.id.container, informationFragment).commit()
+                                }
                             }
-
                             gridLayout.addView(button)
                         }
                         binding.layout.addView(gridLayout)

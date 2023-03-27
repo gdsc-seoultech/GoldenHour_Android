@@ -37,7 +37,6 @@ class InformationFragment : Fragment() {
     ): View? {
         binding = FragmentInformationBinding.inflate(inflater, container, false)
         val situationId: Int = arguments?.getInt("situationId3")!!
-        Log.d("tag", "informationFrag " + situationId)
         loadInformation(situationId)
         return binding.root
     }
@@ -65,21 +64,28 @@ class InformationFragment : Fragment() {
                                 button.setOnClickListener {
                                     Toast.makeText(context, "${response.body()!!.data[i].answerList[j]}", Toast.LENGTH_SHORT).show()
 
-                                    val safetyInformationFragment = SafetyInformationFragment()
-                                    val totalBundle = Bundle()
-                                    val tmp: String = arguments?.getString("key") + "\n" + response.body()!!.data.get(i).question + " : " + response.body()!!.data[i].answerList[j]
-                                    totalBundle.putString("key", tmp)
-                                    totalBundle.putString("type", arguments!!.getString("type"))
-                                    safetyInformationFragment.arguments = totalBundle
+                                    if(arguments?.getInt("situationId3")!! >= 25) {
+                                        val btn110Fragment = btn110Fragment()
+                                        val totalBundle = Bundle()
+                                        val tmp: String = arguments?.getString("key") + "\n" + "피해 상황 : " + response.body()!!.data.get(i).question + " : " + response.body()!!.data[i].answerList[j]
+                                        totalBundle.putString("key", tmp)
+                                        totalBundle.putString("type", arguments!!.getString("type"))
+                                        btn110Fragment.arguments = totalBundle
+                                        fragmentManager.beginTransaction().replace(R.id.container, btn110Fragment)
+                                            .commit()
+                                    } else {
+                                        val safetyInformationFragment = SafetyInformationFragment()
+                                        val totalBundle = Bundle()
+                                        val tmp: String = arguments?.getString("key") + "\n" + response.body()!!.data.get(i).question + " : " + response.body()!!.data[i].answerList[j]
+                                        totalBundle.putString("key", tmp)
+                                        totalBundle.putString("type", arguments!!.getString("type"))
+                                        safetyInformationFragment.arguments = totalBundle
 
-                                    Log.d("tag", "detail " + tmp)
-                                    transaction.replace(R.id.container, safetyInformationFragment).commit()
-
+                                        transaction.replace(R.id.container, safetyInformationFragment).commit()
+                                    }
                                 }
                                 gridLayout.addView(button)
                             }
-
-
                         }
                         binding.layout.addView(gridLayout)
                     }
