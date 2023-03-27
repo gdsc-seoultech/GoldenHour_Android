@@ -25,14 +25,14 @@ class SettingsActivity : AppCompatActivity() {
         mGoogleSignInClient = GoogleSignInClientObj.getInstance(this)
         loadFragment(SettingsFragment())
 
-        updateUserInfo()
+        showUserInfo()
 
         binding.btnLogout.setOnClickListener {
             logOut()
         }
     }
 
-    private fun updateUserInfo() {
+    private fun showUserInfo() {
         val gsa = GoogleSignIn.getLastSignedInAccount(this)
         Glide.with(this)
             .load(gsa?.photoUrl)

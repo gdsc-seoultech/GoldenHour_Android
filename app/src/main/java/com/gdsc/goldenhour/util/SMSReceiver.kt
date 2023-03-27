@@ -27,7 +27,7 @@ class SMSReceiver : BroadcastReceiver() {
                 val smsContent = messages[0]?.messageBody.toString()
                 Log.d(TAG, "content: $smsContent")
 
-                // todo: 재난과 관련된 문자인 경우에만, 체크리스트 화면 띄우기
+                // 재난과 관련된 문자인 경우에만, 체크리스트 화면 띄우기
                 checkSMSContent(context, smsContent)
             }
         }
