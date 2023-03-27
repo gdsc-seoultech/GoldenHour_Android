@@ -20,8 +20,6 @@
             android:textColor="#222222"
             android:textSize="20dp" />
 
-
-
     </LinearLayout>
 
     <TextView
@@ -41,80 +39,108 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:id="@+id/btnHos"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="15dp"
                 android:text="병원 / 응급실" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnPhar"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:text="약국" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:id="@+id/btnAED"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="15dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:text="자동심장충격기" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnFire"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:text="비상소화장치" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
-            <Button
+            <TextView
                 android:id="@+id/btnShelter"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="15dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:text="대피소" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnTmp"
                 android:layout_width="150dp"
                 android:layout_height="75dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="30dp"
+                android:background="@drawable/normal_btn_background"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:elevation="4dp"
                 android:text="임시주거시설" />
         </LinearLayout>
 
-        <Button
+        <TextView
             android:id="@+id/btnRest"
             android:layout_width="150dp"
             android:layout_height="75dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/normal_btn_background"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:elevation="4dp"
             android:text="쉼터" />
 
 
