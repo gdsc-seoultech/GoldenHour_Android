@@ -1,86 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".view.call.CallFragment"
-android:orientation="vertical"
-android:id="@+id/callLayout"
-android:layout_margin="15dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/callLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".view.call.CallFragment">
 
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="사용자의 현위치"
-        android:textSize="20sp"
-        android:textColor="#222222"/>
+        android:textColor="#222222"
+        android:textSize="20sp" />
 
     <TextView
-        android:layout_marginTop="5dp"
         android:id="@+id/tv_user_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text=": 주소"
-        android:textSize="19sp"
-        android:textColor="#222222"/>
+        android:textColor="#222222"
+        android:textSize="19sp" />
 
     <TextView
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="전화"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="긴급 전화"
         android:textColor="#222222"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btn112"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="긴급범죄 신고 112"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/round_button"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/btn112"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/normal_btn_background"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:text="긴급범죄 신고 112"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
-    <Button
-        android:id="@+id/btn119"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="화재 / 구조 / 구급 신고 119"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/round_button"
-        android:layout_marginBottom="10dp"/>
+        <TextView
+            android:id="@+id/btn119"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/normal_btn_background"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:text="화재 / 구조 / 구급 신고 119"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
-    <Button
-        android:id="@+id/btn110"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="그 외 모든 민원 상담 110"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/round_button" />
+        <TextView
+            android:id="@+id/btn110"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/normal_btn_background"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:layout_marginTop="16dp"
+            android:text="그 외 모든 민원 상담 110"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+    </LinearLayout>
 
     <TextView
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문자"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="긴급 문자"
         android:textColor="#222222"
         android:textSize="20sp" />
 
-    <Button
+    <TextView
         android:id="@+id/btnSms"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/normal_btn_background"
+        android:gravity="center"
+        android:elevation="4dp"
         android:text="긴급 문자 신고 (템플릿 제공)"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/round_button"
-        android:layout_marginBottom="10dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         tools:ignore="InvalidId" />
 
 </LinearLayout>

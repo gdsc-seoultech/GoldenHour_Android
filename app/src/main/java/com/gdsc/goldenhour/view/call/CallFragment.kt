@@ -1,9 +1,11 @@
 package com.gdsc.goldenhour.view.call
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -11,9 +13,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,15 +27,27 @@ import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
 
-class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
+class CallFragment(
+    private var isDisasterMode: Boolean
+) : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var mLastLocation: Location
     private lateinit var mLocationRequest: LocationRequest
     private val REQUEST_PERMISSION_LOCATION = 10
     private var addr: String? = null
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("CallFragment", "disaster mode: $isDisasterMode")
+
+        if(isDisasterMode){
+            binding.btn112.setBackgroundResource(R.drawable.disaster_btn_background)
+            binding.btn119.setBackgroundResource(R.drawable.disaster_btn_background)
+            binding.btn110.setBackgroundResource(R.drawable.disaster_btn_background)
+            binding.btnSms.setBackgroundResource(R.drawable.disaster_btn_background)
+        }
 
         val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
         binding.tvUserName.text = "${gsa?.displayName}님의 위치"
@@ -38,7 +56,7 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
 
-        if(checkPermissionForLocation(requireContext())) {
+        if (checkPermissionForLocation(requireContext())) {
             startLocationUpdates()
         }
 
@@ -61,13 +79,25 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
     }
 
     fun startLocationUpdates() {
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(requireContext(),Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        mFusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return
         }
 
-        mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper())
+        mFusedLocationProviderClient.requestLocationUpdates(
+            mLocationRequest,
+            mLocationCallback,
+            Looper.myLooper()
+        )
     }
 
     val mLocationCallback = object : LocationCallback() {
@@ -103,7 +133,11 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
             if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 true
             } else {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_PERMISSION_LOCATION)
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSION_LOCATION
+                )
                 false
             }
         } else {
@@ -111,7 +145,11 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
@@ -119,7 +157,8 @@ class CallFragment : BindingFragment<FragmentCallBinding>(FragmentCallBinding::i
                 startLocationUpdates()
 
             } else {
-                Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT)
+                    .show()
                 addr = "   : 주소를 확인할 수 없습니다."
                 binding.tvUserLocation.text = addr
             }

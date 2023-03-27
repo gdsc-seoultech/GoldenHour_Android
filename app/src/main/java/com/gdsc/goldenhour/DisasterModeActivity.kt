@@ -3,7 +3,6 @@ package com.gdsc.goldenhour
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.gdsc.goldenhour.databinding.ActivityDisasterModeBinding
@@ -61,11 +60,11 @@ class DisasterModeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.call -> {
-                    loadFragment(CallFragment())
+                    loadFragment(CallFragment(true))
                     true
                 }
                 R.id.map -> {
-                    loadFragment(MapFragment())
+                    loadFragment(MapFragment(true))
                     true
                 }
                 else -> false

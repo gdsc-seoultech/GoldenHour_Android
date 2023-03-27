@@ -13,8 +13,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
-
+class MapFragment(
+    private var isDisasterMode: Boolean = false
+) : Fragment(), View.OnClickListener, OnMapReadyCallback {
     private lateinit var binding: FragmentMapBinding
     private lateinit var mMap: GoogleMap
 
@@ -39,7 +40,6 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         return binding.root
     }
 
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val marker = LatLng(35.241615, 128.695587)
@@ -47,10 +47,7 @@ class MapFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(marker))
     }
 
-
     override fun onClick(v: View?) {
 
     }
-
-
 }

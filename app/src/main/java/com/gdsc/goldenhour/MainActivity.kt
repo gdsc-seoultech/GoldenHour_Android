@@ -42,11 +42,11 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.call -> {
-                    loadFragment(CallFragment())
+                    loadFragment(CallFragment(false))
                     true
                 }
                 R.id.map -> {
-                    loadFragment(MapFragment())
+                    loadFragment(MapFragment(false))
                     true
                 }
                 else -> false
