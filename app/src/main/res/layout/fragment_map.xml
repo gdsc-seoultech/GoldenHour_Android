@@ -7,17 +7,31 @@
     android:orientation="vertical"
     tools:context=".view.map.MapFragment">
 
-    <TextView
+    <LinearLayout
         android:id="@+id/tv_place"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="안전 편의시설"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:orientation="horizontal"
+        android:padding="18dp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_safe_place"
+            app:tint="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안전 편의시설"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <GridLayout
         android:id="@+id/container"
