@@ -43,6 +43,11 @@ class MapFragment(
             val intent = Intent(activity, MapPharActivity::class.java)
             startActivity(intent)
         }
+
+        binding.btnAED.setOnClickListener {
+            val intent = Intent(activity, MapAedActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
