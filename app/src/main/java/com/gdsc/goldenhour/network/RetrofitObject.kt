@@ -4,7 +4,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 // 싱글톤 패턴으로 객체가 한번만 생성되도록
 object RetrofitObject {
@@ -14,7 +13,7 @@ object RetrofitObject {
         setLevel(HttpLoggingInterceptor.Level.BODY)
     }
     
-    private val okHttpClient = OkHttpClient.Builder()
+    val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
 
     private val retrofit = Retrofit.Builder()
@@ -24,4 +23,13 @@ object RetrofitObject {
         .build()
 
     val networkService: INetworkService = retrofit.create(INetworkService::class.java)
+
+    // 공공데이터 api
+    private const val DATA_API_URL = "http://apis.data.go.kr"
+    private val retrofitAPI = Retrofit.Builder()
+        .baseUrl(DATA_API_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient.build())
+        .build()
+    val dataService: INetworkService = retrofitAPI.create(INetworkService::class.java)
 }
