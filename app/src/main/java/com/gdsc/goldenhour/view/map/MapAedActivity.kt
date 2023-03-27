@@ -36,7 +36,6 @@ import retrofit2.Response
 import java.io.IOException
 import java.util.*
 
-
 class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCameraIdleListener,
     GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnMarkerClickListener {
 
@@ -57,7 +56,6 @@ class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCame
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-
     lateinit var mCurrentLocatiion: Location
     var currentPosition: LatLng =LatLng(37.5, 127.0)
 
@@ -66,7 +64,6 @@ class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCame
     lateinit var location: Location
 
     val API_KEY = "lNSHWWuKKYF7knMXov2iRzSxkBRVM4KKXkdD93IyF%2Bx7Mq42e5SfU%2FsPJo3BfbT9LVXqPkndJi4xpQGgS%2B8Hsw%3D%3D"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +81,6 @@ class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCame
         } else {
             loadAedList(127.0, 37.5, 1, 7, API_KEY)
         }
-
-
  */
         mLayout = binding.layoutMain
 
