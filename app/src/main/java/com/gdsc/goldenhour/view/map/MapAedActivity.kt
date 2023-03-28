@@ -17,9 +17,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.gdsc.goldenhour.BuildConfig
 import com.gdsc.goldenhour.databinding.ActivityMapAedBinding
+import com.gdsc.goldenhour.network.DataRetrofit
 import com.gdsc.goldenhour.network.model.AedResponse
-import com.gdsc.goldenhour.network.model.DataRetrofit
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -46,8 +47,6 @@ class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCame
     var currentMarker: Marker? = null
 
     private val GPS_ENABLE_REQUEST_CODE = 2001
-    private val UPDATE_INTERVAL_MS = 1000
-    private val FASTEST_UPDATE_INTERVAL_MS = 500
     private val PERMISSIONS_REQUEST_CODE = 100
     var needRequest = false
 
@@ -63,25 +62,11 @@ class MapAedActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCame
     private var locationRequest: LocationRequest? = null
     lateinit var location: Location
 
-    val API_KEY = "lNSHWWuKKYF7knMXov2iRzSxkBRVM4KKXkdD93IyF%2Bx7Mq42e5SfU%2FsPJo3BfbT9LVXqPkndJi4xpQGgS%2B8Hsw%3D%3D"
+    val API_KEY = BuildConfig.DATA_API_KEY
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-/*
-        mLocationRequest =  LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-        (supportFragmentManager.findFragmentById(com.gdsc.goldenhour.R.id.map) as SupportMapFragment).getMapAsync(this)
-
-        if(checkPermissionForLocation(this)) {
-            Log.d("tag", "check- true")
-            startLocationUpdates()
-        } else {
-            loadAedList(127.0, 37.5, 1, 7, API_KEY)
-        }
- */
         mLayout = binding.layoutMain
 
         locationRequest = LocationRequest()

@@ -2,11 +2,7 @@ package com.gdsc.goldenhour.view.map
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentMapBinding
@@ -34,6 +30,8 @@ class MapFragment(
             binding.btnTmp.setBackgroundResource(R.drawable.disaster_btn_background)
         }
 
+        binding.mapLottie.playAnimation()
+
         binding.btnHos.setOnClickListener {
             val intent = Intent(activity, MapHosActivity::class.java)
             startActivity(intent)
@@ -48,8 +46,6 @@ class MapFragment(
             val intent = Intent(activity, MapAedActivity::class.java)
             startActivity(intent)
         }
-
-        binding.mapLottie.playAnimation()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
