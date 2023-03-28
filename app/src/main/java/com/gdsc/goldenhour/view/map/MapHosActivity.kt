@@ -10,6 +10,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -19,7 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback
 import androidx.core.content.ContextCompat
 import com.gdsc.goldenhour.BuildConfig
-import com.gdsc.goldenhour.databinding.ActivityMapPharBinding
+import com.gdsc.goldenhour.databinding.ActivityMapHosBinding
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -61,13 +62,13 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     var previous_marker: MutableList<Marker> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        Log.d("tag", "oncreate")
         super.onCreate(savedInstanceState)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
         )
-        val binding = ActivityMapPharBinding.inflate(layoutInflater)
+        val binding = ActivityMapHosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
@@ -89,6 +90,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
+        Log.d("tag", "onMapReady")
         mMap = googleMap
 
         setDefaultLocation()
@@ -172,6 +174,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
 
     var locationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
+            Log.d("tag", "locationCallback")
             super.onLocationResult(locationResult)
             val locationList = locationResult.locations
             if (locationList.size > 0) {
@@ -190,6 +193,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     }
 
     private fun startLocationUpdates() {
+        Log.d("tag", "startLocaionUpdate")
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting()
         } else {
@@ -339,6 +343,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     }
 
     fun setDefaultLocation() {
+        Log.d("tag", "setDefault")
         val DEFAULT_LOCATION = LatLng(37.56, 126.97)
         val markerTitle = "위치정보 가져올 수 없음"
         val markerSnippet = "위치 퍼미션과 GPS 활성 여부 확인하세요"
@@ -355,6 +360,7 @@ class MapHosActivity() : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnCa
     }
 
     private fun checkPermission(): Boolean {
+        Log.d("tag", "checkPermission")
         val hasFineLocationPermission = ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.ACCESS_FINE_LOCATION

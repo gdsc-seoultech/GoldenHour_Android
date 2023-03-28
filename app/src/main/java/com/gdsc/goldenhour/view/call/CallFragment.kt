@@ -1,11 +1,9 @@
 package com.gdsc.goldenhour.view.call
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -13,34 +11,29 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.gdsc.goldenhour.R
 import com.gdsc.goldenhour.binding.BindingFragment
 import com.gdsc.goldenhour.databinding.FragmentCallBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import java.util.*
+import com.gdsc.goldenhour.R
 
 class CallFragment(
     private var isDisasterMode: Boolean
-) : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
-    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    private lateinit var mLastLocation: Location
-    private lateinit var mLocationRequest: LocationRequest
-    private val REQUEST_PERMISSION_LOCATION = 10
-    private var addr: String? = null
+)  : BindingFragment<FragmentCallBinding>(FragmentCallBinding::inflate) {
+    lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var mLastLocation: Location
+    lateinit var mLocationRequest: LocationRequest
+    val REQUEST_PERMISSION_LOCATION = 10
+    var addr: String? = null
+    var addresses: List<Address>? = null
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d("CallFragment", "disaster mode: $isDisasterMode")
 
         if(isDisasterMode){
             binding.btn112.setBackgroundResource(R.drawable.disaster_btn_background)
@@ -52,16 +45,10 @@ class CallFragment(
         val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
         binding.tvUserName.text = "${gsa?.displayName}님의 위치"
 
-        mLocationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        }
-
-        if (checkPermissionForLocation(requireContext())) {
-            startLocationUpdates()
-        }
-
         binding.btnSms.setOnClickListener {
             val intent = Intent(requireContext(), EmergencySmsActivity::class.java)
+            val address = addresses?.get(0)?.getAddressLine(0).toString()
+            intent.putExtra("addr", address)
             startActivity(intent)
         }
 
@@ -75,6 +62,14 @@ class CallFragment(
 
         binding.btn110.setOnClickListener {
             startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$110")))
+        }
+
+        mLocationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        if (checkPermissionForLocation(requireContext())) {
+            startLocationUpdates()
         }
     }
 
@@ -110,22 +105,22 @@ class CallFragment(
     fun onLocationChanged(location: Location?) {
         mLastLocation = location!!
         val currentLatLng = LatLng(mLastLocation.latitude, mLastLocation.longitude)
-
         val geocoder = Geocoder(requireContext(), Locale.getDefault())
-        val addresses: List<Address>?
 
         addresses = geocoder.getFromLocation(
             currentLatLng.latitude,
             currentLatLng.longitude,
             1
         )
-        if (addresses == null || addresses.isEmpty()) {
+
+        if (addresses == null || addresses!!.isEmpty()) {
             Toast.makeText(requireContext(), "주소 미발견", Toast.LENGTH_LONG).show()
-            binding.tvUserLocation.text = " :  주소를 찾을 수 없습니다."
+            binding.tvUserLocation.text = "   : 주소를 찾을 수 없습니다."
         } else {
-            val address = addresses[0]
-            binding.tvUserLocation.text = " :  ${address.getAddressLine(0)}"
+            val address = addresses!![0]
+            binding.tvUserLocation.text = " :  " + address.getAddressLine(0).toString()
         }
+
     }
 
     fun checkPermissionForLocation(context: Context): Boolean {
@@ -163,5 +158,6 @@ class CallFragment(
                 binding.tvUserLocation.text = addr
             }
         }
+
     }
 }

@@ -13,5 +13,4 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         tools:layout="@layout/activity_map_aed" />
-
 </LinearLayout>
