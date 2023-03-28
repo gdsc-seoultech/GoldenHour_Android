@@ -48,6 +48,8 @@ class MapFragment(
             val intent = Intent(activity, MapAedActivity::class.java)
             startActivity(intent)
         }
+
+        binding.mapLottie.playAnimation()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
