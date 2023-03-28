@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
+    android:orientation="vertical"
+    android:padding="24dp"
     tools:context=".view.call.EmergencySmsActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp">
 
         <TextView
             android:layout_marginBottom="10dp"
@@ -25,6 +28,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn112"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,6 +36,7 @@
                 android:layout_margin="5dp"
                 android:text="112" />
             <Button
+                android:id="@+id/btn119"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,6 +44,7 @@
                 android:textSize="17dp"
                 android:text="119" />
             <Button
+                android:id="@+id/btn110"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -46,10 +52,12 @@
                 android:textSize="17dp"
                 android:text="110" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/txt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
     </LinearLayout>
 
-</ScrollView>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

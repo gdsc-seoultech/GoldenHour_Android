@@ -1,7 +1,5 @@
-package com.gdsc.goldenhour.network.model
+package com.gdsc.goldenhour.network
 
-import com.gdsc.goldenhour.network.INetworkService
-import com.gdsc.goldenhour.network.RetrofitObject
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import okhttp3.OkHttpClient

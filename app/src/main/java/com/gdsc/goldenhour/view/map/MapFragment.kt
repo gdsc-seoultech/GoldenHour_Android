@@ -34,6 +34,8 @@ class MapFragment(
             binding.btnTmp.setBackgroundResource(R.drawable.disaster_btn_background)
         }
 
+        binding.mapLottie.playAnimation()
+
         binding.btnHos.setOnClickListener {
             val intent = Intent(activity, MapHosActivity::class.java)
             startActivity(intent)
