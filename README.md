@@ -9,6 +9,10 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
 > ### The Meaning of Golden Hour
 > The first hour after the occurrence of a traumatic injury, considered the most critical for successful emergency treatment.
 
+## Download
+
+[Golden Hour v1.0.0](https://github.com/gdsc-seoultech/GoldenHour_Android/releases/tag/v1.0.0)
+
 ## Feature
 ### Safety Guide
 - It provides a slide webtoon format using images and text to show how to respond to emergencies we may encounter, such as CPR and airway obstruction. 
@@ -29,6 +33,11 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
 - Safety amenities provided include hospitals/emergency rooms, pharmacies, AEDs, fire extinguishers, shelters, and transitional housing.
 
 ## Demo Video
+
+## Project Structure
+<img width="755" alt="golden-hour structure" src="https://user-images.githubusercontent.com/64399505/228250494-3c6ecca2-e35f-4a83-99c9-5ad0ba452dc3.png">
+
+## 각 파트별 코드 설명
 
 ## Team Member
 <table algin="center">
@@ -52,9 +61,3 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
   <tr>
 </table> 
 
-
-## Project Structure
-<img width="755" alt="golden-hour structure" src="https://user-images.githubusercontent.com/64399505/228250494-3c6ecca2-e35f-4a83-99c9-5ad0ba452dc3.png">
-
-
-## 각 파트별 코드 설명
