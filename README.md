@@ -34,7 +34,7 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
 
 ## Demo Video
 
-
+[![thumbnail](썸네일 이미지)](유튜브 링크)
 
 ## Project Structure
 <img width="755" alt="golden-hour structure" src="https://user-images.githubusercontent.com/64399505/228250494-3c6ecca2-e35f-4a83-99c9-5ad0ba452dc3.png">
