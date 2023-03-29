@@ -34,26 +34,19 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
 
 ## Demo Video
 
-[![thumbnail](썸네일 이미지)](유튜브 링크)
+<a href="유튜브 링크"><img width="755" src="https://user-images.githubusercontent.com/68090939/228529082-1306ec5d-6bff-4296-b5ba-8a3cc807b88c.png"/></a>
 
 ## Project Structure
 <img width="755" alt="golden-hour structure" src="https://user-images.githubusercontent.com/64399505/228250494-3c6ecca2-e35f-4a83-99c9-5ad0ba452dc3.png">
 
-## Tech stack, Open-source libraries
+## Detailed implementations using Google technology
 
 ### Android 
 
-- Android Studio 
-- Minimum SDK level 21 
-- Kotlin based 
-- Google Login 
-- Google Maps 
-- Google ML Kit Pose Detection 
-- CameraX 
-- TFLite Task Library 
-- Retrofit2, OkHttp3: construct the REST APIs. 
-- Glide: set images with URI from network.
-- Lottie animation 
+- We made it possible for users **signed in with a Google account** to register, view, edit, and delete relief supplies and emergency contacts for disasters or emergencies.
+- We used **Google Maps** to quickly locate nearby hospitals, emergency rooms, pharmacies, and AEDs based on the user's current location.
+- Using the **ML Kit's Pose Detection model** and CameraX, we made it possible to detect the upper body of a person who collapsed from cardiac arrest and show the CPR compression point from it. As a next step, we made the model detect the angle of the rescuer's arm and sound an alert whenever it is less than 120 degrees. This allows CPR to proceed in a more correct posture.
+- Using the **TFLite custom object detection model** and CameraX, we implemented it to detect bleeding or wounded areas and mark their center of gravity as hemostatic points.
 
 ### BackEnd
 
