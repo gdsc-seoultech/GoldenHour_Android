@@ -34,17 +34,45 @@ To solve this problem, we created Golden Hour, an app that provides safety guide
 
 ## Demo Video
 
+
+
 ## Project Structure
 <img width="755" alt="golden-hour structure" src="https://user-images.githubusercontent.com/64399505/228250494-3c6ecca2-e35f-4a83-99c9-5ad0ba452dc3.png">
 
-## 각 파트별 코드 설명
+## Tech stack, Open-source libraries
+
+### Android 
+
+- Android Studio 
+- Minimum SDK level 21 
+- Kotlin based 
+- Google Login 
+- Google Maps 
+- Google ML Kit Pose Detection 
+- CameraX 
+- TFLite Task Library 
+- Retrofit2, OkHttp3: construct the REST APIs. 
+- Glide: set images with URI from network.
+- Lottie animation 
+
+### BackEnd
+
+### DL 
+
+
+## Repositories 
+
+- [Github Project](https://github.com/orgs/gdsc-seoultech/projects/3/views/1)
+- [Android](https://github.com/gdsc-seoultech/GoldenHour_Android) 
+- [BackEnd](https://github.com/gdsc-seoultech/GoldenHour_Backend) 
+- [DL](https://github.com/jwyeeh-dev/GoldenHour_DL) 
 
 ## Team Member
 <table algin="center">
    <tr>
       <td colspan="2" align="center"><strong>Android</strong></td>
-      <td colspan="1" align="center"><strong>Back-End</strong></td>
-      <td colspan="1" align="center"><strong>ML</strong></td>
+      <td colspan="1" align="center"><strong>BackEnd</strong></td>
+      <td colspan="1" align="center"><strong>DL</strong></td>
    </tr>
   <tr>
      <td align="center">
