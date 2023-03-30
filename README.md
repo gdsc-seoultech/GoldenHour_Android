@@ -15,12 +15,13 @@ To solve this problem, we created Golden Hour, an app that provides appropriate 
 [Golden Hour v1.0.0](https://github.com/gdsc-seoultech/GoldenHour_Android/releases/tag/v1.0.0)
 
 ## Feature
+
 ### Safety Guide
 - It provides a slide webtoon format using images and text to show how to respond to emergencies we may encounter, such as CPR and airway obstruction. 
 - It provides CPR compression points using MLKit Pose Detection to assist in effective CPR.
 - It provides hemostasis points based on TFlite Object Detection to assist in hemostasis in case of bleeding.
 
-### Disaster first aid
+### Disaster Action Tip 
 - Based on the disaster message, the slide webtoon format using images and text to provide actions that correspond to the current disaster situation.
 - Users can carefully check their pre-set emergency contacts and relief supplies through the checklist.
 
