@@ -52,15 +52,21 @@ To solve this problem, we created Golden Hour, an app that provides appropriate 
 
 ### BackEnd
 
+- To provide the **Backend technology to the client Android app in the form of a REST API**, we used several services from Google Cloud Platform (**GCP**).
+
+- To create, read, update, and delete data, we used MySQL, a relational database engine. We used **Google SQL**, a fully managed relational database service provided by GCP, **to make MySQL accessible to Spring Project via Data JPA**.
+
+- To create communication via REST APIs, we used Spring Project, a web framework in JAVA. We used **Google Compute Engine**, a virtual machine service provided by GCP, **to access the REST API provided by Spring Project through Retrofit on Android**.
+
+- To store and serve the slide images for the first aid and safety guide, we needed to use a Cloud File service. We used **Google Cloud Storage**, a managed service for storing unstructured data provided by GCP, **to serve the slide images with a public URL for each image**.
+
 ### DL 
 
-
-## Repositories 
-
-- [Github Project](https://github.com/orgs/gdsc-seoultech/projects/3/views/1)
-- [Android](https://github.com/gdsc-seoultech/GoldenHour_Android) 
-- [BackEnd](https://github.com/gdsc-seoultech/GoldenHour_Backend) 
-- [DL](https://github.com/jwyeeh-dev/GoldenHour_DL) 
+- To provide the specific DL technology to the Android Application, we used several model and services from Google Technologies.
+- To train, provide the object detection and recognition model about the bleeding wounds of the patient, We used **Google Tensorflow libraries**, especially **TFLite** as a mobile library to deploy the model to the Android application.
+- To make lightweight the wounds detection and recognition model to put in Android App, We also amke the custom model based on **MobileNet_V2 from Tensorflow Hub by Google**.
+- To detect the precise body landmarks of the patient, we used the **mediapipe pose detector from the ML Kit.** Mediapipe pose detector is inspired by **the lightWeighted BlazeFace model** as a proxy for a person detector.
+- If you want to see more information, please see the Additional DL Documentation below.
 
 ## Team Member
 <table algin="center">
@@ -84,3 +90,13 @@ To solve this problem, we created Golden Hour, an app that provides appropriate 
   <tr>
 </table> 
 
+## Repositories 
+
+<table algin="center">
+   <tr>
+      <td align="center"><a href="https://github.com/orgs/gdsc-seoultech/projects/3"><strong>Project</strong></a></td>
+      <td align="center"><a href="https://github.com/gdsc-seoultech/GoldenHour_Android"><strong>Android</strong></a></td>
+      <td align="center"><a href="https://github.com/gdsc-seoultech/GoldenHour_Backend"><strong>Back-End</strong></a></td>
+      <td align="center"><a href="https://github.com/jwyeeh-dev/GoldenHour_DL"><strong>DL</strong></a></td>
+   </tr>
+</table> 
