@@ -3,9 +3,9 @@
 ## What is Golden Hour ?
 Many types of natural disasters are now five times more common in the world than they were 50 years ago. Each year, an increasing number of people are injured or killed by natural disasters.
 
-One of the reasons for the high number of casualties is the "lack of information on first aid and disaster action tips".
+One of the reasons for the high number of casualties is the "lack of information for proper first aid and disaster action tips".
 
-To solve this problem, we created Golden Hour, an app that provides appropriate first aid and disaster action tips.
+To solve this problem, **we created Golden Hour, an app that provides safety guides for first aid and disaster action tips.**
 
 > ### The Meaning of Golden Hour
 > The first hour after the occurrence of a traumatic injury, considered the most critical for successful emergency treatment.
