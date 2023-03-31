@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.gdsc.goldenhour"
-        minSdk 21
+        minSdk 28
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
@@ -76,10 +75,12 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
+
+    // retrofit, glide
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.9.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
@@ -89,9 +90,6 @@ dependencies {
     implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
     kapt 'com.tickaroo.tikxml:processor:0.8.13'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
-
-    // for string body
-    implementation "com.squareup.retrofit2:converter-scalars:2.4.0"
 
     // google login
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
