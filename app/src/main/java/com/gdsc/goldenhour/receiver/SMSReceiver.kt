@@ -1,4 +1,4 @@
-package com.gdsc.goldenhour.util
+package com.gdsc.goldenhour.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -7,7 +7,7 @@ import android.os.Build
 import android.provider.Settings
 import android.provider.Telephony
 import android.util.Log
-import com.gdsc.goldenhour.DisasterModeActivity
+import com.gdsc.goldenhour.view.main.DisasterModeActivity
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.Disaster
 import com.gdsc.goldenhour.network.model.DisasterList
