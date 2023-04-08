@@ -34,11 +34,11 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".DisasterModeActivity"
+            android:name=".view.main.DisasterModeActivity"
             android:exported="false" />
 
         <receiver
-            android:name=".util.SMSReceiver"
+            android:name=".receiver.SMSReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -48,7 +48,7 @@
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".view.main.MainActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
 

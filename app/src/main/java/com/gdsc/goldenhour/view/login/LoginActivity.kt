@@ -4,9 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
-import com.gdsc.goldenhour.MainActivity
+import com.gdsc.goldenhour.view.main.MainActivity
 import com.gdsc.goldenhour.databinding.ActivityLoginBinding
 import com.gdsc.goldenhour.network.RetrofitObject
 import com.gdsc.goldenhour.network.model.SignInResponse

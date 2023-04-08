@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.gdsc.goldenhour.MainActivity
+import com.gdsc.goldenhour.view.main.MainActivity
 import com.gdsc.goldenhour.databinding.ActivitySplashBinding
-import com.gdsc.goldenhour.util.GoogleSignInClientObj
 import com.gdsc.goldenhour.view.permission.PermActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 
